@@ -41,3 +41,21 @@ enum Type{
   Steel,
   Fairy
 }
+
+class PokeStats{
+  int hp;
+  int attack;
+  int defence;
+  int specialAttack;
+  int specialDefence;
+  int speed;
+
+  PokeStats({
+    required this.hp,
+    required this.attack,
+    required this.defence,
+    required this.specialAttack,
+    required this.specialDefence,
+    required this.speed
+  });
+}

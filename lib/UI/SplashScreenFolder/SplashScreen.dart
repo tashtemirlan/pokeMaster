@@ -3,7 +3,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:pokemonmap/Models/pokemonModel.dart';
 
-import 'package:pokemonmap/globals.dart' as globals;
+import 'package:pokemonmap/DatabaseInstructions/pokeNames.dart' as pokeNames;
+import 'package:pokemonmap/DatabaseInstructions/pokeGifs.dart' as pokeGifs;
+import 'package:pokemonmap/DatabaseInstructions/pokeRarity.dart' as pokeRarity;
+import 'package:pokemonmap/DatabaseInstructions/pokeRegion.dart' as pokeRegion;
+import 'package:pokemonmap/DatabaseInstructions/pokeStats.dart' as pokeStats;
+import 'package:pokemonmap/DatabaseInstructions/pokeTypes.dart' as pokeTypes;
+import 'package:pokemonmap/DatabaseInstructions/pokeWeakness.dart' as pokeWeakness;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -38,14 +44,16 @@ class SplashScreenState extends State<SplashScreen>{
 
   Future<void> checkPokeData() async{
     bool pokeDataBaseInitialized = await checkPokeDataBase();
+    print(pokeDataBaseInitialized);
     if(!pokeDataBaseInitialized){
       await fillHivePokeDataBase();
     }
   }
 
   Future<void> fillHivePokeDataBase() async{
-    print("Fill data base poke database");
-    
+    print(pokeNames.pokeNames.length);
+    //for(int pokeInt = 0; pokeInt< pokeNames.pokeNames.length;pokeInt++ ){
+    //}
   }
 
   Future<void> showWelcomeMessage() async{
