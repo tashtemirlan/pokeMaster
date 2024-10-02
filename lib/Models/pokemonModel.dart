@@ -16,40 +16,42 @@ class Pokemon extends HiveObject{
   Rarity rarity;
 
   @HiveField(3)
-  String image;
-
-  @HiveField(4)
   List<Type> type;
 
-  @HiveField(5)
+  @HiveField(4)
   int hp;
 
-  @HiveField(6)
+  @HiveField(5)
   int attack;
 
-  @HiveField(7)
+  @HiveField(6)
   int defence;
 
-  @HiveField(8)
+  @HiveField(7)
   int specialAttack;
 
-  @HiveField(9)
+  @HiveField(8)
   int specialDefence;
 
-  @HiveField(10)
+  @HiveField(9)
   int speed;
 
+  @HiveField(10)
+  Region region;
+
   @HiveField(11)
-  List<Region> region;
+  List<Type?> weakness;
 
   @HiveField(12)
-  List<Type> weakness;
+  String gifFront;
+
+  @HiveField(13)
+  String gifBack;
 
   Pokemon({
     required this.pokeDexIndex,
     required this.name,
     required this.rarity,
-    required this.image,
     required this.type,
     required this.hp,
     required this.attack,
@@ -58,7 +60,9 @@ class Pokemon extends HiveObject{
     required this.specialDefence,
     required this.speed,
     required this.region,
-    required this.weakness
+    required this.weakness,
+    required this.gifFront,
+    required this.gifBack
   });
 
 }
