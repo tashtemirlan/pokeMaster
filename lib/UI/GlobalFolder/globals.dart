@@ -59,3 +59,4 @@ class PokeStats{
     required this.speed
   });
 }
+
