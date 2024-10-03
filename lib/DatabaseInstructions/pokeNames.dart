@@ -171,7 +171,7 @@ List<String> pokeNames = [
   "Palkia", "Heatran", "Regigigas",
   "Giratina", "Cresselia", "Phione",
   "Manaphy", "Darkrai", "Shaymin",
-  "Arceus"
+  "Arceus",
 
   // Generation 5 (Unova)
   "Victini", "Snivy", "Servine",

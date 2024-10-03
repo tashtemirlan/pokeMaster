@@ -10,8 +10,11 @@ import 'package:pokemonmap/DatabaseInstructions/pokeRegion.dart' as pokeRegion;
 import 'package:pokemonmap/DatabaseInstructions/pokeStats.dart' as pokeStats;
 import 'package:pokemonmap/DatabaseInstructions/pokeTypes.dart' as pokeTypes;
 import 'package:pokemonmap/DatabaseInstructions/pokeWeakness.dart' as pokeWeakness;
+import 'package:pokemonmap/UI/GlobalFolder/colors.dart' as colors;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../BottomNavigationFolder/bottomNavBar.dart';
 
 
 class SplashScreen extends StatefulWidget{
@@ -74,8 +77,8 @@ class SplashScreenState extends State<SplashScreen>{
     // todo : show welcome message =>
     await showWelcomeMessage();
     //todo : navigate to our app =>
-    //Navigator.of(context).pushReplacement(MaterialPageRoute(
-    //    builder: (BuildContext context) => const BottomNavBarScreen(positionBottomNavigationBar: 0,))
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (BuildContext context) => const BottomPokeNavigationBar()));
   }
 
 
@@ -95,29 +98,55 @@ class SplashScreenState extends State<SplashScreen>{
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    double statusBarHeight = MediaQuery.of(context).padding.top;
-    double mainHeight = height - statusBarHeight;
-
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
           width: width,
           height: height,
-          decoration: const BoxDecoration(
-              color: Color.fromRGBO(56, 102, 65, 1)
-          ),
-          child: const Column(
+          color: colors.scaffoldColor,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                  "Разработано" ,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontSize: 18, color: Colors.white, fontWeight: FontWeight.w300 ,
-                      fontFamily: 'Monteregular'
-                  )
+              SizedBox(
+                height: height*0.7,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/gifs/350.gif",
+                      width: width*0.75,
+                      height: width*0.75,
+                      fit: BoxFit.contain,
+                      filterQuality: FilterQuality.high,
+                    ),
+                    const SizedBox(height: 15,),
+                    Text(
+                        "PokeMap\n   dev. by TeitCorp" ,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600,
+                        )
+                    ),
+                  ],
+                )
               ),
+              Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 25),
+                        child: Text(
+                            "Pokémon images & names \n© 1995-2024 Nintendo/Game Freak." ,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12, color: Colors.black, fontWeight: FontWeight.w600,
+                            )
+                        ),
+                    ),
+                  )
+              )
             ],
           ),
         )

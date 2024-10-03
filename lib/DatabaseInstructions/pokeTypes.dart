@@ -1,4 +1,4 @@
-import '../globals.dart';
+import '../UI/GlobalFolder/globals.dart';
 List<List<Type>> pokeType = [
 
    //todo : Generation 1

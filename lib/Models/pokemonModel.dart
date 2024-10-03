@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import '../globals.dart';
+import '../UI/GlobalFolder/globals.dart';
 
 
 @HiveType(typeId: 0)

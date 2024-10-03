@@ -1,4 +1,4 @@
-import '../globals.dart';
+import '../UI/GlobalFolder/globals.dart';
 
 List<Rarity> pokeRarity = [
   //todo : 1st generation
