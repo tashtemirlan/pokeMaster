@@ -51,9 +51,8 @@ class SplashScreenState extends State<SplashScreen>{
   }
 
   Future<void> fillHivePokeDataBase() async{
-    print(pokeNames.pokeNames.length);
-    //for(int pokeInt = 0; pokeInt< pokeNames.pokeNames.length;pokeInt++ ){
-    //}
+    for(int pokeInt = 0; pokeInt< pokeNames.pokeNames.length;pokeInt++ ){
+    }
   }
 
   Future<void> showWelcomeMessage() async{
