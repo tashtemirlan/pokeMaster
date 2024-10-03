@@ -17,6 +17,7 @@ dependencies:
   dio: ^5.7.0
   cached_network_image: ^3.4.1
   flutter_launcher_icons: ^0.14.1
+  flutter_riverpod: ^2.5.1
   flutter:
     sdk: flutter
   flutter_localizations:

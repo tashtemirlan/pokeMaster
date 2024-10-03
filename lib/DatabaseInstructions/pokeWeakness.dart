@@ -1,4 +1,4 @@
-import '../globals.dart';
+import '../UI/GlobalFolder/globals.dart';
 List<List<Type?>> pokeWeakness = [
 //todo : Generation 1
   //"Bulbasaur//"
