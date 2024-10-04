@@ -1,4 +1,9 @@
 {
   "@@locale": "ru",
-  "welcomeMessage" : "Добро пожаловать!!"
+  "welcomeMessage" : "Добро пожаловать!!",
+  "poke_rarity_casual" : "Обычный",
+  "poke_rarity_rare" : "Редкий",
+  "poke_rarity_epic" : "Эпический",
+  "poke_rarity_mystic" : "Мистический",
+  "poke_rarity_legendary" : "Легендарный"
 }

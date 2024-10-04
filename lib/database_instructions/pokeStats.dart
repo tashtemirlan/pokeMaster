@@ -1,4 +1,4 @@
-import 'package:pokemonmap/UI/GlobalFolder/globals.dart';
+import 'package:pokemonmap/ui/global_folder/globals.dart';
 
 List<PokeStats> pokeStats = [
   //todo : Generation 1

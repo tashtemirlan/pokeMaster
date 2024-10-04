@@ -1,4 +1,9 @@
 {
   "@@locale": "ky",
-  "welcomeMessage" : "Кош келиңиздер!"
+  "welcomeMessage" : "Кош келиңиздер!",
+  "poke_rarity_casual" : "Кадимки",
+  "poke_rarity_rare" : "Сейрек",
+  "poke_rarity_epic" : "Эпикалык",
+  "poke_rarity_mystic" : "Мистикалык",
+  "poke_rarity_legendary" : "Легендарлуу"
 }

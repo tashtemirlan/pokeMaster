@@ -3,18 +3,18 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:pokemonmap/Models/pokemonModel.dart';
 
-import 'package:pokemonmap/DatabaseInstructions/pokeNames.dart' as pokeNames;
-import 'package:pokemonmap/DatabaseInstructions/pokeGifs.dart' as pokeGifs;
-import 'package:pokemonmap/DatabaseInstructions/pokeRarity.dart' as pokeRarity;
-import 'package:pokemonmap/DatabaseInstructions/pokeRegion.dart' as pokeRegion;
-import 'package:pokemonmap/DatabaseInstructions/pokeStats.dart' as pokeStats;
-import 'package:pokemonmap/DatabaseInstructions/pokeTypes.dart' as pokeTypes;
-import 'package:pokemonmap/DatabaseInstructions/pokeWeakness.dart' as pokeWeakness;
-import 'package:pokemonmap/UI/GlobalFolder/colors.dart' as colors;
+import 'package:pokemonmap/database_instructions/pokeNames.dart' as pokeNames;
+import 'package:pokemonmap/database_instructions/pokeGifs.dart' as pokeGifs;
+import 'package:pokemonmap/database_instructions/pokeRarity.dart' as pokeRarity;
+import 'package:pokemonmap/database_instructions/pokeRegion.dart' as pokeRegion;
+import 'package:pokemonmap/database_instructions/pokeStats.dart' as pokeStats;
+import 'package:pokemonmap/database_instructions/pokeTypes.dart' as pokeTypes;
+import 'package:pokemonmap/database_instructions/pokeWeakness.dart' as pokeWeakness;
+import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../BottomNavigationFolder/bottomNavBar.dart';
+import '../bottom_navigation_folder/bottomNavBar.dart';
 
 
 class SplashScreen extends StatefulWidget{
