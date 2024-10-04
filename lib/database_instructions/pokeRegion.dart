@@ -1,4 +1,4 @@
-import '../UI/GlobalFolder/globals.dart';
+import '../ui/global_folder/globals.dart';
 
 List<Region> pokeRegion = [
 

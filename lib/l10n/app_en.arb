@@ -1,4 +1,9 @@
 {
   "@@locale": "en",
-  "welcomeMessage" : "Welcome!"
+  "welcomeMessage" : "Welcome!",
+  "poke_rarity_casual" : "Casual",
+  "poke_rarity_rare" : "Rare",
+  "poke_rarity_epic" : "Epic",
+  "poke_rarity_mystic" : "Mystic",
+  "poke_rarity_legendary" : "Legendary"
 }

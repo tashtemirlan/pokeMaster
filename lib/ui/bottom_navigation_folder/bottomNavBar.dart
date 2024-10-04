@@ -2,12 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pokemonmap/UI/BottomNavigationFolder/challengePage.dart';
-import 'package:pokemonmap/UI/BottomNavigationFolder/mapPage.dart';
-import 'package:pokemonmap/UI/BottomNavigationFolder/pokedexPage.dart';
-import 'package:pokemonmap/UI/BottomNavigationFolder/shopPage.dart';
-import 'package:pokemonmap/UI/BottomNavigationFolder/userInventoryPage.dart';
-import 'package:pokemonmap/UI/GlobalFolder/colors.dart' as colors;
+
+import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
+import 'package:pokemonmap/ui/bottom_navigation_folder/pokedexPage.dart';
+import 'package:pokemonmap/ui/bottom_navigation_folder/shopPage.dart';
+import 'package:pokemonmap/ui/bottom_navigation_folder/userInventoryPage.dart';
+
+import 'challengePage.dart';
+import 'mapPage.dart';
 
 
 
