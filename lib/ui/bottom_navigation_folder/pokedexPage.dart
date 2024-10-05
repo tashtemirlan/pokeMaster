@@ -22,7 +22,6 @@ class PokedexPage extends StatefulWidget{
 class PokedexPageState extends State<PokedexPage>{
 
 
-
   void viewPokeBottomSheet(int pokeIndex) async{
     showCupertinoModalBottomSheet<String>(
       topRadius: const Radius.circular(40),
@@ -83,28 +82,6 @@ class PokedexPageState extends State<PokedexPage>{
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
-            ),
-            const SizedBox(height: 4),
-            // Pokémon Types
-            Wrap(
-              spacing: 2,
-              children: types.map((type) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                  decoration: BoxDecoration(
-                      color:  typeColors[type] ?? Colors.grey,
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 1
-                      )
-                  ),
-                  child: Text(
-                    type.toString().split('.').last,
-                    style:  TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
-                  ),
-                );
-              }).toList(),
             ),
           ],
         ),
