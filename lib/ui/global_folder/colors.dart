@@ -21,3 +21,5 @@ Color colorDragon = Colors.indigo;
 Color colorDark = Colors.black;
 Color colorSteel = Colors.blueGrey;
 Color colorFairy = Colors.pinkAccent;
+
+Color searchBoxColor = Color.fromRGBO(0, 48, 73, 1);

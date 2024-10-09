@@ -12,7 +12,7 @@ Future<void> main() async {
     runApp(
         MaterialApp(
           theme: ThemeData(
-              colorScheme: ThemeData().colorScheme.copyWith(primary: const Color.fromRGBO(106, 153, 78, 1)),
+              colorScheme: ThemeData().colorScheme.copyWith(primary: const Color.fromRGBO(255, 255, 255, 1)),
               fontFamily: 'Inter'
           ),
           debugShowCheckedModeBanner: false,

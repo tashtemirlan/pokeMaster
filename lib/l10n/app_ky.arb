@@ -40,5 +40,7 @@
   "pokemon_stats_defence" : "Коргоо",
   "pokemon_stats_special_attack" : "Өзгөчө чабуул",
   "pokemon_stats_special_defence" : "Өзгөчө коргоо",
-  "pokemon_stats_speed" : "Ылдамдык"
+  "pokemon_stats_speed" : "Ылдамдык",
+  "choice_type_string" : "Түрүн тандаңыз",
+  "choice_string" : "Тандоо"
 }

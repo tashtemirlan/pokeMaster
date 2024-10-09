@@ -1,5 +1,6 @@
 import 'package:pokemonmap/ui/global_folder/globals.dart';
 
+//todo : check to all pokemons later!!!!
 List<PokeStats> pokeStats = [
   //todo : Generation 1
   // Bulbasaur

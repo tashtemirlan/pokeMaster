@@ -40,5 +40,7 @@
   "pokemon_stats_defence" : "Defence",
   "pokemon_stats_special_attack" : "Sp. Attack",
   "pokemon_stats_special_defence" : "Sp. Defence",
-  "pokemon_stats_speed" : "Speed"
+  "pokemon_stats_speed" : "Speed",
+  "choice_type_string" : "Choice type",
+  "choice_string" : "Choice"
 }

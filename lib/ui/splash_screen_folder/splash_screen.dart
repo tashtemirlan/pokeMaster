@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -10,10 +12,10 @@ import 'package:pokemonmap/database_instructions/pokeRegion.dart' as pokeRegion;
 import 'package:pokemonmap/database_instructions/pokeStats.dart' as pokeStats;
 import 'package:pokemonmap/database_instructions/pokeTypes.dart' as pokeTypes;
 import 'package:pokemonmap/database_instructions/pokeWeakness.dart' as pokeWeakness;
-import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
 
+import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bottom_navigation_folder/bottomNavBar.dart';
 
 
@@ -29,9 +31,6 @@ class SplashScreenState extends State<SplashScreen>{
   String noInternetRu = "Нет подключения\nк интернету!";
   String noInternetKg = "Интернетке байланыш жок";
 
-  double opacityLogo = 0;
-
-  double allPokemonVal = 10;
   List<Pokemon> pokemonList = [];
 
   Future<bool> checkPokeDataBase() async{
@@ -54,7 +53,50 @@ class SplashScreenState extends State<SplashScreen>{
   }
 
   Future<void> fillHivePokeDataBase() async{
-    for(int pokeInt = 0; pokeInt< pokeNames.pokeNames.length;pokeInt++ ){
+    log("Poke names lenght : ${pokeNames.pokeNames.length}");
+    log("Poke Rarity lenght : ${pokeRarity.pokeRarity.length}");
+    log("Poke Types lenght : ${pokeTypes.pokeType.length}");
+    log("Poke Stats lenght : ${pokeStats.pokeStats.length}");
+    log("Poke Region lenght : ${pokeRegion.pokeRegion.length}");
+    log("Poke Weakness lenght : ${pokeWeakness.pokeWeakness.length}");
+    //for(int pokeInt = 0; pokeInt< pokeNames.pokeNames.length;pokeInt++ ){
+    //  log("Poke number : $pokeInt");
+    //  log("Poke Name : ${pokeNames.pokeNames[pokeInt]}");
+    //  log("Poke Stats attack : ${pokeStats.pokeStats[pokeInt].hp}");
+    //  log("Poke Stats lenght : ${pokeStats.pokeStats[pokeInt].attack}");
+    //}
+  }
+
+  Future<void> fillPokemons() async{
+    for(int pokeInt = 0; pokeInt< pokeStats.pokeStats.length;pokeInt++ ){
+      String gifFrontPath = "";
+      String gifBackPath = "";
+      if(pokeInt<99){
+        if(pokeInt<9){
+          gifFrontPath = 'assets/gifs/00${pokeInt + 1}.gif';
+          gifBackPath = 'assets/gifs/00${pokeInt + 1}b.gif';
+        }
+        else{
+          gifFrontPath = 'assets/gifs/0${pokeInt + 1}.gif';
+          gifBackPath = 'assets/gifs/0${pokeInt + 1}b.gif';
+        }
+      }
+      else{
+        gifFrontPath = 'assets/gifs/${pokeInt + 1}.gif';
+        gifBackPath = 'assets/gifs/${pokeInt + 1}b.gif';
+      }
+      Pokemon poke = Pokemon(
+          pokeDexIndex: pokeInt,
+          name: pokeNames.pokeNames[pokeInt],
+          rarity: pokeRarity.pokeRarity[pokeInt],
+          type: pokeTypes.pokeType[pokeInt],
+          pokeStats: pokeStats.pokeStats[pokeInt],
+          region: pokeRegion.pokeRegion[pokeInt],
+          weakness: pokeWeakness.pokeWeakness[pokeInt],
+          gifFront: gifFrontPath,
+          gifBack: gifBackPath
+      );
+      globals.pokeList.add(poke);
     }
   }
 
@@ -72,6 +114,8 @@ class SplashScreenState extends State<SplashScreen>{
   Future<void> logoMainMethod() async{
     //todo: ensure to initialize all neccessary voids and methods =>
     await Hive.initFlutter();
+    //todo : fill pokemon data in list =>
+    await fillPokemons();
     // todo : check poke data =>
     await checkPokeData();
     // todo : show welcome message =>
