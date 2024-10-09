@@ -14,14 +14,14 @@ import 'mapPage.dart';
 
 
 
-class BottomPokeNavigationBar extends ConsumerStatefulWidget {
+class BottomPokeNavigationBar extends StatefulWidget {
   const BottomPokeNavigationBar({super.key});
 
   @override
   BottomPokeNavigationBarState createState() => BottomPokeNavigationBarState();
 }
 
-class BottomPokeNavigationBarState extends ConsumerState<BottomPokeNavigationBar> {
+class BottomPokeNavigationBarState extends State<BottomPokeNavigationBar> {
 
   int selectedBottomNavBarIndex = 2;
 

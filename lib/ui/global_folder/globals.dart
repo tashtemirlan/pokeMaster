@@ -2,9 +2,32 @@ library pokemon.globals;
 
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:pokemonmap/Models/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+List<Pokemon> pokeList = [];
+
+List<Type> listTypes = [
+  Type.Normal,
+  Type.Fire,
+  Type.Water,
+  Type.Electric,
+  Type.Grass,
+  Type.Ice,
+  Type.Fighting,
+  Type.Poison,
+  Type.Ground,
+  Type.Flying,
+  Type.Psychic,
+  Type.Bug,
+  Type.Rock,
+  Type.Ghost,
+  Type.Dragon,
+  Type.Dark,
+  Type.Steel,
+  Type.Fairy
+];
 
 
 enum Region{
@@ -175,4 +198,12 @@ String showTypePokemon(Type type, BuildContext context){
   else{
     return AppLocalizations.of(context)!.pokemon_type_fairy;
   }
+}
+
+class CheckBoxItem {
+
+  Type type;
+  bool itemSelected;
+
+  CheckBoxItem({required this.type, required this.itemSelected});
 }

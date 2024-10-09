@@ -3,13 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
-import 'package:pokemonmap/database_instructions/pokeNames.dart' as pokeNames;
-import 'package:pokemonmap/database_instructions/pokeGifs.dart' as pokeGifs;
-import 'package:pokemonmap/database_instructions/pokeRarity.dart' as pokeRarity;
-import 'package:pokemonmap/database_instructions/pokeRegion.dart' as pokeRegion;
-import 'package:pokemonmap/database_instructions/pokeStats.dart' as pokeStats;
-import 'package:pokemonmap/database_instructions/pokeTypes.dart' as pokeTypes;
-import 'package:pokemonmap/database_instructions/pokeWeakness.dart' as pokeWeakness;
+import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
+
 import '../global_folder/globals.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -92,7 +87,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
   }
 
   Widget pokemonStats(double height){
-    PokeStats pokemon_Stats = pokeStats.pokeStats[widget.pokeIndex];
+    PokeStats pokemon_Stats = globals.pokeList[widget.pokeIndex].pokeStats;
     double pokemon_hp = pokemon_Stats.hp;
     double pokemon_attack = pokemon_Stats.attack;
     double pokemon_defence = pokemon_Stats.defence;
@@ -100,7 +95,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
     double pokemon_sp_defence = pokemon_Stats.specialDefence;
     double pokemon_speed = pokemon_Stats.speed;
     List<double> pokeData = [pokemon_hp, pokemon_attack ,pokemon_defence, pokemon_sp_attack , pokemon_sp_defence, pokemon_speed];
-    Color? colorPokeCharts = typeColors[pokeTypes.pokeType[widget.pokeIndex].first];
+    Color? colorPokeCharts = typeColors[globals.pokeList[widget.pokeIndex].type.first];
     Color showColor = (colorPokeCharts!=null)? colorPokeCharts : Colors.blue.shade600;
     return radarChartPokemon(pokeData, showColor, height);
   }
@@ -158,13 +153,13 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
               ),
               const SizedBox(height: 20),
               Text(
-                  pokeNames.pokeNames[widget.pokeIndex],
+                  globals.pokeList[widget.pokeIndex].name,
                   style: TextStyle(color: Colors.black, fontSize: 24, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
               Wrap(
                 spacing: 5,
-                children: pokeTypes.pokeType[widget.pokeIndex].map((type) {
+                children: globals.pokeList[widget.pokeIndex].type.map((type) {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
@@ -202,7 +197,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                             const SizedBox(width: 5,),
                             Expanded(
                               child: Text(
-                                showRarityPokemon(pokeRarity.pokeRarity[widget.pokeIndex], context),
+                                showRarityPokemon(globals.pokeList[widget.pokeIndex].rarity, context),
                                 style: TextStyle(color: Colors.black , fontSize: 18,
                                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
                               ),
@@ -220,7 +215,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                             const SizedBox(width: 5,),
                             Expanded(
                               child: Text(
-                                showRegionPokemon(pokeRegion.pokeRegion[widget.pokeIndex], context),
+                                showRegionPokemon(globals.pokeList[widget.pokeIndex].region, context),
                                 style: TextStyle(color: Colors.black , fontSize: 18,
                                     decoration: TextDecoration.none, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
                               ),
@@ -236,7 +231,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                         Wrap(
                           spacing: 5,
                           runSpacing: 5,
-                          children: pokeWeakness.pokeWeakness[widget.pokeIndex].map((type) {
+                          children: globals.pokeList[widget.pokeIndex].weakness.map((type) {
                             if(type!=null){
                               return Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
