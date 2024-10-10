@@ -2,6 +2,7 @@ library pokemon.globals;
 
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:pokemonmap/Models/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -197,6 +198,24 @@ String showTypePokemon(Type type, BuildContext context){
   }
   else{
     return AppLocalizations.of(context)!.pokemon_type_fairy;
+  }
+}
+
+Color showRarityColorPokemon(Rarity rarity){
+  if(rarity == Rarity.casual){
+    return Colors.grey.shade400;
+  }
+  else if(rarity == Rarity.rare){
+    return Colors.orange.shade300;
+  }
+  else if(rarity == Rarity.epic){
+    return Colors.purple.shade500;
+  }
+  else if(rarity == Rarity.mystic){
+    return Colors.purpleAccent.shade700.withOpacity(0.8);
+  }
+  else{
+    return Colors.greenAccent.shade400.withOpacity(0.5);
   }
 }
 

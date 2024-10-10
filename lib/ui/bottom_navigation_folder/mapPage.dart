@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
+
+import '../bottom_sheets_folder/poke_rullete_bottom_sheet.dart';
 
 
 class MapPage extends StatefulWidget{
@@ -12,6 +15,21 @@ class MapPage extends StatefulWidget{
 }
 
 class MapPageState extends State<MapPage>{
+
+  void viewPokeRouletteBottomSheet() async{
+    showCupertinoModalBottomSheet(
+      topRadius: const Radius.circular(40),
+      backgroundColor: colors.scaffoldColor,
+      context: context,
+      expand: true,
+      builder: (BuildContext context) {
+        return PokemonRouletteBottomSheet();
+      },
+    );
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -19,6 +37,7 @@ class MapPageState extends State<MapPage>{
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double mainSizedBoxHeightUserNotLogged = height  - statusBarHeight - 80;
 
+    print("we are here");
     return PopScope(
         canPop: false,
         child: Scaffold(
@@ -30,8 +49,12 @@ class MapPageState extends State<MapPage>{
                   color: colors.scaffoldColor,
                   child: SingleChildScrollView(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-
+                        TextButton(onPressed: (){
+                          viewPokeRouletteBottomSheet();
+                        }, child: Text("Start Spin", style: TextStyle(color: Colors.blue.shade500, fontSize: 52),))
                       ],
                     ),
                   )
