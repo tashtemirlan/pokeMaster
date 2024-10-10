@@ -20,22 +20,20 @@ class PokemonPokedexBottomSheet extends StatefulWidget{
 class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
 
   bool frontView = false;
-  String gifFrontPath = "";
-  String gifBackPath = "";
   String gifPath = "";
 
   void changeImageView(){
     if(frontView==true){
       // show back view
       setState(() {
-        gifPath = gifBackPath;
+        gifPath = globals.pokeList[widget.pokeIndex].gifBack;
         frontView = false;
       });
     }
     else{
       //show front view
       setState(() {
-        gifPath = gifFrontPath;
+        gifPath = globals.pokeList[widget.pokeIndex].gifFront;
         frontView = true;
       });
     }
@@ -100,23 +98,129 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
     return radarChartPokemon(pokeData, showColor, height);
   }
 
+  Widget rowDataPokemon(width){
+    return Column(
+      children: [
+        //HP
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${AppLocalizations.of(context)!.pokemon_stats_hp} : ",
+              style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 5,),
+            Expanded(
+              child: Text(
+                "${globals.pokeList[widget.pokeIndex].pokeStats.hp}",
+                style: TextStyle(color: Colors.black , fontSize: 18,
+                    decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
+              ),
+            )
+          ],
+        ),
+        //Attack
+        SizedBox(height: 10,),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${AppLocalizations.of(context)!.pokemon_stats_attack} : ",
+              style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 5,),
+            Expanded(
+              child: Text(
+                "${globals.pokeList[widget.pokeIndex].pokeStats.attack}",
+                style: TextStyle(color: Colors.black , fontSize: 18,
+                    decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
+              ),
+            )
+          ],
+        ),
+        // Defence
+        SizedBox(height: 10,),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${AppLocalizations.of(context)!.pokemon_stats_defence} : ",
+              style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 5,),
+            Expanded(
+              child: Text(
+                "${globals.pokeList[widget.pokeIndex].pokeStats.defence}",
+                style: TextStyle(color: Colors.black , fontSize: 18,
+                    decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
+              ),
+            )
+          ],
+        ),
+        // Special attack
+        SizedBox(height: 10,),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${AppLocalizations.of(context)!.pokemon_stats_special_attack} : ",
+              style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 5,),
+            Expanded(
+              child: Text(
+                "${globals.pokeList[widget.pokeIndex].pokeStats.specialAttack}",
+                style: TextStyle(color: Colors.black , fontSize: 18,
+                    decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
+              ),
+            )
+          ],
+        ),
+        // Special defence
+        SizedBox(height: 10,),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${AppLocalizations.of(context)!.pokemon_stats_special_defence} : ",
+              style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 5,),
+            Expanded(
+              child: Text(
+                "${globals.pokeList[widget.pokeIndex].pokeStats.specialDefence}",
+                style: TextStyle(color: Colors.black , fontSize: 18,
+                    decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
+              ),
+            )
+          ],
+        ),
+        // speed
+        SizedBox(height: 10,),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${AppLocalizations.of(context)!.pokemon_stats_speed} : ",
+              style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 5,),
+            Expanded(
+              child: Text(
+                "${globals.pokeList[widget.pokeIndex].pokeStats.speed}",
+                style: TextStyle(color: Colors.black , fontSize: 18,
+                    decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
+              ),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    if(widget.pokeIndex<99){
-      if(widget.pokeIndex<9){
-        gifFrontPath = 'assets/gifs/00${widget.pokeIndex + 1}.gif';
-        gifBackPath = 'assets/gifs/00${widget.pokeIndex + 1}b.gif';
-      }
-      else{
-        gifFrontPath = 'assets/gifs/0${widget.pokeIndex + 1}.gif';
-        gifBackPath = 'assets/gifs/0${widget.pokeIndex + 1}b.gif';
-      }
-    }
-    else{
-      gifFrontPath = 'assets/gifs/${widget.pokeIndex + 1}.gif';
-      gifBackPath = 'assets/gifs/${widget.pokeIndex + 1}b.gif';
-    }
     changeImageView();
   }
 
@@ -261,6 +365,8 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                           style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 10),
+                        rowDataPokemon(width),
+                        const SizedBox(height: 20),
                         pokemonStats(height/2),
                         const SizedBox(height: 30,)
                       ],
