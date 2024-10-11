@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:pokemonmap/Models/pokemonModel.dart';
+import 'package:pokemonmap/models/pokemonModel.dart';
 
 import 'package:pokemonmap/database_instructions/pokeNames.dart' as pokeNames;
 import 'package:pokemonmap/database_instructions/pokeGifs.dart' as pokeGifs;

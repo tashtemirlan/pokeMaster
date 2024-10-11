@@ -23,3 +23,9 @@ Color colorSteel = Colors.blueGrey;
 Color colorFairy = Colors.pinkAccent;
 
 Color searchBoxColor = Color.fromRGBO(0, 48, 73, 1);
+
+Color casualColor = Color.fromRGBO(150, 150, 150, 1);
+Color rareColor = Color.fromRGBO(70, 130, 180, 1);
+Color epicColor = Color.fromRGBO(138, 43, 226, 1);
+Color mysticColor = Color.fromRGBO(255, 165, 0, 1);
+Color legendaryColor = Color.fromRGBO(255, 215, 0, 1);

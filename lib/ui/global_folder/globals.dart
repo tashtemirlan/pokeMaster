@@ -1,9 +1,8 @@
 library pokemon.globals;
 
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pokemonmap/Models/pokemonModel.dart';
+import 'package:pokemonmap/models/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,6 +27,14 @@ List<Type> listTypes = [
   Type.Dark,
   Type.Steel,
   Type.Fairy
+];
+
+List<Rarity> listRarity = [
+  Rarity.casual,
+  Rarity.rare,
+  Rarity.epic,
+  Rarity.mystic,
+  Rarity.legendary
 ];
 
 
@@ -203,19 +210,19 @@ String showTypePokemon(Type type, BuildContext context){
 
 Color showRarityColorPokemon(Rarity rarity){
   if(rarity == Rarity.casual){
-    return Colors.grey.shade400;
+    return colors.casualColor;
   }
   else if(rarity == Rarity.rare){
-    return Colors.orange.shade300;
+    return colors.rareColor;
   }
   else if(rarity == Rarity.epic){
-    return Colors.purple.shade500;
+    return colors.epicColor;
   }
   else if(rarity == Rarity.mystic){
-    return Colors.purpleAccent.shade700.withOpacity(0.8);
+    return colors.mysticColor;
   }
   else{
-    return Colors.greenAccent.shade400.withOpacity(0.5);
+    return colors.legendaryColor;
   }
 }
 
