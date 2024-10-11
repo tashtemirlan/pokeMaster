@@ -21,7 +21,7 @@ class MapPageState extends State<MapPage>{
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
       context: context,
-      expand: true,
+      expand: false,
       builder: (BuildContext context) {
         return PokemonRouletteBottomSheet();
       },
@@ -36,8 +36,6 @@ class MapPageState extends State<MapPage>{
     double height = MediaQuery.of(context).size.height;
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double mainSizedBoxHeightUserNotLogged = height  - statusBarHeight - 80;
-
-    print("we are here");
     return PopScope(
         canPop: false,
         child: Scaffold(

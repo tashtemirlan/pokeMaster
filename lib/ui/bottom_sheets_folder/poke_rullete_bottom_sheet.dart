@@ -1,7 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:pokemonmap/Models/pokemonModel.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pokemonmap/models/pokemonModel.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pokemonmap/ui/bottom_sheets_folder/pokemon_pokedex_bottom_sheet.dart';
 import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
+import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
+
 
 class PokemonRouletteBottomSheet extends StatefulWidget {
   const PokemonRouletteBottomSheet({super.key});
@@ -17,20 +22,52 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
   late Animation<double> _animation;
   final Random _random = Random();
   double _currentOffset = 0;
-  final double _itemWidth = 100.0;
   late List<Pokemon> _shuffledPokemonList;
 
-  int? _selectedIndex;  // Index of the selected Pokémon
-  Pokemon? _selectedPokemon;  // To store the selected Pokémon
+  double _itemWidth = 120;
+  int randomVal = 0;
+
+
+  Widget listRarity(double width){
+    return SizedBox(
+      height: (40 * globals.listRarity.length).toDouble(),
+      child: ListView.builder(
+        itemCount: globals.listRarity.length,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          return SizedBox(
+            width: width,
+            height: 40,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(child: Text(
+                  globals.showRarityPokemon(globals.listRarity[index], context),
+                  style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+                )),
+                const SizedBox(width: 10,),
+                Container(
+                  width: 25,
+                  height: 25,
+                  decoration: BoxDecoration(
+                      color: globals.showRarityColorPokemon(globals.listRarity[index]),
+                      borderRadius: BorderRadius.circular(5)
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
-
-    // Initialize Animation Controller
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 10),
     );
 
     _animationController.addListener(() {
@@ -43,7 +80,6 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
       }
     });
 
-    // Shuffle the Pokémon list initially
     _shufflePokemonList();
   }
 
@@ -54,20 +90,30 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
     super.dispose();
   }
 
-  void _shufflePokemonList() {
-    _shuffledPokemonList = List.from(globals.pokeList)..shuffle();
-    _selectedIndex = null;  // Reset the selected Pokémon
-    _selectedPokemon = null;  // Reset the selected Pokémon to display
+  void viewPokeBottomSheet(int pokeIndex) async{
+    showCupertinoModalBottomSheet<String>(
+      topRadius: const Radius.circular(40),
+      backgroundColor: colors.scaffoldColor,
+      context: context,
+      expand: true,
+      builder: (BuildContext context) {
+        return PokemonPokedexBottomSheet(pokeIndex: pokeIndex);
+      },
+    );
   }
 
-  // Start spinning the roulette
+  void _shufflePokemonList() {
+    _shuffledPokemonList = List.from(globals.pokeList)..shuffle();
+  }
+
   void _startRoulette() {
-    _shufflePokemonList();  // Shuffle Pokémon each time we spin
     setState(() {
-      _currentOffset = _scrollController.position.pixels;
+      _currentOffset = 0;
     });
 
-    final targetOffset = _currentOffset + _random.nextInt(5000) + 1000;
+    randomVal = _random.nextInt(globals.pokeList.length);
+    final randomValToPixels = randomVal * (_itemWidth.toInt()+10);
+    final targetOffset = _currentOffset + randomValToPixels - 10;
 
     _animation = Tween<double>(
       begin: _currentOffset,
@@ -80,103 +126,107 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
     _animationController.forward(from: 0.0);
   }
 
-  // Stop the roulette and highlight the chosen Pokémon
   void _stopRoulette() {
-    double finalOffset = _scrollController.position.pixels;
-    double remainder = finalOffset % _itemWidth;
-
-    // Align to the nearest Pokémon
-    if (remainder > _itemWidth / 2) {
-      finalOffset = finalOffset - remainder + _itemWidth;
-    } else {
-      finalOffset = finalOffset - remainder;
-    }
-
-    // Find the selected Pokémon based on the final adjusted offset
-    int selectedIndex = (finalOffset ~/ _itemWidth) % _shuffledPokemonList.length;
-
-    setState(() {
-      _selectedIndex = selectedIndex;  // Save the index of the chosen Pokémon
-      _selectedPokemon = _shuffledPokemonList[selectedIndex];  // Save the chosen Pokémon to display its name
-    });
-
-    // Animate to perfectly align the selected Pokémon
-    _scrollController.animateTo(
-      finalOffset,
-      duration: Duration(milliseconds: 500),
-      curve: Curves.fastLinearToSlowEaseIn,
-    );
+    int pokeRandomIndex = globals.pokeList.indexOf(_shuffledPokemonList[randomVal+1]);
+    viewPokeBottomSheet(pokeRandomIndex);
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 100),
+            Text(
+              AppLocalizations.of(context)!.spin_roulette_string,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            SizedBox(height: 30,),
             SizedBox(
-              height: _itemWidth,  // Set the height for the Pokémon list
+              height: 150,
               child: ListView.builder(
                 controller: _scrollController,
                 scrollDirection: Axis.horizontal,
-                itemCount: _shuffledPokemonList.length * 5,  // Loop through the list to simulate endless scroll
+                itemCount: _shuffledPokemonList.length * 5,
+                physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   final pokemon = _shuffledPokemonList[index % _shuffledPokemonList.length];
-                  bool isSelected = (index % _shuffledPokemonList.length) == _selectedIndex;
-
-                  return Container(
-                    width: _itemWidth,
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: globals.showRarityColorPokemon(pokemon.rarity),
-                      borderRadius: BorderRadius.circular(10),
-                      border: isSelected
-                          ? Border.all(color: globals.showRarityColorPokemon(pokemon.rarity), width: 3)
-                          : Border.all(color: Colors.grey, width: 1),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          pokemon.gifFront,
-                          height: 50,
-                          fit: BoxFit.contain,
+                  return Padding(
+                      padding: EdgeInsets.only(left: index==0 ? 0:10),
+                      child: Container(
+                        width: _itemWidth,
+                        decoration: BoxDecoration(
+                          color: globals.showRarityColorPokemon(pokemon.rarity),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        Text(
-                          pokemon.name,  // Display Pokémon name
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                            color: isSelected ? globals.showRarityColorPokemon(pokemon.rarity) : Colors.black,
-                            decoration: TextDecoration.none,
-                          ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              pokemon.gifFront,
+                              height: 100,
+                              fit: BoxFit.contain,
+                            ),
+                            const SizedBox(height: 10,),
+                            Text(
+                              pokemon.name,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: (pokemon.rarity == globals.Rarity.mystic || pokemon.rarity == globals.Rarity.legendary)?
+                                Colors.black : Colors.white,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
                   );
                 },
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
+            Text(
+              AppLocalizations.of(context)!.rarity_string,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            SizedBox(height: 10,),
+            listRarity(width),
+            SizedBox(height: 10,),
             ElevatedButton(
-              onPressed: _startRoulette,
+              onPressed: ()=> _startRoulette(),
+              style: ButtonStyle(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+              ),
               child: Text(
-                "Spin the Roulette",
+                AppLocalizations.of(context)!.spin_roulette_string,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                   decoration: TextDecoration.none,
                 ),
               ),
             ),
-            SizedBox(height: 20),
           ],
         ),
       ),

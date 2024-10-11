@@ -42,5 +42,6 @@
   "pokemon_stats_special_defence" : "Өзгөчө коргоо",
   "pokemon_stats_speed" : "Ылдамдык",
   "choice_type_string" : "Түрүн тандаңыз",
-  "choice_string" : "Тандоо"
+  "choice_string" : "Тандоо",
+  "spin_roulette_string" : "Рулетканы айлантуу"
 }

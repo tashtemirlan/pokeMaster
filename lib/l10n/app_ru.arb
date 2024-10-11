@@ -42,5 +42,6 @@
   "pokemon_stats_special_defence" : "Особая защита",
   "pokemon_stats_speed" : "Скорость",
   "choice_type_string" : "Выберите тип",
-  "choice_string" : "Выбрать"
+  "choice_string" : "Выбрать",
+  "spin_roulette_string" : "Крутить рулетку"
 }
