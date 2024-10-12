@@ -43,5 +43,8 @@
   "pokemon_stats_speed" : "Speed",
   "choice_type_string" : "Choice type",
   "choice_string" : "Choice",
-  "spin_roulette_string" : "Spin roulette"
+  "spin_roulette_string" : "Spin roulette",
+  "store_string" : "Store",
+  "buy_string" : "Buy",
+  "low_money_string" : "Insufficient funds!"
 }

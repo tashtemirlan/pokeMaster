@@ -6,6 +6,7 @@ import 'package:pokemonmap/models/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+int userCoins = 10000;
 List<Pokemon> pokeList = [];
 
 List<Type> listTypes = [

@@ -43,5 +43,8 @@
   "pokemon_stats_speed" : "Скорость",
   "choice_type_string" : "Выберите тип",
   "choice_string" : "Выбрать",
-  "spin_roulette_string" : "Крутить рулетку"
+  "spin_roulette_string" : "Крутить рулетку",
+  "store_string" : "Магазин",
+  "buy_string" : "Купить",
+  "low_money_string" : "Недостаточно средств!"
 }
