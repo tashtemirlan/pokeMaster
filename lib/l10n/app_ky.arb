@@ -43,5 +43,8 @@
   "pokemon_stats_speed" : "Ылдамдык",
   "choice_type_string" : "Түрүн тандаңыз",
   "choice_string" : "Тандоо",
-  "spin_roulette_string" : "Рулетканы айлантуу"
+  "spin_roulette_string" : "Рулетканы айлантуу",
+  "store_string" : "Дүкөн",
+  "buy_string" : "Сатып алуу",
+  "low_money_string" : "Каражат жетишсиз!"
 }

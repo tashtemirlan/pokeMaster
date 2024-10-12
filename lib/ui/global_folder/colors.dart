@@ -29,3 +29,6 @@ Color rareColor = Color.fromRGBO(70, 130, 180, 1);
 Color epicColor = Color.fromRGBO(138, 43, 226, 1);
 Color mysticColor = Color.fromRGBO(255, 165, 0, 1);
 Color legendaryColor = Color.fromRGBO(255, 215, 0, 1);
+
+Color goldColor = Color.fromRGBO(255, 215, 0, 1);
+Color darkBlack = Color.fromRGBO(32, 32, 32, 1);
