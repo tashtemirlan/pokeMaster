@@ -6,7 +6,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:pokemonmap/models/pokemonModel.dart';
 
 import 'package:pokemonmap/database_instructions/pokeNames.dart' as pokeNames;
-import 'package:pokemonmap/database_instructions/pokeGifs.dart' as pokeGifs;
 import 'package:pokemonmap/database_instructions/pokeRarity.dart' as pokeRarity;
 import 'package:pokemonmap/database_instructions/pokeRegion.dart' as pokeRegion;
 import 'package:pokemonmap/database_instructions/pokeStats.dart' as pokeStats;

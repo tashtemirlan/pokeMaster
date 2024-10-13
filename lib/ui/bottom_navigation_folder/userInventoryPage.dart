@@ -31,7 +31,15 @@ class UserInventoryPageState extends State<UserInventoryPage>{
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-
+                        Text(
+                          "Inventory",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                       ],
                     ),
                   )
