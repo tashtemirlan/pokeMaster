@@ -31,7 +31,15 @@ class ChallengePageState extends State<ChallengePage>{
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-
+                        Text(
+                          "Challenge",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                       ],
                     ),
                   )
