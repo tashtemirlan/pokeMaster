@@ -45,15 +45,39 @@ class MapPageState extends State<MapPage>{
                   width: width,
                   height: mainSizedBoxHeightUserNotLogged,
                   color: colors.scaffoldColor,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        TextButton(onPressed: (){
-                          viewPokeRouletteBottomSheet();
-                        }, child: Text("Start Spin", style: TextStyle(color: Colors.blue.shade500, fontSize: 52),))
-                      ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 15,),
+                          SizedBox(
+                            width: width,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: GestureDetector(
+                                onTap: (){
+                                  viewPokeRouletteBottomSheet();
+                                },
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: colors.searchBoxColor
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Icon(Icons.catching_pokemon_outlined, color: Colors.white, size: 36,),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   )
               ),

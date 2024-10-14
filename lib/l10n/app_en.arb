@@ -46,5 +46,7 @@
   "spin_roulette_string" : "Spin roulette",
   "store_string" : "Store",
   "buy_string" : "Buy",
-  "low_money_string" : "Insufficient funds!"
+  "low_money_string" : "Insufficient funds!",
+  "challenge_string" : "Challenges",
+  "contest_string" : "Contests"
 }
