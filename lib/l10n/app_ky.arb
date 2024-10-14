@@ -46,5 +46,7 @@
   "spin_roulette_string" : "Рулетканы айлантуу",
   "store_string" : "Дүкөн",
   "buy_string" : "Сатып алуу",
-  "low_money_string" : "Каражат жетишсиз!"
+  "low_money_string" : "Каражат жетишсиз!",
+  "challenge_string" : "Тесттер",
+  "contest_string" : "Жарыш"
 }

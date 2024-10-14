@@ -46,5 +46,7 @@
   "spin_roulette_string" : "Крутить рулетку",
   "store_string" : "Магазин",
   "buy_string" : "Купить",
-  "low_money_string" : "Недостаточно средств!"
+  "low_money_string" : "Недостаточно средств!",
+  "challenge_string" : "Испытания",
+  "contest_string" : "Состязания"
 }
