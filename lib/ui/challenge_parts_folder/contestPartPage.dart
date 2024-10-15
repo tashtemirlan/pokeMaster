@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../bottom_sheets_folder/poke_badges_bottom_sheet.dart';
 
 class ContestTab extends StatefulWidget {
   @override
@@ -12,7 +15,17 @@ class ContestTab extends StatefulWidget {
 class _ContestTabState extends State<ContestTab> {
 
   void showAllContestAwards(){
-
+    showCupertinoModalBottomSheet(
+      topRadius: const Radius.circular(40),
+      backgroundColor: colors.scaffoldColor,
+      context: context,
+      expand: false,
+      builder: (BuildContext context) {
+        return PokeBadgesBottomSheet(
+          showGym: false,
+        );
+      },
+    );
   }
 
   @override
