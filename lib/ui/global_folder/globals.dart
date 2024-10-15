@@ -7,6 +7,7 @@ import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 int userCoins = 10000;
+
 List<Pokemon> pokeList = [];
 
 List<Type> listTypes = [
@@ -37,7 +38,6 @@ List<Rarity> listRarity = [
   Rarity.mystic,
   Rarity.legendary
 ];
-
 
 enum Region{
   Kanto,
@@ -227,6 +227,7 @@ Color showRarityColorPokemon(Rarity rarity){
   }
 }
 
+//todo : checkbox items to select type of pokemon in pokedex
 class CheckBoxItem {
 
   Type type;
@@ -234,3 +235,76 @@ class CheckBoxItem {
 
   CheckBoxItem({required this.type, required this.itemSelected});
 }
+
+// todo : items of store
+List<ShopItem> shopItems = [
+  ShopItem(imagePath: "assets/pokeimages/pb1.png", itemName: "Pokeball", itemPrice: "200"),
+  ShopItem(imagePath: "assets/pokeimages/pb2.png", itemName: "Great Ball", itemPrice: "1500"),
+  ShopItem(imagePath: "assets/pokeimages/pb3.png", itemName: "Ultra Ball", itemPrice: "10000"),
+  ShopItem(imagePath: "assets/pokeimages/pb4.png", itemName: "Master Ball", itemPrice: "1000000"),
+];
+
+class ShopItem{
+  final String imagePath;
+  final String itemName;
+  final String itemPrice;
+
+  ShopItem({
+    required this.imagePath,
+    required this.itemName,
+    required this.itemPrice
+  });
+}
+
+//todo : badges in challenges
+class AwardsBadges{
+  final String imagePath;
+  final String itemName;
+
+  AwardsBadges({
+    required this.imagePath,
+    required this.itemName,
+  });
+}
+
+List<AwardsBadges> kantoGym = [
+
+];
+
+List<AwardsBadges> johtoGym = [
+
+];
+List<AwardsBadges> hoennGym = [
+
+];
+List<AwardsBadges> sinnohGym = [
+
+];
+List<AwardsBadges> unovaGym = [
+
+];
+List<AwardsBadges> kalosGym = [
+
+];
+
+//todo : badges in contests
+List<AwardsBadges> kantoContest = [
+
+];
+
+List<AwardsBadges> johtoContest = [
+
+];
+List<AwardsBadges> hoennContest = [
+
+];
+List<AwardsBadges> sinnohContest = [
+
+];
+List<AwardsBadges> unovaContest = [
+
+];
+List<AwardsBadges> kalosContest = [
+
+];
+

@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
@@ -240,11 +241,14 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                      child: Image.asset(
-                        gifPath,
-                        height: width *0.6,
-                        width: width,
-                        fit: BoxFit.contain,
+                      child: InstaImageViewer(
+                          backgroundColor: Colors.white,
+                          child: Image.asset(
+                            gifPath,
+                            height: width *0.6,
+                            width: width,
+                            fit: BoxFit.contain,
+                          )
                       ),
                   ),
                   GestureDetector(

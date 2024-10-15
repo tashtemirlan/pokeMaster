@@ -29,6 +29,8 @@ class PokedexPageState extends State<PokedexPage>{
 
   List<CheckBoxItem> listCheckBox = [];
 
+  bool userChoseSelectionType = false;
+
   void viewPokeBottomSheet(int pokeIndex) async{
     showCupertinoModalBottomSheet<String>(
       topRadius: const Radius.circular(40),
@@ -42,6 +44,7 @@ class PokedexPageState extends State<PokedexPage>{
   }
 
   void viewPokeTypeMultiChoiceBottomSheet() async{
+    userChoseSelectionType = true;
     var result = await showCupertinoModalBottomSheet<List<globals.CheckBoxItem>>(
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
@@ -187,6 +190,8 @@ class PokedexPageState extends State<PokedexPage>{
   }
 
   void _filterList(String query) {
+    listCheckBox = [];
+    fillCheckList();
     setState(() {
       if (query.isEmpty) {
         filteredPokemons = globals.pokeList;

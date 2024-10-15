@@ -9,18 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../bottom_sheets_folder/poke_ball_buy_bottom_sheet.dart';
 
-class ShopItem{
-  final String imagePath;
-  final String itemName;
-  final String itemPrice;
-
-  ShopItem({
-    required this.imagePath,
-    required this.itemName,
-    required this.itemPrice
-  });
-}
-
 class ShopPage extends StatefulWidget{
   const ShopPage({super.key});
 
@@ -31,10 +19,9 @@ class ShopPage extends StatefulWidget{
 
 class ShopPageState extends State<ShopPage>{
 
-  List<ShopItem> shopItemList = [];
   String showUserMoney = "";
 
-  Widget storeItem(double width, ShopItem shopItem) {
+  Widget storeItem(double width, globals.ShopItem shopItem) {
     return Container(
       width: width/2.5,
       padding: EdgeInsets.all(10.0),
@@ -106,24 +93,13 @@ class ShopPageState extends State<ShopPage>{
     return Wrap(
       spacing: 16.0,
       runSpacing: 16.0,
-      children: shopItemList.map((item){
+      children: globals.shopItems.map((item){
         return storeItem(width, item);
       }).toList(),
     );
   }
 
-  void fillList(){
-    ShopItem sh1 = ShopItem(imagePath: "assets/pokeimages/pb1.png", itemName: "Pokeball", itemPrice: "200");
-    ShopItem sh2 = ShopItem(imagePath: "assets/pokeimages/pb2.png", itemName: "Great Ball", itemPrice: "1500");
-    ShopItem sh3 = ShopItem(imagePath: "assets/pokeimages/pb3.png", itemName: "Ultra Ball", itemPrice: "10000");
-    ShopItem sh4 = ShopItem(imagePath: "assets/pokeimages/pb4.png", itemName: "Master Ball", itemPrice: "1000000");
-    shopItemList.add(sh1);
-    shopItemList.add(sh2);
-    shopItemList.add(sh3);
-    shopItemList.add(sh4);
-  }
-
-  void viewPokeBallBottomSheet(ShopItem shopItem) async{
+  void viewPokeBallBottomSheet(globals.ShopItem shopItem) async{
     final result = await showCupertinoModalBottomSheet<int>(
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
@@ -143,7 +119,6 @@ class ShopPageState extends State<ShopPage>{
   @override
   void initState() {
     super.initState();
-    fillList();
     showUserMoney = globals.userCoins.toString();
   }
 
