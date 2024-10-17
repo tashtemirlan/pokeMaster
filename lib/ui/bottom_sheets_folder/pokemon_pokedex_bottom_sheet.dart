@@ -260,7 +260,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                 ],
               ),
               const SizedBox(height: 20),
-              Text(
+              Text(//show correct name in ky/ru/en
                   globals.pokeList[widget.pokeIndex].name,
                   style: TextStyle(color: Colors.black, fontSize: 24, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
               ),

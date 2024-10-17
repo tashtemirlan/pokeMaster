@@ -103,7 +103,7 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
   }
 
   void _shufflePokemonList() {
-    _shuffledPokemonList = List.from(globals.pokeList)..shuffle();
+    _shuffledPokemonList = List.from(globals.listAllPokemons)..shuffle();
   }
 
   void _startRoulette() {
@@ -111,7 +111,7 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
       _currentOffset = 0;
     });
 
-    randomVal = _random.nextInt(globals.pokeList.length);
+    randomVal = _random.nextInt(globals.listAllPokemons.length);
     final randomValToPixels = randomVal * (_itemWidth.toInt()+10);
     final targetOffset = _currentOffset + randomValToPixels - 10;
 
@@ -127,7 +127,7 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
   }
 
   void _stopRoulette() {
-    int pokeRandomIndex = globals.pokeList.indexOf(_shuffledPokemonList[randomVal+1]);
+    int pokeRandomIndex = globals.listAllPokemons.indexOf(_shuffledPokemonList[randomVal+1]);
     viewPokeBottomSheet(pokeRandomIndex);
   }
 

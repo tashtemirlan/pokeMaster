@@ -6,9 +6,9 @@ import 'package:pokemonmap/models/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-int userCoins = 10000;
+int userCoins = 0;
 
-List<Pokemon> pokeList = [];
+List<Pokemon> listAllPokemons = [];
 
 List<Type> listTypes = [
   Type.Normal,
@@ -260,51 +260,28 @@ class ShopItem{
 class AwardsBadges{
   final String imagePath;
   final String itemName;
+  final String cityName;
 
   AwardsBadges({
     required this.imagePath,
     required this.itemName,
+    required this.cityName
   });
 }
 
-List<AwardsBadges> kantoGym = [
-
-];
-
-List<AwardsBadges> johtoGym = [
-
-];
-List<AwardsBadges> hoennGym = [
-
-];
-List<AwardsBadges> sinnohGym = [
-
-];
-List<AwardsBadges> unovaGym = [
-
-];
-List<AwardsBadges> kalosGym = [
-
-];
+List<AwardsBadges> kantoGym = [];
+List<AwardsBadges> johtoGym = [];
+List<AwardsBadges> hoennGym = [];
+List<AwardsBadges> sinnohGym = [];
+List<AwardsBadges> unovaGym = [];
+List<AwardsBadges> kalosGym = [];
 
 //todo : badges in contests
-List<AwardsBadges> kantoContest = [
+List<AwardsBadges> kantoContest = [];
 
-];
-
-List<AwardsBadges> johtoContest = [
-
-];
-List<AwardsBadges> hoennContest = [
-
-];
-List<AwardsBadges> sinnohContest = [
-
-];
-List<AwardsBadges> unovaContest = [
-
-];
-List<AwardsBadges> kalosContest = [
-
-];
+List<AwardsBadges> johtoContest = [];
+List<AwardsBadges> hoennContest = [];
+List<AwardsBadges> sinnohContest = [];
+List<AwardsBadges> unovaContest = [];
+List<AwardsBadges> kalosContest = [];
 

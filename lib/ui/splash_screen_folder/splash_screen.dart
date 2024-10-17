@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:pokemonmap/models/pokedexModel.dart';
 import 'package:pokemonmap/models/pokemonModel.dart';
 
 import 'package:pokemonmap/database_instructions/pokeNames.dart' as pokeNames;
@@ -27,13 +28,20 @@ class SplashScreen extends StatefulWidget{
 }
 
 class SplashScreenState extends State<SplashScreen>{
-  String noInternetRu = "Нет подключения\nк интернету!";
-  String noInternetKg = "Интернетке байланыш жок";
-
   List<Pokemon> pokemonList = [];
 
-  Future<bool> checkPokeDataBase() async{
-    var box = await Hive.openBox("PokemonDataBaseInitialized");
+  Future<void> checkPokeData() async{
+    bool pokeUserInitialized = await checkPokeUserDataBase();
+    if(pokeUserInitialized == false){
+      await fillHivePokeDataBase();
+    }
+    else{
+      setUserPokeData();
+    }
+  }
+
+  Future<bool> checkPokeUserDataBase() async{
+    var box = await Hive.openBox("PokemonUserDataBaseInitialized");
     bool initialized = box.containsKey("initialized");
     if(initialized){
       return true;
@@ -43,31 +51,17 @@ class SplashScreenState extends State<SplashScreen>{
     }
   }
 
-  Future<void> checkPokeData() async{
-    bool pokeDataBaseInitialized = await checkPokeDataBase();
-    print(pokeDataBaseInitialized);
-    if(!pokeDataBaseInitialized){
-      await fillHivePokeDataBase();
-    }
+  Future<void> fillHivePokeDataBase() async{
+    log("fill poke user data");
   }
 
-  Future<void> fillHivePokeDataBase() async{
-    log("Poke names lenght : ${pokeNames.pokeNames.length}");
-    log("Poke Rarity lenght : ${pokeRarity.pokeRarity.length}");
-    log("Poke Types lenght : ${pokeTypes.pokeType.length}");
-    log("Poke Stats lenght : ${pokeStats.pokeStats.length}");
-    log("Poke Region lenght : ${pokeRegion.pokeRegion.length}");
-    log("Poke Weakness lenght : ${pokeWeakness.pokeWeakness.length}");
-    //for(int pokeInt = 0; pokeInt< pokeNames.pokeNames.length;pokeInt++ ){
-    //  log("Poke number : $pokeInt");
-    //  log("Poke Name : ${pokeNames.pokeNames[pokeInt]}");
-    //  log("Poke Stats attack : ${pokeStats.pokeStats[pokeInt].hp}");
-    //  log("Poke Stats lenght : ${pokeStats.pokeStats[pokeInt].attack}");
-    //}
+  Future<void> setUserPokeData() async{
+    log("set user poke data");
   }
 
   Future<void> fillPokemons() async{
-    for(int pokeInt = 0; pokeInt< pokeStats.pokeStats.length;pokeInt++ ){
+    List<PokedexPokemonModel> userPokedex = [];
+    for(int pokeInt = 0; pokeInt< pokeNames.pokeNames.length; pokeInt++ ){
       String gifFrontPath = "";
       String gifBackPath = "";
       if(pokeInt<99){
@@ -95,7 +89,9 @@ class SplashScreenState extends State<SplashScreen>{
           gifFront: gifFrontPath,
           gifBack: gifBackPath
       );
-      globals.pokeList.add(poke);
+      PokedexPokemonModel pkm = PokedexPokemonModel(pokemon: poke, isFound: false);
+      userPokedex.add(pkm);
+      globals.listAllPokemons.add(poke);
     }
   }
 
@@ -113,8 +109,6 @@ class SplashScreenState extends State<SplashScreen>{
   Future<void> logoMainMethod() async{
     //todo: ensure to initialize all neccessary voids and methods =>
     await Hive.initFlutter();
-    //todo : fill pokemon data in list =>
-    await fillPokemons();
     // todo : check poke data =>
     await checkPokeData();
     // todo : show welcome message =>
