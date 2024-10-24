@@ -1,11 +1,17 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:pokemonmap/models/pokemonModel.dart';
+import 'package:pokemonmap/models/pokemonFolder/pokeType.dart';
+import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 
 import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
 
+import '../../models/pokedexModel.dart';
 import '../bottom_sheets_folder/pokemon_bottom_sheets.dart';
 import '../bottom_sheets_folder/pokemon_pokedex_bottom_sheet.dart';
 import '../global_folder/globals.dart';
@@ -23,7 +29,9 @@ class PokedexPage extends StatefulWidget{
 
 class PokedexPageState extends State<PokedexPage>{
 
-  late List<Pokemon> filteredPokemons;
+  List<PokedexPokemonModel> filteredPokemons = [];
+
+  List<PokedexPokemonModel> hiveList = [];
 
   TextEditingController searchPokemon = TextEditingController();
 
@@ -38,7 +46,7 @@ class PokedexPageState extends State<PokedexPage>{
       context: context,
       expand: true,
       builder: (BuildContext context) {
-        return PokemonPokedexBottomSheet(pokeIndex: pokeIndex);
+        return PokemonPokedexBottomSheet(pokeIndex: pokeIndex, showFind: false, );
       },
     );
   }
@@ -64,7 +72,7 @@ class PokedexPageState extends State<PokedexPage>{
     }
   }
 
-  Widget pokeDexPokemon(String pokemonName,  List<Type> types, String imagePath, int pokeInt) {
+  Widget pokeDexPokemon(String pokemonName,  List<PokeType> types, String imagePath, int pokeInt, bool isFound) {
     // Background color based on primary type
     Color backgroundColor = typeColors[types[0]] ?? Colors.grey;
 
@@ -82,16 +90,23 @@ class PokedexPageState extends State<PokedexPage>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Pokémon GIF
+            (isFound)?
             Image.asset(
               imagePath,
               height: 60,
               width: 60,
               fit: BoxFit.contain,
+            ) : Image.asset(
+              imagePath,
+              height: 60,
+              width: 60,
+              fit: BoxFit.contain,
+              color: Colors.transparent.withOpacity(0.5),
             ),
             const SizedBox(height: 8),
             // Pokémon Name
             Text(
-              pokemonName,
+              showPokemonNameCyrillic(pokemonName),
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -115,10 +130,12 @@ class PokedexPageState extends State<PokedexPage>{
       ),
       itemBuilder: (context, index) {
         return pokeDexPokemon(
-            filteredPokemons[index].name,
-            filteredPokemons[index].type,
-            filteredPokemons[index].gifFront,
-            filteredPokemons[index].pokeDexIndex);
+            filteredPokemons[index].pokemon.name,
+            filteredPokemons[index].pokemon.type,
+            filteredPokemons[index].pokemon.gifFront,
+            filteredPokemons[index].pokemon.pokeDexIndex,
+            filteredPokemons[index].isFound
+        );
       },
     );
   }
@@ -194,12 +211,12 @@ class PokedexPageState extends State<PokedexPage>{
     fillCheckList();
     setState(() {
       if (query.isEmpty) {
-        filteredPokemons = globals.pokeList;
+        setDataFromHivePokedex();
       } else {
         filteredPokemons = [];
-        for (int i = 0; i < globals.pokeList.length; i++) {
-          if (globals.pokeList[i].name.toLowerCase().contains(query.toLowerCase())) {
-            filteredPokemons.add(globals.pokeList[i]);
+        for (int i = 0; i < hiveList.length; i++) {
+          if (hiveList[i].pokemon.name.toLowerCase().contains(query.toLowerCase())) {
+            filteredPokemons.add(hiveList[i]);
           }
         }
       }
@@ -207,7 +224,7 @@ class PokedexPageState extends State<PokedexPage>{
   }
 
   void _filterByType(){
-    List<globals.Type> listSelectedTypes = [];
+    List<PokeType> listSelectedTypes = [];
     for(int a=0; a < listCheckBox.length; a++){
       if(listCheckBox[a].itemSelected == true){
         listSelectedTypes.add(listCheckBox[a].type);
@@ -215,14 +232,14 @@ class PokedexPageState extends State<PokedexPage>{
     }
     setState(() {
       if(listSelectedTypes.isEmpty){
-        filteredPokemons = globals.pokeList;
+        setDataFromHivePokedex();
       }
       else{
         filteredPokemons = [];
-        for(int b=0; b < globals.pokeList.length; b++){
-          for(int c=0; c<globals.pokeList[b].type.length; c++){
-            if(listSelectedTypes.contains(globals.pokeList[b].type[c])){
-              filteredPokemons.add(globals.pokeList[b]);
+        for(int b=0; b < hiveList.length; b++){
+          for(int c=0; c < hiveList[b].pokemon.type.length; c++){
+            if(listSelectedTypes.contains(hiveList[b].pokemon.type[c])){
+              filteredPokemons.add(hiveList[b]);
               break;
             }
           }
@@ -238,10 +255,55 @@ class PokedexPageState extends State<PokedexPage>{
     }
   }
 
+  String showPokemonNameCyrillic(String englishPokeName) {
+    // Mapping of English letters to Cyrillic equivalents (basic transliteration)
+    final Map<String, String> transliterationMap = {
+      'A': 'А', 'B': 'Б', 'C': 'С', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г',
+      'H': 'Х', 'I': 'И', 'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
+      'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р', 'S': 'С', 'T': 'Т', 'U': 'У',
+      'V': 'В', 'W': 'В', 'X': 'Кс', 'Y': 'Ы', 'Z': 'З',
+      'a': 'а', 'b': 'б', 'c': 'с', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г',
+      'h': 'х', 'i': 'и', 'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
+      'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
+      'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
+    };
+
+    String locale = Platform.localeName;
+    String languageCode = locale.split('_')[0];
+
+    if (languageCode == 'en') {
+      return englishPokeName;
+    } else {
+      String cyrillicName = englishPokeName.split('').map((letter) {
+        return transliterationMap[letter] ?? letter; // Use the mapped letter or fallback to the original
+      }).join('');
+      return cyrillicName;
+    }
+  }
+
+  Future<void> setDataFromHivePokedex() async{
+    filteredPokemons = hiveList;
+  }
+
+  Future<void> setDataFromHivePokedexInitialized() async{
+    var box = await Hive.openBox("PokemonUserPokedex");
+
+    // Read the list from Hive and cast it to List<PokedexPokemonModel>
+    List<dynamic> pokeListFromHiveDynamic = box.get("Pokedex", defaultValue: []);
+
+    // Cast the list to List<PokedexPokemonModel>
+    List<PokedexPokemonModel> pokeListFromHive = pokeListFromHiveDynamic.cast<PokedexPokemonModel>();
+
+    setState(() {
+      hiveList = pokeListFromHive;
+      filteredPokemons = pokeListFromHive;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    filteredPokemons = globals.pokeList;
+    setDataFromHivePokedexInitialized();
     fillCheckList();
   }
 

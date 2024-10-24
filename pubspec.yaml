@@ -12,8 +12,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   font_awesome_flutter: ^10.7.0
   fluttertoast: ^8.2.8
-  hive: ^3.0.0-dev
-  hive_flutter: ^2.0.0-dev
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   dio: ^5.7.0
   cached_network_image: ^3.4.1
   flutter_launcher_icons: ^0.14.1
@@ -30,6 +30,8 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^5.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.13
   flutter_test:
     sdk: flutter
 

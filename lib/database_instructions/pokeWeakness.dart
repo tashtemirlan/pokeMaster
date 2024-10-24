@@ -1,1557 +1,1557 @@
-import '../ui/global_folder/globals.dart';
-List<List<Type?>> pokeWeakness = [
+import '../models/pokemonFolder/pokeType.dart';
+List<List<PokeType?>> pokeWeakness = [
 //todo : Generation 1
   //"Bulbasaur//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 //"Ivysaur//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 //"Venusaur//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 
 //"Charmander//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Charmeleon//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Charizard//"
-  [Type.Water, Type.Electric, Type.Rock],
+  [PokeType.Water, PokeType.Electric, PokeType.Rock],
 
 
 //"Squirtle//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Wartortle//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Blastoise//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 
 
 //"Caterpie//"
-  [Type.Fire, Type.Flying, Type.Rock],
+  [PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Metapod//"
-  [Type.Fire, Type.Flying, Type.Rock],
+  [PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Butterfree//"
-  [Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+  [PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 
 
 //"Weedle//"
-  [Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+  [PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 //"Kakuna//"
-  [Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+  [PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 //"Beedrill//"
-  [Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+  [PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 
 
 //"Pidgey//"
-  [Type.Electric, Type.Ice, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Pidgeotto//"
-  [Type.Electric, Type.Ice, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Pidgeot//"
-  [Type.Electric, Type.Ice, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Rattata//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 //"Raticate//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Spearow//"
-  [Type.Electric, Type.Ice, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Fearow//"
-  [Type.Electric, Type.Ice, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Ekans//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 //"Arbok//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 
 
 //"Pikachu//"
-  [Type.Ground],
+  [PokeType.Ground],
 //"Raichu//"
-  [Type.Ground],
+  [PokeType.Ground],
 
 
 //"Sandshrew//"
-  [Type.Water, Type.Ice, Type.Grass],
+  [PokeType.Water, PokeType.Ice, PokeType.Grass],
 //"Sandslash//"
-  [Type.Water, Type.Ice, Type.Grass],
+  [PokeType.Water, PokeType.Ice, PokeType.Grass],
 
 
 //"Nidoran♀//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 //"Nidorina//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 //"Nidoqueen//"
-  [Type.Water, Type.Ice, Type.Ground, Type.Psychic],
+  [PokeType.Water, PokeType.Ice, PokeType.Ground, PokeType.Psychic],
 
 
 //"Nidoran♂//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 //"Nidorino//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 //"Nidoking//"
-  [Type.Water, Type.Ice, Type.Ground, Type.Psychic],
+  [PokeType.Water, PokeType.Ice, PokeType.Ground, PokeType.Psychic],
 
 
 //"Clefairy//"
-  [Type.Poison, Type.Steel],
+  [PokeType.Poison, PokeType.Steel],
 //"Clefable//"
-  [Type.Poison, Type.Steel],
+  [PokeType.Poison, PokeType.Steel],
 
 
 //"Vulpix//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Ninetales//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Jigglypuff//"
-  [Type.Poison, Type.Steel],
+  [PokeType.Poison, PokeType.Steel],
 //"Wigglytuff//"
-  [Type.Poison, Type.Steel],
+  [PokeType.Poison, PokeType.Steel],
 
 
 //"Zubat//"
-  [Type.Electric, Type.Ice, Type.Psychic, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Psychic, PokeType.Rock],
 //"Golbat//"
-  [Type.Electric, Type.Ice, Type.Psychic, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Psychic, PokeType.Rock],
 
 
 //"Oddish//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 //"Gloom//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 //"Vileplume//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 
 
 //"Paras//"
-  [Type.Fire, Type.Flying, Type.Poison, Type.Rock, Type.Bug, Type.Ice],
+  [PokeType.Fire, PokeType.Flying, PokeType.Poison, PokeType.Rock, PokeType.Bug, PokeType.Ice],
 //"Parasect//"
-  [Type.Fire, Type.Flying, Type.Poison, Type.Rock, Type.Bug, Type.Ice],
+  [PokeType.Fire, PokeType.Flying, PokeType.Poison, PokeType.Rock, PokeType.Bug, PokeType.Ice],
 
 
 //"Venonat//"
-  [Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+  [PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 //"Venomoth//"
-  [Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+  [PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 
 
 //"Diglett//"
-  [Type.Water, Type.Ice, Type.Grass],
+  [PokeType.Water, PokeType.Ice, PokeType.Grass],
 //"Dugtrio//"
-  [Type.Water, Type.Ice, Type.Grass],
+  [PokeType.Water, PokeType.Ice, PokeType.Grass],
 
 
 //"Meowth//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 //"Persian//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Psyduck//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Golduck//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 
 
 //"Mankey//"
-  [Type.Flying, Type.Psychic, Type.Fairy],
+  [PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Primeape//"
-  [Type.Flying, Type.Psychic, Type.Fairy],
+  [PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Growlithe//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Arcanine//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Poliwag//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Poliwhirl//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Poliwrath//"
-  [Type.Electric, Type.Grass, Type.Flying, Type.Psychic],
+  [PokeType.Electric, PokeType.Grass, PokeType.Flying, PokeType.Psychic],
 
 
 //"Abra//"
-  [Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 //"Kadabra//"
-  [Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 //"Alakazam//"
-  [Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Machop//"
-  [Type.Flying, Type.Psychic, Type.Fairy],
+  [PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Machoke//"
-  [Type.Flying, Type.Psychic, Type.Fairy],
+  [PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Machamp//"
-  [Type.Flying, Type.Psychic, Type.Fairy],
+  [PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Bellsprout//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 //"Weepinbell//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 //"Victreebel//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 
 
 //"Tentacool//"
-  [Type.Electric, Type.Psychic, Type.Ground],
+  [PokeType.Electric, PokeType.Psychic, PokeType.Ground],
 //"Tentacruel//"
-  [Type.Electric, Type.Psychic, Type.Ground],
+  [PokeType.Electric, PokeType.Psychic, PokeType.Ground],
 
 
 //"Geodude//"
-  [Type.Water, Type.Grass, Type.Ice, Type.Fighting, Type.Ground, Type.Steel],
+  [PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 //"Graveler//"
-  [Type.Water, Type.Grass, Type.Ice, Type.Fighting, Type.Ground, Type.Steel],
+  [PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 //"Golem//"
-  [Type.Water, Type.Grass, Type.Ice, Type.Fighting, Type.Ground, Type.Steel],
+  [PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 
 
 //"Ponyta//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Rapidash//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Slowpoke//"
-  [Type.Electric, Type.Grass, Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Electric, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 //"Slowbro//"
-  [Type.Electric, Type.Grass, Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Electric, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Magnemite//"
-  [Type.Fire, Type.Fighting, Type.Ground],
+  [PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 //"Magneton//"
-  [Type.Fire, Type.Fighting, Type.Ground],
+  [PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 
 
 //"Farfetch'd//"
-  [Type.Electric, Type.Ice, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Doduo//"
-  [Type.Electric, Type.Ice, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Dodrio//"
-  [Type.Electric, Type.Ice, Type.Rock],
+  [PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Seel//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Dewgong//"
-  [Type.Electric, Type.Grass, Type.Fighting, Type.Rock],
+  [PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Rock],
 
 
 //"Grimer//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 //"Muk//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 
 
 //"Shellder//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Cloyster//"
-  [Type.Electric, Type.Grass, Type.Fighting, Type.Rock],
+  [PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Rock],
 
 
 //"Gastly//"
-  [Type.Ghost, Type.Dark, Type.Psychic],
+  [PokeType.Ghost, PokeType.Dark, PokeType.Psychic],
 //"Haunter//"
-  [Type.Ghost, Type.Dark, Type.Psychic],
+  [PokeType.Ghost, PokeType.Dark, PokeType.Psychic],
 //"Gengar//"
-  [Type.Ghost, Type.Dark, Type.Psychic],
+  [PokeType.Ghost, PokeType.Dark, PokeType.Psychic],
 
 
 //"Onix//"
-  [Type.Water, Type.Grass, Type.Ice, Type.Fighting, Type.Ground, Type.Steel],
+  [PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 
 
 //"Drowzee//"
-  [Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 //"Hypno//"
-  [Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Krabby//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Kingler//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 
 
 //"Voltorb//"
-  [Type.Ground],
+  [PokeType.Ground],
 //"Electrode//"
-  [Type.Ground],
+  [PokeType.Ground],
 
 
 //"Exeggcute//"
-  [Type.Fire, Type.Ice, Type.Poison, Type.Flying, Type.Bug, Type.Dark],
+  [PokeType.Fire, PokeType.Ice, PokeType.Poison, PokeType.Flying, PokeType.Bug, PokeType.Dark],
 //"Exeggutor//"
-  [Type.Fire, Type.Ice, Type.Poison, Type.Flying, Type.Bug, Type.Dark],
+  [PokeType.Fire, PokeType.Ice, PokeType.Poison, PokeType.Flying, PokeType.Bug, PokeType.Dark],
 
 
 //"Cubone//"
-  [Type.Water, Type.Ice, Type.Grass],
+  [PokeType.Water, PokeType.Ice, PokeType.Grass],
 //"Marowak//"
-  [Type.Water, Type.Ice, Type.Grass],
+  [PokeType.Water, PokeType.Ice, PokeType.Grass],
 
 
 //"Hitmonlee//"
-  [Type.Flying, Type.Psychic, Type.Fairy],
+  [PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Hitmonchan//"
-  [Type.Flying, Type.Psychic, Type.Fairy],
+  [PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Lickitung//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Koffing//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 //"Weezing//"
-  [Type.Ground, Type.Psychic],
+  [PokeType.Ground, PokeType.Psychic],
 
 
 //"Rhyhorn//"
-  [Type.Water, Type.Grass, Type.Ice, Type.Fighting, Type.Ground, Type.Steel],
+  [PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 //"Rhydon//"
-  [Type.Water, Type.Grass, Type.Ice, Type.Fighting, Type.Ground, Type.Steel],
+  [PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 
 
 //"Chansey//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Tangela//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Kangaskhan//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Horsea//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Seadra//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 
 
 //"Goldeen//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Seaking//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 
 
 //"Staryu//"
-  [Type.Electric, Type.Grass, Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Electric, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 //"Starmie//"
-  [Type.Electric, Type.Grass, Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Electric, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Mr. Mime//"
-  [Type.Poison, Type.Ghost, Type.Steel],
+  [PokeType.Poison, PokeType.Ghost, PokeType.Steel],
 //"Scyther//"
-  [Type.Fire, Type.Electric, Type.Flying, Type.Rock],
+  [PokeType.Fire, PokeType.Electric, PokeType.Flying, PokeType.Rock],
 
 //"Jynx//"
-  [Type.Fire, Type.Bug, Type.Rock, Type.Ghost, Type.Dark, Type.Steel],
+  [PokeType.Fire, PokeType.Bug, PokeType.Rock, PokeType.Ghost, PokeType.Dark, PokeType.Steel],
 //"Electabuzz//"
-  [Type.Ground],
+  [PokeType.Ground],
 //"Magmar//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Pinsir//"
-  [Type.Fire, Type.Flying, Type.Rock],
+  [PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Tauros//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Magikarp//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Gyarados//"
-  [Type.Electric, Type.Rock],
+  [PokeType.Electric, PokeType.Rock],
 
 
 //"Lapras//"
-  [Type.Electric, Type.Grass, Type.Fighting, Type.Rock],
+  [PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Rock],
 
 
 //"Ditto//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Eevee//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Vaporeon//"
-  [Type.Electric, Type.Grass],
+  [PokeType.Electric, PokeType.Grass],
 //"Jolteon//"
-  [Type.Ground],
+  [PokeType.Ground],
 //"Flareon//"
-  [Type.Water, Type.Ground, Type.Rock],
+  [PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Porygon//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Omanyte//"
-  [Type.Electric, Type.Grass, Type.Fighting, Type.Ground],
+  [PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Ground],
 //"Omastar//"
-  [Type.Electric, Type.Grass, Type.Fighting, Type.Ground],
+  [PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Ground],
 
 //"Kabuto//"
-  [Type.Electric, Type.Grass, Type.Fighting, Type.Ground],
+  [PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Ground],
 //"Kabutops//"
-  [Type.Electric, Type.Grass, Type.Fighting, Type.Ground],
+  [PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Ground],
 
 
 //"Aerodactyl//"
-  [Type.Electric, Type.Ice, Type.Water, Type.Rock, Type.Steel],
+  [PokeType.Electric, PokeType.Ice, PokeType.Water, PokeType.Rock, PokeType.Steel],
 
 
 //"Snorlax//"
-  [Type.Fighting],
+  [PokeType.Fighting],
 
 
 //"Articuno//"
-  [Type.Electric, Type.Fire, Type.Rock, Type.Steel],
+  [PokeType.Electric, PokeType.Fire, PokeType.Rock, PokeType.Steel],
 //"Zapdos//"
-  [Type.Ice, Type.Rock],
+  [PokeType.Ice, PokeType.Rock],
 //"Moltres//"
-  [Type.Water, Type.Electric, Type.Rock],
+  [PokeType.Water, PokeType.Electric, PokeType.Rock],
 
 
 //"Dratini//"
-  [Type.Ice, Type.Dragon, Type.Fairy],
+  [PokeType.Ice, PokeType.Dragon, PokeType.Fairy],
 //"Dragonair//"
-  [Type.Ice, Type.Dragon, Type.Fairy],
+  [PokeType.Ice, PokeType.Dragon, PokeType.Fairy],
 //"Dragonite//"
-  [Type.Ice, Type.Dragon, Type.Fairy],
+  [PokeType.Ice, PokeType.Dragon, PokeType.Fairy],
 
 
 //"Mewtwo//"
-  [Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Mew//"
-  [Type.Bug, Type.Ghost, Type.Dark],
+  [PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
   //todo : Generation 2
   //"Chikorita//"
-  [Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+  [PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Bayleef//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Meganium//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 
 
 //"Cyndaquil//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Quilava//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Typhlosion//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Totodile//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Croconaw//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Feraligatr//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Sentret//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Furret//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Hoothoot//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Noctowl//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Ledyba//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 //"Ledian//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 
 
 //"Spinarak//"
-[Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 //"Ariados//"
-[Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 
 
 //"Crobat//"
-[Type.Electric, Type.Ice, Type.Psychic, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Psychic, PokeType.Rock],
 
 
 //"Chinchou//"
-[Type.Grass, Type.Ground],
+[PokeType.Grass, PokeType.Ground],
 //"Lanturn//"
-[Type.Grass, Type.Ground],
+[PokeType.Grass, PokeType.Ground],
 
 
 //"Pichu//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Cleffa//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Igglybuff//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 
 
 //"Togepi//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Togetic//"
-[Type.Electric, Type.Ice, Type.Poison, Type.Rock, Type.Steel],
+[PokeType.Electric, PokeType.Ice, PokeType.Poison, PokeType.Rock, PokeType.Steel],
 
 
 //"Natu//"
-[Type.Electric, Type.Ice, Type.Ghost, Type.Dark, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Ghost, PokeType.Dark, PokeType.Rock],
 //"Xatu//"
-[Type.Electric, Type.Ice, Type.Ghost, Type.Dark, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Ghost, PokeType.Dark, PokeType.Rock],
 
 
 //"Mareep//"
-[Type.Ground],
+[PokeType.Ground],
 //"Flaaffy//"
-[Type.Ground],
+[PokeType.Ground],
 //"Ampharos//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Bellossom//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Marill//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Azumarill//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Sudowoodo//"
-[Type.Water, Type.Grass, Type.Ice, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 
 
 //"Politoed//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Hoppip//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Rock],
 //"Skiploom//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Rock],
 //"Jumpluff//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Rock],
 
 
 //"Aipom//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Sunkern//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 //"Sunflora//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Yanma//"
-[Type.Fire, Type.Flying, Type.Electric, Type.Rock, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Electric, PokeType.Rock, PokeType.Ice],
 
 
 //"Wooper//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Quagsire//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Espeon//"
-[Type.Bug, Type.Ghost, Type.Dark],
+[PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 //"Umbreon//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 
 
 //"Murkrow//"
-[Type.Electric, Type.Ice, Type.Rock, Type.Fairy],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock, PokeType.Fairy],
 
 
 //"Slowking//"
-[Type.Electric, Type.Grass, Type.Bug, Type.Ghost, Type.Dark],
+[PokeType.Electric, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Misdreavus//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 
 
 //"Unown//"
-[Type.Bug, Type.Ghost, Type.Dark],
+[PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Wobbuffet//"
-[Type.Bug, Type.Ghost, Type.Dark],
+[PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Girafarig//"
-[Type.Bug, Type.Dark],
+[PokeType.Bug, PokeType.Dark],
 
 
 //"Pineco//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Forretress//"
-[Type.Fire],
+[PokeType.Fire],
 
 
 //"Dunsparce//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Gligar//"
-[Type.Water, Type.Ice],
+[PokeType.Water, PokeType.Ice],
 
 
 //"Steelix//"
-[Type.Fire, Type.Water, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Water, PokeType.Fighting, PokeType.Ground],
 
 
 //"Snubbull//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Granbull//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 
 
 //"Qwilfish//"
-[Type.Electric, Type.Ground, Type.Psychic],
+[PokeType.Electric, PokeType.Ground, PokeType.Psychic],
 
 
 //"Scizor//"
-[Type.Fire],
+[PokeType.Fire],
 
 
 //"Shuckle//"
-[Type.Water, Type.Steel, Type.Rock],
+[PokeType.Water, PokeType.Steel, PokeType.Rock],
 
 
 //"Heracross//"
-[Type.Fire, Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Sneasel//"
-[Type.Fighting, Type.Bug, Type.Rock, Type.Steel, Type.Fire, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Rock, PokeType.Steel, PokeType.Fire, PokeType.Fairy],
 
 
 //"Teddiursa//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Ursaring//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Slugma//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Magcargo//"
-[Type.Water, Type.Ground, Type.Fighting, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Fighting, PokeType.Rock],
 
 
 //"Swinub//"
-[Type.Fire, Type.Fighting, Type.Grass, Type.Steel, Type.Water],
+[PokeType.Fire, PokeType.Fighting, PokeType.Grass, PokeType.Steel, PokeType.Water],
 //"Piloswine//"
-[Type.Fire, Type.Fighting, Type.Grass, Type.Steel, Type.Water],
+[PokeType.Fire, PokeType.Fighting, PokeType.Grass, PokeType.Steel, PokeType.Water],
 
 
 //"Corsola//"
-[Type.Electric, Type.Grass, Type.Fighting, Type.Ground],
+[PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Ground],
 
 
 //"Remoraid//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Octillery//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Delibird//"
-[Type.Electric, Type.Rock, Type.Fire, Type.Steel],
+[PokeType.Electric, PokeType.Rock, PokeType.Fire, PokeType.Steel],
 
 
 //"Mantine//"
-[Type.Electric, Type.Rock],
+[PokeType.Electric, PokeType.Rock],
 
 
 //"Skarmory//"
-[Type.Fire, Type.Electric],
+[PokeType.Fire, PokeType.Electric],
 
 
 //"Houndour//"
-[Type.Water, Type.Fighting, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground, PokeType.Rock],
 //"Houndoom//"
-[Type.Water, Type.Fighting, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground, PokeType.Rock],
 
 
 //"Kingdra//"
-[Type.Dragon, Type.Fairy],
+[PokeType.Dragon, PokeType.Fairy],
 
 
 //"Phanpy//"
-[Type.Water, Type.Ice, Type.Grass],
+[PokeType.Water, PokeType.Ice, PokeType.Grass],
 //"Donphan//"
-[Type.Water, Type.Ice, Type.Grass],
+[PokeType.Water, PokeType.Ice, PokeType.Grass],
 
 
 //"Porygon2//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Stantler//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Smeargle//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Tyrogue//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Hitmontop//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Smoochum//"
-[Type.Fire, Type.Bug, Type.Rock, Type.Ghost, Type.Dark, Type.Steel],
+[PokeType.Fire, PokeType.Bug, PokeType.Rock, PokeType.Ghost, PokeType.Dark, PokeType.Steel],
 
 
 //"Elekid//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Magby//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Miltank//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Blissey//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Raikou//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Entei//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Suicune//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Larvitar//"
-[Type.Water, Type.Grass, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 //"Pupitar//"
-[Type.Water, Type.Grass, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 //"Tyranitar//"
-[Type.Fighting, Type.Bug, Type.Steel, Type.Fairy, Type.Ground, Type.Water, Type.Grass, Type.Ice],
+[PokeType.Fighting, PokeType.Bug, PokeType.Steel, PokeType.Fairy, PokeType.Ground, PokeType.Water, PokeType.Grass, PokeType.Ice],
 
 
 //"Lugia//"
-[Type.Ghost, Type.Electric, Type.Ice, Type.Rock, Type.Dark],
+[PokeType.Ghost, PokeType.Electric, PokeType.Ice, PokeType.Rock, PokeType.Dark],
 
 
 //"Ho-oh//"
-[Type.Water, Type.Electric, Type.Rock],
+[PokeType.Water, PokeType.Electric, PokeType.Rock],
 
 
 //"Celebi//"
-[Type.Fire, Type.Ice, Type.Flying, Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Fire, PokeType.Ice, PokeType.Flying, PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
   //todo : Generation 3
 //"Treecko//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Grovyle//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Sceptile//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 
 
 //"Torchic//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Combusken//"
-[Type.Water, Type.Flying, Type.Ground, Type.Psychic],
+[PokeType.Water, PokeType.Flying, PokeType.Ground, PokeType.Psychic],
 //"Blaziken//"
-[Type.Water, Type.Flying, Type.Ground, Type.Psychic],
+[PokeType.Water, PokeType.Flying, PokeType.Ground, PokeType.Psychic],
 
 
 //"Mudkip//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Marshtomp//"
-[Type.Grass],
+[PokeType.Grass],
 //"Swampert//"
-[Type.Grass],
+[PokeType.Grass],
 
 
 //"Poochyena//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 //"Mightyena//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 
 
 //"Zigzagoon//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Linoone//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Wurmple//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Silcoon//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Beautifly//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 
 
 //"Cascoon//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Dustox//"
-[Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 
 
 //"Lotad//"
-[Type.Flying, Type.Poison, Type.Bug],
+[PokeType.Flying, PokeType.Poison, PokeType.Bug],
 //"Lombre//"
-[Type.Flying, Type.Poison, Type.Bug],
+[PokeType.Flying, PokeType.Poison, PokeType.Bug],
 //"Ludicolo//"
-[Type.Flying, Type.Poison, Type.Bug],
+[PokeType.Flying, PokeType.Poison, PokeType.Bug],
 
 
 //"Seedot//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Nuzleaf//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Fighting, Type.Fairy],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Fighting, PokeType.Fairy],
 //"Shiftry//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Fighting, Type.Fairy],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Fighting, PokeType.Fairy],
 
 
 //"Taillow//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Swellow//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Wingull//"
-[Type.Electric, Type.Rock],
+[PokeType.Electric, PokeType.Rock],
 //"Pelipper//"
-[Type.Electric, Type.Rock],
+[PokeType.Electric, PokeType.Rock],
 
 
 //"Ralts//"
-[Type.Ghost, Type.Steel, Type.Poison],
+[PokeType.Ghost, PokeType.Steel, PokeType.Poison],
 //"Kirlia//"
-[Type.Ghost, Type.Steel, Type.Poison],
+[PokeType.Ghost, PokeType.Steel, PokeType.Poison],
 //"Gardevoir//"
-[Type.Ghost, Type.Steel, Type.Poison],
+[PokeType.Ghost, PokeType.Steel, PokeType.Poison],
 
 
 //"Surskit//"
-[Type.Flying, Type.Electric, Type.Rock],
+[PokeType.Flying, PokeType.Electric, PokeType.Rock],
 //"Masquerain//"
-[Type.Flying, Type.Electric, Type.Rock],
+[PokeType.Flying, PokeType.Electric, PokeType.Rock],
 
 
 //"Shroomish//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Breloom//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Psychic, Type.Poison, Type.Fairy],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic, PokeType.Poison, PokeType.Fairy],
 
 
 //"Slakoth//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Vigoroth//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Slaking//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Nincada//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Water],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Water],
 //"Ninjask//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 //"Shedinja//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Ghost, Type.Dark],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Ghost, PokeType.Dark],
 
 
 //"Whismur//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Loudred//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Exploud//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Makuhita//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Hariyama//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Azurill//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 
 
 //"Nosepass//"
-[Type.Water, Type.Grass, Type.Ground, Type.Fighting, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Ground, PokeType.Fighting, PokeType.Steel],
 
 
 //"Skitty//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Delcatty//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Sableye//"
-[Type.Fairy],
+[PokeType.Fairy],
 
 
 //"Mawile//"
-[Type.Fire, Type.Ground],
+[PokeType.Fire, PokeType.Ground],
 
 
 //"Aron//"
-[Type.Water, Type.Fighting, Type.Ground],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground],
 //"Lairon//"
-[Type.Water, Type.Fighting, Type.Ground],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground],
 //"Aggron//"
-[Type.Water, Type.Fighting, Type.Ground],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground],
 
 
 //"Meditite//"
-[Type.Flying, Type.Ghost, Type.Fairy],
+[PokeType.Flying, PokeType.Ghost, PokeType.Fairy],
 //"Medicham//"
-[Type.Flying, Type.Ghost, Type.Fairy],
+[PokeType.Flying, PokeType.Ghost, PokeType.Fairy],
 
 
 //"Electrike//"
-[Type.Ground],
+[PokeType.Ground],
 //"Manectric//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Plusle//"
-[Type.Ground],
+[PokeType.Ground],
 //"Minun//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Volbeat//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Illumise//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 
 
 //"Roselia//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 
 
 //"Gulpin//"
-[Type.Psychic, Type.Ground],
+[PokeType.Psychic, PokeType.Ground],
 //"Swalot//"
-[Type.Psychic, Type.Ground],
+[PokeType.Psychic, PokeType.Ground],
 
 
 //"Carvanha//"
-[Type.Electric, Type.Fighting, Type.Bug, Type.Grass, Type.Fairy],
+[PokeType.Electric, PokeType.Fighting, PokeType.Bug, PokeType.Grass, PokeType.Fairy],
 //"Sharpedo//"
-[Type.Electric, Type.Fighting, Type.Bug, Type.Grass, Type.Fairy],
+[PokeType.Electric, PokeType.Fighting, PokeType.Bug, PokeType.Grass, PokeType.Fairy],
 
 
 //"Wailmer//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Wailord//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Numel//"
-[Type.Water, Type.Ground],
+[PokeType.Water, PokeType.Ground],
 //"Camerupt//"
-[Type.Water, Type.Ground],
+[PokeType.Water, PokeType.Ground],
 
 
 //"Torkoal//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Spoink//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 //"Grumpig//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Spinda//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Trapinch//"
-[Type.Water, Type.Ice, Type.Grass],
+[PokeType.Water, PokeType.Ice, PokeType.Grass],
 //"Vibrava//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Flygon//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 
 
 //"Cacnea//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Cacturne//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison, Type.Fairy],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison, PokeType.Fairy],
 
 
 //"Swablu//"
-[Type.Ice, Type.Rock],
+[PokeType.Ice, PokeType.Rock],
 //"Altaria//"
-[Type.Dragon, Type.Fairy, Type.Ice, Type.Rock],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice, PokeType.Rock],
 
 
 //"Zangoose//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Seviper//"
-[Type.Ground, Type.Psychic],
+[PokeType.Ground, PokeType.Psychic],
 
 
 //"Lunatone//"
-[Type.Water, Type.Grass, Type.Bug, Type.Ghost, Type.Dark, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Dark, PokeType.Steel],
 //"Solrock//"
-[Type.Water, Type.Grass, Type.Bug, Type.Ghost, Type.Dark, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Dark, PokeType.Steel],
 
 
 //"Barboach//"
-[Type.Grass],
+[PokeType.Grass],
 //"Whiscash//"
-[Type.Grass],
+[PokeType.Grass],
 
 
 //"Corphish//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Crawdaunt//"
-[Type.Electric, Type.Grass, Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 
 
 //"Baltoy//"
-[Type.Water, Type.Grass, Type.Bug, Type.Ghost, Type.Ice],
+[PokeType.Water, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Ice],
 //"Claydol//"
-[Type.Water, Type.Grass, Type.Bug, Type.Ghost, Type.Ice],
+[PokeType.Water, PokeType.Grass, PokeType.Bug, PokeType.Ghost, PokeType.Ice],
 
 
 //"Lileep//"
-[Type.Ice, Type.Fighting, Type.Bug, Type.Steel],
+[PokeType.Ice, PokeType.Fighting, PokeType.Bug, PokeType.Steel],
 //"Cradily//"
-[Type.Ice, Type.Fighting, Type.Bug, Type.Steel],
+[PokeType.Ice, PokeType.Fighting, PokeType.Bug, PokeType.Steel],
 
 
 //"Anorith//"
-[Type.Water, Type.Steel, Type.Electric, Type.Rock],
+[PokeType.Water, PokeType.Steel, PokeType.Electric, PokeType.Rock],
 //"Armaldo//"
-[Type.Water, Type.Steel, Type.Electric, Type.Rock],
+[PokeType.Water, PokeType.Steel, PokeType.Electric, PokeType.Rock],
 
 
 //"Feebas//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Milotic//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Castform//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Kecleon//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Shuppet//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 //"Banette//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 
 
 //"Duskull//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 //"Dusclops//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 
 
 //"Tropius//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Rock],
 
 
 //"Chimecho//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Absol//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 
 
 //"Wynaut//"
-[Type.Bug, Type.Ghost, Type.Dark],
+[PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 
 //"Snorunt//"
-[Type.Fire, Type.Steel, Type.Fighting, Type.Rock],
+[PokeType.Fire, PokeType.Steel, PokeType.Fighting, PokeType.Rock],
 //"Glalie//"
-[Type.Fire, Type.Steel, Type.Fighting, Type.Rock],
+[PokeType.Fire, PokeType.Steel, PokeType.Fighting, PokeType.Rock],
 
 
 //"Spheal//"
-[Type.Electric, Type.Fighting, Type.Rock, Type.Grass],
+[PokeType.Electric, PokeType.Fighting, PokeType.Rock, PokeType.Grass],
 //"Sealeo//"
-[Type.Electric, Type.Fighting, Type.Rock, Type.Grass],
+[PokeType.Electric, PokeType.Fighting, PokeType.Rock, PokeType.Grass],
 //"Walrein//"
-[Type.Electric, Type.Fighting, Type.Rock, Type.Grass],
+[PokeType.Electric, PokeType.Fighting, PokeType.Rock, PokeType.Grass],
 
 
 //"Clamperl//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Huntail//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Gorebyss//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Relicanth//"
-[Type.Electric, Type.Grass, Type.Fighting, Type.Ground],
+[PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Ground],
 
 
 //"Luvdisc//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Bagon//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Shelgon//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Salamence//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 
 
 //"Beldum//"
-[Type.Fire, Type.Ground],
+[PokeType.Fire, PokeType.Ground],
 //"Metang//"
-[Type.Fire, Type.Ground],
+[PokeType.Fire, PokeType.Ground],
 //"Metagross//"
-[Type.Fire, Type.Ground],
+[PokeType.Fire, PokeType.Ground],
 
 
 //"Regirock//"
-[Type.Water, Type.Grass, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 
 
 //"Regice//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 
 
 //"Registeel//"
-[Type.Fire, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 
 
 //"Latias//"
-[Type.Dragon, Type.Fairy, Type.Ice, Type.Bug, Type.Dark, Type.Ghost],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice, PokeType.Bug, PokeType.Dark, PokeType.Ghost],
 //"Latios//"
-[Type.Dragon, Type.Fairy, Type.Ice, Type.Bug, Type.Dark, Type.Ghost],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice, PokeType.Bug, PokeType.Dark, PokeType.Ghost],
 
 
 //"Kyogre//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Groudon//"
-[Type.Water, Type.Ice],
+[PokeType.Water, PokeType.Ice],
 
 
 //"Rayquaza//"
-[Type.Dragon, Type.Fairy, Type.Ice, Type.Rock],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice, PokeType.Rock],
 
 
 //"Jirachi//"
-[Type.Fire, Type.Ground, Type.Ghost],
+[PokeType.Fire, PokeType.Ground, PokeType.Ghost],
 
 
 //"Deoxys//"
-[Type.Bug, Type.Dark, Type.Ghost],
+[PokeType.Bug, PokeType.Dark, PokeType.Ghost],
 
 
   //todo : Generation 4 (Sinnoh)
 //"Turtwig//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Grotle//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Torterra//"
-[Type.Fire, Type.Ice, Type.Bug],
+[PokeType.Fire, PokeType.Ice, PokeType.Bug],
 
 
 //"Chimchar//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Monferno//"
-[Type.Water, Type.Flying, Type.Ground, Type.Psychic],
+[PokeType.Water, PokeType.Flying, PokeType.Ground, PokeType.Psychic],
 //"Infernape//"
-[Type.Water, Type.Flying, Type.Ground, Type.Psychic],
+[PokeType.Water, PokeType.Flying, PokeType.Ground, PokeType.Psychic],
 
 
 //"Piplup//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Prinplup//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Empoleon//"
-[Type.Electric, Type.Fighting, Type.Ground],
+[PokeType.Electric, PokeType.Fighting, PokeType.Ground],
 
 
 //"Starly//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Staravia//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Staraptor//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Bidoof//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Bibarel//"
-[Type.Electric, Type.Grass, Type.Fighting],
+[PokeType.Electric, PokeType.Grass, PokeType.Fighting],
 
 
 //"Kricketot//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Kricketune//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 
 
 //"Shinx//"
-[Type.Ground],
+[PokeType.Ground],
 //"Luxio//"
-[Type.Ground],
+[PokeType.Ground],
 //"Luxray//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Budew//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 //"Roserade//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 
 
 //"Cranidos//"
-[Type.Water, Type.Grass, Type.Ground, Type.Steel, Type.Fighting],
+[PokeType.Water, PokeType.Grass, PokeType.Ground, PokeType.Steel, PokeType.Fighting],
 //"Rampardos//"
-[Type.Water, Type.Grass, Type.Ground, Type.Steel, Type.Fighting],
+[PokeType.Water, PokeType.Grass, PokeType.Ground, PokeType.Steel, PokeType.Fighting],
 
 
 //"Shieldon//"
-[Type.Water, Type.Ground, Type.Fighting],
+[PokeType.Water, PokeType.Ground, PokeType.Fighting],
 //"Bastiodon//"
-[Type.Water, Type.Ground, Type.Fighting],
+[PokeType.Water, PokeType.Ground, PokeType.Fighting],
 
 
 //"Burmy//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Wormadam//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Bug, Type.Steel],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Bug, PokeType.Steel],
 
 
 //"Mothim//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 
 
 //"Combee//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 //"Vespiquen//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 
 
 //"Pachirisu//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Buizel//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Floatzel//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Cherubi//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 //"Cherrim//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Shellos//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Gastrodon//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Ambipom//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Drifloon//"
-[Type.Electric, Type.Ice, Type.Ghost, Type.Dark, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Ghost, PokeType.Dark, PokeType.Rock],
 //"Drifblim//"
-[Type.Electric, Type.Ice, Type.Ghost, Type.Dark, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Ghost, PokeType.Dark, PokeType.Rock],
 
 
 //"Buneary//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Lopunny//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Mismagius//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 
 
 //"Honchkrow//"
-[Type.Electric, Type.Ice, Type.Rock, Type.Fairy],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock, PokeType.Fairy],
 
 
 //"Glameow//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Purugly//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Chingling//"
-[Type.Bug, Type.Ghost, Type.Dark],
+[PokeType.Bug, PokeType.Ghost, PokeType.Dark],
 
 //"Stunky//"
-[Type.Ground],
+[PokeType.Ground],
 //"Skuntank//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Bronzor//"
-[Type.Fire, Type.Ground],
+[PokeType.Fire, PokeType.Ground],
 //"Bronzong//"
-[Type.Fire, Type.Ground],
+[PokeType.Fire, PokeType.Ground],
 
 
 //"Bonsly//"
-[Type.Water, Type.Grass, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 
 
 //"Mime Jr.//"
-[Type.Poison, Type.Steel, Type.Ghost],
+[PokeType.Poison, PokeType.Steel, PokeType.Ghost],
 
 
 //"Happiny//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Chatot//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Spiritomb//"
-[Type.Fairy],
+[PokeType.Fairy],
 
 
 //"Gible//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Gabite//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Garchomp//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 
 
 //"Munchlax//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Riolu//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Lucario//"
-[Type.Fire, Type.Ground, Type.Fighting],
+[PokeType.Fire, PokeType.Ground, PokeType.Fighting],
 
 
 //"Hippopotas//"
-[Type.Water, Type.Ice, Type.Grass],
+[PokeType.Water, PokeType.Ice, PokeType.Grass],
 //"Hippowdon//"
-[Type.Water, Type.Ice, Type.Grass],
+[PokeType.Water, PokeType.Ice, PokeType.Grass],
 
 
 //"Skorupi//"
-[Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 //"Drapion//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Croagunk//"
-[Type.Flying, Type.Psychic],
+[PokeType.Flying, PokeType.Psychic],
 //"Toxicroak//"
-[Type.Flying, Type.Psychic],
+[PokeType.Flying, PokeType.Psychic],
 
 
 //"Carnivine//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 
 
 //"Finneon//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Lumineon//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Mantyke//"
-[Type.Electric, Type.Rock],
+[PokeType.Electric, PokeType.Rock],
 
 
 //"Snover//"
-[Type.Fire, Type.Flying, Type.Fighting, Type.Poison, Type.Rock, Type.Bug, Type.Steel],
+[PokeType.Fire, PokeType.Flying, PokeType.Fighting, PokeType.Poison, PokeType.Rock, PokeType.Bug, PokeType.Steel],
 //"Abomasnow//"
-[Type.Fire, Type.Flying, Type.Fighting, Type.Poison, Type.Rock, Type.Bug, Type.Steel],
+[PokeType.Fire, PokeType.Flying, PokeType.Fighting, PokeType.Poison, PokeType.Rock, PokeType.Bug, PokeType.Steel],
 
 
 //"Weavile//"
-[Type.Fire, Type.Fighting, Type.Bug, Type.Steel, Type.Rock, Type.Fairy],
+[PokeType.Fire, PokeType.Fighting, PokeType.Bug, PokeType.Steel, PokeType.Rock, PokeType.Fairy],
 
 
 //"Magnezone//"
-[Type.Fire, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 
 
 //"Lickilicky//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Rhyperior//"
-[Type.Water, Type.Grass, Type.Ice, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 
 
 //"Tangrowth//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Electivire//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Magmortar//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Togekiss//"
-[Type.Electric, Type.Ice, Type.Poison, Type.Rock, Type.Steel],
+[PokeType.Electric, PokeType.Ice, PokeType.Poison, PokeType.Rock, PokeType.Steel],
 
 
 //"Yanmega//"
-[Type.Fire, Type.Flying, Type.Electric, Type.Rock, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Electric, PokeType.Rock, PokeType.Ice],
 
 
 //"Leafeon//"
-[Type.Fire, Type.Flying, Type.Bug, Type.Poison, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Bug, PokeType.Poison, PokeType.Ice],
 
 
 //"Glaceon//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 
 
 //"Gliscor//"
-[Type.Water, Type.Ice],
+[PokeType.Water, PokeType.Ice],
 
 
 //"Mamoswine//"
-[Type.Fire, Type.Fighting, Type.Grass, Type.Steel, Type.Water],
+[PokeType.Fire, PokeType.Fighting, PokeType.Grass, PokeType.Steel, PokeType.Water],
 
 
 //"Porygon-Z//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Gallade//"
-[Type.Ghost, Type.Flying, Type.Fairy],
+[PokeType.Ghost, PokeType.Flying, PokeType.Fairy],
 
 
 //"Probopass//"
-[Type.Water, Type.Ground, Type.Fighting],
+[PokeType.Water, PokeType.Ground, PokeType.Fighting],
 
 
 //"Dusknoir//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 
 
 //"Froslass//"
-[Type.Fire, Type.Ghost, Type.Dark, Type.Steel, Type.Rock],
+[PokeType.Fire, PokeType.Ghost, PokeType.Dark, PokeType.Steel, PokeType.Rock],
 
 
 //"Rotom//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 
 
 //"Uxie//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Mesprit//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Azelf//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Dialga//"
-[Type.Fighting, Type.Ground],
+[PokeType.Fighting, PokeType.Ground],
 
 
 //"Palkia//"
-[Type.Dragon, Type.Fairy],
+[PokeType.Dragon, PokeType.Fairy],
 
 
 //"Heatran//"
-[Type.Water, Type.Fighting, Type.Ground],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground],
 
 
 //"Regigigas//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Giratina//"
-[Type.Ghost, Type.Dark, Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Ghost, PokeType.Dark, PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 
 
 //"Cresselia//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Phione//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Manaphy//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Darkrai//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 
 
 //"Shaymin//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 
 
 //"Arceus//"
@@ -1559,668 +1559,668 @@ List<List<Type?>> pokeWeakness = [
 
   //todo : Generation 5 (Unova)
 //"Victini//"
-[Type.Water, Type.Ground, Type.Rock, Type.Ghost, Type.Dark],
+[PokeType.Water, PokeType.Ground, PokeType.Rock, PokeType.Ghost, PokeType.Dark],
 //"Snivy//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Servine//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Serperior//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 
 
 //"Tepig//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Pignite//"
-[Type.Water, Type.Ground, Type.Psychic, Type.Flying],
+[PokeType.Water, PokeType.Ground, PokeType.Psychic, PokeType.Flying],
 //"Emboar//"
-[Type.Water, Type.Ground, Type.Psychic, Type.Flying],
+[PokeType.Water, PokeType.Ground, PokeType.Psychic, PokeType.Flying],
 
 
 //"Oshawott//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Dewott//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Samurott//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Patrat//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Watchog//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Lillipup//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Herdier//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Stoutland//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Purrloin//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 //"Liepard//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 
 
 //"Pansage//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 //"Simisage//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Pansear//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Simisear//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Panpour//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Simipour//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Munna//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 //"Musharna//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Pidove//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Tranquill//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Unfezant//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Blitzle//"
-[Type.Ground],
+[PokeType.Ground],
 //"Zebstrika//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Roggenrola//"
-[Type.Water, Type.Grass, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 //"Boldore//"
-[Type.Water, Type.Grass, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 //"Gigalith//"
-[Type.Water, Type.Grass, Type.Fighting, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Fighting, PokeType.Ground, PokeType.Steel],
 
 
 //"Woobat//"
-[Type.Electric, Type.Ice, Type.Ghost, Type.Dark, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Ghost, PokeType.Dark, PokeType.Rock],
 //"Swoobat//"
-[Type.Electric, Type.Ice, Type.Ghost, Type.Dark, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Ghost, PokeType.Dark, PokeType.Rock],
 
 
 //"Drilbur//"
-[Type.Water, Type.Ice, Type.Grass],
+[PokeType.Water, PokeType.Ice, PokeType.Grass],
 //"Excadrill//"
-[Type.Water, Type.Fire, Type.Ground, Type.Fighting],
+[PokeType.Water, PokeType.Fire, PokeType.Ground, PokeType.Fighting],
 
 
 //"Audino//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Timburr//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Gurdurr//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Conkeldurr//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Tympole//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Palpitoad//"
-[Type.Grass],
+[PokeType.Grass],
 //"Seismitoad//"
-[Type.Grass],
+[PokeType.Grass],
 
 
 //"Throh//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Sawk//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Sewaddle//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Ice],
 //"Swadloon//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Ice],
 //"Leavanny//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Ice],
 
 
 //"Venipede//"
-[Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 //"Whirlipede//"
-[Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 //"Scolipede//"
-[Type.Fire, Type.Flying, Type.Psychic, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Psychic, PokeType.Rock],
 
 
 //"Cottonee//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Steel],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Steel],
 //"Whimsicott//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Steel],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Steel],
 
 
 //"Petilil//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 //"Lilligant//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Basculin//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Sandile//"
-[Type.Water, Type.Ice, Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Water, PokeType.Ice, PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 //"Krokorok//"
-[Type.Water, Type.Ice, Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Water, PokeType.Ice, PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 //"Krookodile//"
-[Type.Water, Type.Ice, Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Water, PokeType.Ice, PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 
 
 //"Darumaka//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Darmanitan//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 
 
 //"Maractus//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Dwebble//"
-[Type.Water, Type.Steel, Type.Rock],
+[PokeType.Water, PokeType.Steel, PokeType.Rock],
 //"Crustle//"
-[Type.Water, Type.Steel, Type.Rock],
+[PokeType.Water, PokeType.Steel, PokeType.Rock],
 
 
 //"Scraggy//"
-[Type.Fighting, Type.Flying, Type.Fairy],
+[PokeType.Fighting, PokeType.Flying, PokeType.Fairy],
 //"Scrafty//"
-[Type.Fighting, Type.Flying, Type.Fairy],
+[PokeType.Fighting, PokeType.Flying, PokeType.Fairy],
 
 
 //"Sigilyph//"
-[Type.Ghost, Type.Dark, Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Ghost, PokeType.Dark, PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Yamask//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 //"Cofagrigus//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 
 
 //"Tirtouga//"
-[Type.Electric, Type.Grass, Type.Fighting, Type.Ground],
+[PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Ground],
 //"Carracosta//"
-[Type.Electric, Type.Grass, Type.Fighting, Type.Ground],
+[PokeType.Electric, PokeType.Grass, PokeType.Fighting, PokeType.Ground],
 
 
 //"Archen//"
-[Type.Electric, Type.Ice, Type.Water, Type.Rock, Type.Steel],
+[PokeType.Electric, PokeType.Ice, PokeType.Water, PokeType.Rock, PokeType.Steel],
 //"Archeops//"
-[Type.Electric, Type.Ice, Type.Water, Type.Rock, Type.Steel],
+[PokeType.Electric, PokeType.Ice, PokeType.Water, PokeType.Rock, PokeType.Steel],
 
 
 //"Trubbish//"
-[Type.Psychic, Type.Ground],
+[PokeType.Psychic, PokeType.Ground],
 //"Garbodor//"
-[Type.Psychic, Type.Ground],
+[PokeType.Psychic, PokeType.Ground],
 
 
 //"Zorua//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 //"Zoroark//"
-[Type.Fighting, Type.Bug, Type.Fairy],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy],
 
 
 //"Minccino//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Cinccino//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Gothita//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 //"Gothorita//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 //"Gothitelle//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Solosis//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 //"Duosion//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 //"Reuniclus//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Ducklett//"
-[Type.Electric, Type.Rock],
+[PokeType.Electric, PokeType.Rock],
 //"Swanna//"
-[Type.Electric, Type.Rock],
+[PokeType.Electric, PokeType.Rock],
 
 
 //"Vanillite//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 //"Vanillish//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 //"Vanilluxe//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 
 
 //"Deerling//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Fighting],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Fighting],
 //"Sawsbuck//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Fighting],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Fighting],
 
 
 //"Emolga//"
-[Type.Rock, Type.Ice],
+[PokeType.Rock, PokeType.Ice],
 
 //"Karrablast//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Escavalier//"
-[Type.Fire],
+[PokeType.Fire],
 
 
 //"Foongus//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 //"Amoonguss//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Psychic],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Psychic],
 
 
 //"Frillish//"
-[Type.Electric, Type.Ghost, Type.Dark, Type.Grass],
+[PokeType.Electric, PokeType.Ghost, PokeType.Dark, PokeType.Grass],
 //"Jellicent//"
-[Type.Electric, Type.Ghost, Type.Dark, Type.Grass],
+[PokeType.Electric, PokeType.Ghost, PokeType.Dark, PokeType.Grass],
 
 
 //"Alomomola//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Joltik//"
-[Type.Fire, Type.Rock],
+[PokeType.Fire, PokeType.Rock],
 //"Galvantula//"
-[Type.Fire, Type.Rock],
+[PokeType.Fire, PokeType.Rock],
 
 
 //"Ferroseed//"
-[Type.Fire, Type.Fighting],
+[PokeType.Fire, PokeType.Fighting],
 //"Ferrothorn//"
-[Type.Fire, Type.Fighting],
+[PokeType.Fire, PokeType.Fighting],
 
 
 //"Klink//"
-[Type.Fire, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 //"Klang//"
-[Type.Fire, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 //"Klinklang//"
-[Type.Fire, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 
 
 //"Tynamo//"
-[Type.Ground],
+[PokeType.Ground],
 //"Eelektrik//"
-[Type.Ground],
+[PokeType.Ground],
 //"Eelektross//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Elgyem//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 //"Beheeyem//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Litwick//"
-[Type.Water, Type.Ground, Type.Rock, Type.Ghost, Type.Dark],
+[PokeType.Water, PokeType.Ground, PokeType.Rock, PokeType.Ghost, PokeType.Dark],
 //"Lampent//"
-[Type.Water, Type.Ground, Type.Rock, Type.Ghost, Type.Dark],
+[PokeType.Water, PokeType.Ground, PokeType.Rock, PokeType.Ghost, PokeType.Dark],
 //"Chandelure//"
-[Type.Water, Type.Ground, Type.Rock, Type.Ghost, Type.Dark],
+[PokeType.Water, PokeType.Ground, PokeType.Rock, PokeType.Ghost, PokeType.Dark],
 
 
 //"Axew//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Fraxure//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Haxorus//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 
 
 //"Cubchoo//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 //"Beartic//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 
 
 //"Cryogonal//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 
 
 //"Shelmet//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Accelgor//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 
 
 //"Stunfisk//"
-[Type.Water, Type.Grass, Type.Ice],
+[PokeType.Water, PokeType.Grass, PokeType.Ice],
 
 
 //"Mienfoo//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Mienshao//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 
 
 //"Druddigon//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 
 
 //"Golett//"
-[Type.Water, Type.Grass, Type.Ice, Type.Ghost, Type.Dark],
+[PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Ghost, PokeType.Dark],
 //"Golurk//"
-[Type.Water, Type.Grass, Type.Ice, Type.Ghost, Type.Dark],
+[PokeType.Water, PokeType.Grass, PokeType.Ice, PokeType.Ghost, PokeType.Dark],
 
 
 //"Pawniard//"
-[Type.Fire, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 //"Bisharp//"
-[Type.Fire, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 
 
 //"Bouffalant//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Rufflet//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Braviary//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 
 
 //"Vullaby//"
-[Type.Electric, Type.Ice, Type.Rock, Type.Fairy],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock, PokeType.Fairy],
 //"Mandibuzz//"
-[Type.Electric, Type.Ice, Type.Rock, Type.Fairy],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock, PokeType.Fairy],
 
 
 //"Heatmor//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Durant//"
-[Type.Fire],
+[PokeType.Fire],
 
 
 //"Deino//"
-[Type.Fighting, Type.Bug, Type.Fairy, Type.Dragon, Type.Ice],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy, PokeType.Dragon, PokeType.Ice],
 //"Zweilous//"
-[Type.Fighting, Type.Bug, Type.Fairy, Type.Dragon, Type.Ice],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy, PokeType.Dragon, PokeType.Ice],
 //"Hydreigon//"
-[Type.Fighting, Type.Bug, Type.Fairy, Type.Dragon, Type.Ice],
+[PokeType.Fighting, PokeType.Bug, PokeType.Fairy, PokeType.Dragon, PokeType.Ice],
 
 
 //"Larvesta//"
-[Type.Water, Type.Flying, Type.Rock],
+[PokeType.Water, PokeType.Flying, PokeType.Rock],
 //"Volcarona//"
-[Type.Water, Type.Flying, Type.Rock],
+[PokeType.Water, PokeType.Flying, PokeType.Rock],
 
 
 //"Cobalion//"
-[Type.Fire, Type.Fighting, Type.Ground],
+[PokeType.Fire, PokeType.Fighting, PokeType.Ground],
 //"Terrakion//"
-[Type.Water, Type.Grass, Type.Fighting, Type.Ground, Type.Steel, Type.Psychic],
+[PokeType.Water, PokeType.Grass, PokeType.Fighting, PokeType.Ground, PokeType.Steel, PokeType.Psychic],
 //"Virizion//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Psychic],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Psychic],
 
 
 //"Tornadus//"
-[Type.Electric, Type.Ice, Type.Rock],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock],
 //"Thundurus//"
-[Type.Ice, Type.Rock],
+[PokeType.Ice, PokeType.Rock],
 //"Reshiram//"
-[Type.Ground, Type.Dragon, Type.Rock],
+[PokeType.Ground, PokeType.Dragon, PokeType.Rock],
 
 
 //"Zekrom//"
-[Type.Ground, Type.Ice, Type.Dragon, Type.Fairy],
+[PokeType.Ground, PokeType.Ice, PokeType.Dragon, PokeType.Fairy],
 //"Landorus//"
-[Type.Water, Type.Ice],
+[PokeType.Water, PokeType.Ice],
 //"Kyurem//"
-[Type.Fighting, Type.Dragon, Type.Steel, Type.Fairy],
+[PokeType.Fighting, PokeType.Dragon, PokeType.Steel, PokeType.Fairy],
 
 
 //"Keldeo//"
-[Type.Grass, Type.Electric, Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Grass, PokeType.Electric, PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Meloetta//"
-[Type.Bug, Type.Dark, Type.Ghost],
+[PokeType.Bug, PokeType.Dark, PokeType.Ghost],
 //"Genesect//"
-[Type.Fire],
+[PokeType.Fire],
 
 
   //todo : Generation 6 (Kalos)
 //"Chespin//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Quilladin//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Bug, Type.Poison],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Bug, PokeType.Poison],
 //"Chesnaught//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Fairy, Type.Psychic],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Fairy, PokeType.Psychic],
 
 
 //"Fennekin//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Braixen//"
-[Type.Water, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Ground, PokeType.Rock],
 //"Delphox//"
-[Type.Water, Type.Ground, Type.Rock, Type.Ghost, Type.Dark],
+[PokeType.Water, PokeType.Ground, PokeType.Rock, PokeType.Ghost, PokeType.Dark],
 
 
 //"Froakie//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Frogadier//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Greninja//"
-[Type.Electric, Type.Grass, Type.Fairy, Type.Fighting, Type.Bug],
+[PokeType.Electric, PokeType.Grass, PokeType.Fairy, PokeType.Fighting, PokeType.Bug],
 
 
 //"Bunnelby//"
-[Type.Fighting],
+[PokeType.Fighting],
 //"Diggersby//"
-[Type.Water, Type.Ice, Type.Fighting, Type.Grass],
+[PokeType.Water, PokeType.Ice, PokeType.Fighting, PokeType.Grass],
 
 
 //"Fletchling//"
-[Type.Electric, Type.Rock],
+[PokeType.Electric, PokeType.Rock],
 //"Fletchinder//"
-[Type.Water, Type.Electric, Type.Rock],
+[PokeType.Water, PokeType.Electric, PokeType.Rock],
 //"Talonflame//"
-[Type.Water, Type.Electric, Type.Rock],
+[PokeType.Water, PokeType.Electric, PokeType.Rock],
 
 
 //"Scatterbug//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Spewpa//"
-[Type.Fire, Type.Flying, Type.Rock],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock],
 //"Vivillon//"
-[Type.Fire, Type.Flying, Type.Rock, Type.Electric, Type.Ice],
+[PokeType.Fire, PokeType.Flying, PokeType.Rock, PokeType.Electric, PokeType.Ice],
 
 
 //"Litleo//"
-[Type.Water, Type.Fighting, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground, PokeType.Rock],
 //"Pyroar//"
-[Type.Water, Type.Fighting, Type.Ground, Type.Rock],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground, PokeType.Rock],
 
 
 //"Flabébé//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Floette//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Florges//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 
 
 //"Skiddo//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 //"Gogoat//"
-[Type.Fire, Type.Flying, Type.Ice, Type.Poison, Type.Bug],
+[PokeType.Fire, PokeType.Flying, PokeType.Ice, PokeType.Poison, PokeType.Bug],
 
 
 //"Pancham//"
-[Type.Flying, Type.Psychic, Type.Fairy],
+[PokeType.Flying, PokeType.Psychic, PokeType.Fairy],
 //"Pangoro//"
-[Type.Flying, Type.Fighting, Type.Fairy],
+[PokeType.Flying, PokeType.Fighting, PokeType.Fairy],
 
 
 //"Furfrou//"
-[Type.Fighting],
+[PokeType.Fighting],
 
 
 //"Espurr//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 //"Meowstic//"
-[Type.Ghost, Type.Dark, Type.Bug],
+[PokeType.Ghost, PokeType.Dark, PokeType.Bug],
 
 
 //"Honedge//"
-[Type.Fire, Type.Ground, Type.Ghost, Type.Dark],
+[PokeType.Fire, PokeType.Ground, PokeType.Ghost, PokeType.Dark],
 //"Doublade//"
-[Type.Fire, Type.Ground, Type.Ghost, Type.Dark],
+[PokeType.Fire, PokeType.Ground, PokeType.Ghost, PokeType.Dark],
 //"Aegislash//"
-[Type.Fire, Type.Ground, Type.Ghost, Type.Dark],
+[PokeType.Fire, PokeType.Ground, PokeType.Ghost, PokeType.Dark],
 
 
 //"Spritzee//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Aromatisse//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 
 
 //"Swirlix//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Slurpuff//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 
 
 //"Inkay//"
-[Type.Bug, Type.Fairy],
+[PokeType.Bug, PokeType.Fairy],
 //"Malamar//"
-[Type.Bug, Type.Fairy],
+[PokeType.Bug, PokeType.Fairy],
 
 
 //"Binacle//"
-[Type.Electric, Type.Fighting, Type.Ground],
+[PokeType.Electric, PokeType.Fighting, PokeType.Ground],
 //"Barbaracle//"
-[Type.Electric, Type.Fighting, Type.Ground],
+[PokeType.Electric, PokeType.Fighting, PokeType.Ground],
 
 
 //"Skrelp//"
-[Type.Electric, Type.Ground, Type.Psychic],
+[PokeType.Electric, PokeType.Ground, PokeType.Psychic],
 //"Dragalge//"
-[Type.Electric, Type.Ground, Type.Dragon, Type.Ice],
+[PokeType.Electric, PokeType.Ground, PokeType.Dragon, PokeType.Ice],
 
 
 //"Clauncher//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 //"Clawitzer//"
-[Type.Electric, Type.Grass],
+[PokeType.Electric, PokeType.Grass],
 
 
 //"Helioptile//"
-[Type.Water, Type.Fighting, Type.Ground],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground],
 //"Heliolisk//"
-[Type.Water, Type.Fighting, Type.Ground],
+[PokeType.Water, PokeType.Fighting, PokeType.Ground],
 
 
 //"Tyrunt//"
-[Type.Steel, Type.Fairy, Type.Dragon, Type.Ice, Type.Fighting, Type.Ground],
+[PokeType.Steel, PokeType.Fairy, PokeType.Dragon, PokeType.Ice, PokeType.Fighting, PokeType.Ground],
 //"Tyrantrum//"
-[Type.Steel, Type.Fairy, Type.Dragon, Type.Ice, Type.Fighting, Type.Ground],
+[PokeType.Steel, PokeType.Fairy, PokeType.Dragon, PokeType.Ice, PokeType.Fighting, PokeType.Ground],
 
 
 //"Amaura//"
-[Type.Steel, Type.Fighting, Type.Ground, Type.Rock, Type.Water, Type.Grass],
+[PokeType.Steel, PokeType.Fighting, PokeType.Ground, PokeType.Rock, PokeType.Water, PokeType.Grass],
 //"Aurorus//"
-[Type.Steel, Type.Fighting, Type.Ground, Type.Rock, Type.Water, Type.Grass],
+[PokeType.Steel, PokeType.Fighting, PokeType.Ground, PokeType.Rock, PokeType.Water, PokeType.Grass],
 
 
 //"Sylveon//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 
 
 //"Hawlucha//"
-[Type.Electric, Type.Ice, Type.Psychic, Type.Fairy, Type.Flying],
+[PokeType.Electric, PokeType.Ice, PokeType.Psychic, PokeType.Fairy, PokeType.Flying],
 
 
 //"Dedenne//"
-[Type.Ground],
+[PokeType.Ground],
 
 
 //"Carbink//"
-[Type.Water, Type.Grass, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Ground, PokeType.Steel],
 
 
 //"Goomy//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Sliggoo//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 //"Goodra//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 
 
 //"Klefki//"
-[Type.Ground, Type.Fire],
+[PokeType.Ground, PokeType.Fire],
 
 
 //"Phantump//"
-[Type.Ghost, Type.Dark, Type.Fire, Type.Flying, Type.Ice],
+[PokeType.Ghost, PokeType.Dark, PokeType.Fire, PokeType.Flying, PokeType.Ice],
 //"Trevenant//"
-[Type.Ghost, Type.Dark, Type.Fire, Type.Flying, Type.Ice],
+[PokeType.Ghost, PokeType.Dark, PokeType.Fire, PokeType.Flying, PokeType.Ice],
 
 
 //"Pumpkaboo//"
-[Type.Ghost, Type.Dark, Type.Fire, Type.Flying, Type.Ice],
+[PokeType.Ghost, PokeType.Dark, PokeType.Fire, PokeType.Flying, PokeType.Ice],
 //"Gourgeist//"
-[Type.Ghost, Type.Dark, Type.Fire, Type.Flying, Type.Ice],
+[PokeType.Ghost, PokeType.Dark, PokeType.Fire, PokeType.Flying, PokeType.Ice],
 
 
 //"Bergmite//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 //"Avalugg//"
-[Type.Fire, Type.Fighting, Type.Rock, Type.Steel],
+[PokeType.Fire, PokeType.Fighting, PokeType.Rock, PokeType.Steel],
 
 
 //"Noibat//"
-[Type.Dragon, Type.Fairy, Type.Ice, Type.Rock],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice, PokeType.Rock],
 //"Noivern//"
-[Type.Dragon, Type.Fairy, Type.Ice, Type.Rock],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice, PokeType.Rock],
 
 
 //"Xerneas//"
-[Type.Poison, Type.Steel],
+[PokeType.Poison, PokeType.Steel],
 //"Yveltal//"
-[Type.Electric, Type.Ice, Type.Rock, Type.Fairy],
+[PokeType.Electric, PokeType.Ice, PokeType.Rock, PokeType.Fairy],
 //"Zygarde//"
-[Type.Dragon, Type.Fairy, Type.Ice],
+[PokeType.Dragon, PokeType.Fairy, PokeType.Ice],
 
 
 //"Diancie//"
-[Type.Water, Type.Grass, Type.Ground, Type.Steel],
+[PokeType.Water, PokeType.Grass, PokeType.Ground, PokeType.Steel],
 
 
 //"Hoopa//"
-[Type.Ghost, Type.Dark],
+[PokeType.Ghost, PokeType.Dark],
 
 //"Volcanion//"
-[Type.Electric, Type.Ground, Type.Rock, Type.Water]
+[PokeType.Electric, PokeType.Ground, PokeType.Rock, PokeType.Water]
 ];

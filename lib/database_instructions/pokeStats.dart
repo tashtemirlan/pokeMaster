@@ -1,4 +1,4 @@
-import 'package:pokemonmap/ui/global_folder/globals.dart';
+import '../models/pokemonFolder/pokeStats.dart';
 
 //todo : check to all pokemons later!!!!
 List<PokeStats> pokeStats = [

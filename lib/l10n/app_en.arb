@@ -156,5 +156,7 @@
   "ka5_city_string" : "Lumiose City",
   "ka6_city_string" : "Laverre City",
   "ka7_city_string" : "Anistar City",
-  "ka8_city_string" : "Snowbelle City"
+  "ka8_city_string" : "Snowbelle City",
+
+  "ribbon_string" : "Ribbon"
 }

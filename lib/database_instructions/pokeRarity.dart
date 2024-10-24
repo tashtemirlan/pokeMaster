@@ -1,4 +1,4 @@
-import '../ui/global_folder/globals.dart';
+import '../models/pokemonFolder/pokeRarity.dart';
 
 List<Rarity> pokeRarity = [
   //todo : 1st generation
