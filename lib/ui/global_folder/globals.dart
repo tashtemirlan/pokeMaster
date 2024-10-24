@@ -2,33 +2,34 @@ library pokemon.globals;
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:pokemonmap/models/pokemonModel.dart';
+import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../models/pokemonFolder/pokeRegion.dart';
+import '../../models/pokemonFolder/pokeType.dart';
+import '../../models/pokemonFolder/pokeRarity.dart';
 
 int userCoins = 0;
 
-List<Pokemon> listAllPokemons = [];
-
-List<Type> listTypes = [
-  Type.Normal,
-  Type.Fire,
-  Type.Water,
-  Type.Electric,
-  Type.Grass,
-  Type.Ice,
-  Type.Fighting,
-  Type.Poison,
-  Type.Ground,
-  Type.Flying,
-  Type.Psychic,
-  Type.Bug,
-  Type.Rock,
-  Type.Ghost,
-  Type.Dragon,
-  Type.Dark,
-  Type.Steel,
-  Type.Fairy
+List<PokeType> listTypes = [
+  PokeType.Normal,
+  PokeType.Fire,
+  PokeType.Water,
+  PokeType.Electric,
+  PokeType.Grass,
+  PokeType.Ice,
+  PokeType.Fighting,
+  PokeType.Poison,
+  PokeType.Ground,
+  PokeType.Flying,
+  PokeType.Psychic,
+  PokeType.Bug,
+  PokeType.Rock,
+  PokeType.Ghost,
+  PokeType.Dragon,
+  PokeType.Dark,
+  PokeType.Steel,
+  PokeType.Fairy
 ];
 
 List<Rarity> listRarity = [
@@ -39,81 +40,25 @@ List<Rarity> listRarity = [
   Rarity.legendary
 ];
 
-enum Region{
-  Kanto,
-  Johto,
-  Hoenn,
-  Sinnoh,
-  Unova,
-  Kalos,
-}
-
-enum Rarity{
-  casual,
-  rare,
-  epic,
-  mystic,
-  legendary
-}
-
-enum Type{
-  Normal,
-  Fire,
-  Water,
-  Electric,
-  Grass,
-  Ice,
-  Fighting,
-  Poison,
-  Ground,
-  Flying,
-  Psychic,
-  Bug,
-  Rock,
-  Ghost,
-  Dragon,
-  Dark,
-  Steel,
-  Fairy
-}
-
-class PokeStats{
-  double hp;
-  double attack;
-  double defence;
-  double specialAttack;
-  double specialDefence;
-  double speed;
-
-  PokeStats({
-    required this.hp,
-    required this.attack,
-    required this.defence,
-    required this.specialAttack,
-    required this.specialDefence,
-    required this.speed
-  });
-}
-
-Map<Type, Color> typeColors = {
-  Type.Normal: colors.colorNormal,
-  Type.Fire: colors.colorFire,
-  Type.Water: colors.colorWater,
-  Type.Electric: colors.colorElectric,
-  Type.Grass: colors.colorGrass,
-  Type.Ice: colors.colorIce,
-  Type.Fighting: colors.colorFighting,
-  Type.Poison: colors.colorPoison,
-  Type.Ground: colors.colorGround,
-  Type.Flying: colors.colorFlying,
-  Type.Psychic: colors.colorPsychic,
-  Type.Bug: colors.colorBug,
-  Type.Rock: colors.colorRock,
-  Type.Ghost: colors.colorGhost,
-  Type.Dragon: colors.colorDragon,
-  Type.Dark: colors.colorDark,
-  Type.Steel: colors.colorSteel,
-  Type.Fairy: colors.colorFairy,
+Map<PokeType, Color> typeColors = {
+  PokeType.Normal: colors.colorNormal,
+  PokeType.Fire: colors.colorFire,
+  PokeType.Water: colors.colorWater,
+  PokeType.Electric: colors.colorElectric,
+  PokeType.Grass: colors.colorGrass,
+  PokeType.Ice: colors.colorIce,
+  PokeType.Fighting: colors.colorFighting,
+  PokeType.Poison: colors.colorPoison,
+  PokeType.Ground: colors.colorGround,
+  PokeType.Flying: colors.colorFlying,
+  PokeType.Psychic: colors.colorPsychic,
+  PokeType.Bug: colors.colorBug,
+  PokeType.Rock: colors.colorRock,
+  PokeType.Ghost: colors.colorGhost,
+  PokeType.Dragon: colors.colorDragon,
+  PokeType.Dark: colors.colorDark,
+  PokeType.Steel: colors.colorSteel,
+  PokeType.Fairy: colors.colorFairy,
 };
 
 String showRarityPokemon(Rarity rarity, BuildContext context){
@@ -155,53 +100,53 @@ String showRegionPokemon(Region region,BuildContext context){
   }
 }
 
-String showTypePokemon(Type type, BuildContext context){
-  if(type == Type.Normal){
+String showTypePokemon(PokeType type, BuildContext context){
+  if(type == PokeType.Normal){
     return AppLocalizations.of(context)!.pokemon_type_normal;
   }
-  else if(type == Type.Fire){
+  else if(type == PokeType.Fire){
     return AppLocalizations.of(context)!.pokemon_type_fire;
   }
-  else if(type == Type.Water){
+  else if(type == PokeType.Water){
     return AppLocalizations.of(context)!.pokemon_type_water;
   }
-  else if(type == Type.Electric){
+  else if(type == PokeType.Electric){
     return AppLocalizations.of(context)!.pokemon_type_electric;
   }
-  else if(type == Type.Grass){
+  else if(type == PokeType.Grass){
     return AppLocalizations.of(context)!.pokemon_type_grass;
   }
-  else if(type == Type.Ice){
+  else if(type == PokeType.Ice){
     return AppLocalizations.of(context)!.pokemon_type_ice;
   }
-  else if(type == Type.Fighting){
+  else if(type == PokeType.Fighting){
     return AppLocalizations.of(context)!.pokemon_type_fighting;
   }
-  else if(type == Type.Poison){
+  else if(type == PokeType.Poison){
     return AppLocalizations.of(context)!.pokemon_type_poison;
   }
-  else if(type == Type.Ground){
+  else if(type == PokeType.Ground){
     return AppLocalizations.of(context)!.pokemon_type_ground;
   }
-  else if(type == Type.Flying){
+  else if(type == PokeType.Flying){
     return AppLocalizations.of(context)!.pokemon_type_flying;
   }
-  else if(type == Type.Psychic){
+  else if(type == PokeType.Psychic){
     return AppLocalizations.of(context)!.pokemon_type_psychic;
   }
-  else if(type == Type.Bug){
+  else if(type == PokeType.Bug){
     return AppLocalizations.of(context)!.pokemon_type_bug;
   }
-  else if(type == Type.Ghost){
+  else if(type == PokeType.Ghost){
     return AppLocalizations.of(context)!.pokemon_type_ghost;
   }
-  else if(type == Type.Dragon){
+  else if(type == PokeType.Dragon){
     return AppLocalizations.of(context)!.pokemon_type_dragon;
   }
-  else if(type == Type.Dark){
+  else if(type == PokeType.Dark){
     return AppLocalizations.of(context)!.pokemon_type_dark;
   }
-  else if(type == Type.Steel){
+  else if(type == PokeType.Steel){
     return AppLocalizations.of(context)!.pokemon_type_steel;
   }
   else{
@@ -230,7 +175,7 @@ Color showRarityColorPokemon(Rarity rarity){
 //todo : checkbox items to select type of pokemon in pokedex
 class CheckBoxItem {
 
-  Type type;
+  PokeType type;
   bool itemSelected;
 
   CheckBoxItem({required this.type, required this.itemSelected});

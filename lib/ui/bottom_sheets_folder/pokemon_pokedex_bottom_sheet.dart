@@ -1,40 +1,50 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
 
+import '../../models/pokedexModel.dart';
+import '../../models/pokemonFolder/pokeStats.dart';
 import '../global_folder/globals.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class PokemonPokedexBottomSheet extends StatefulWidget{
   final int pokeIndex;
-  const PokemonPokedexBottomSheet({super.key, required this.pokeIndex});
+  final bool showFind;
+  const PokemonPokedexBottomSheet({super.key, required this.pokeIndex, required this.showFind});
 
   @override
   PokemonPokedexBottomSheetState createState() => PokemonPokedexBottomSheetState();
 }
 
 class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
-
+  bool dataGet = false;
   bool frontView = false;
   String gifPath = "";
+
+  List<PokedexPokemonModel> hiveList = [];
+
 
   void changeImageView(){
     if(frontView==true){
       // show back view
       setState(() {
-        gifPath = globals.pokeList[widget.pokeIndex].gifBack;
+        gifPath = hiveList[widget.pokeIndex].pokemon.gifBack;
         frontView = false;
       });
     }
     else{
       //show front view
       setState(() {
-        gifPath = globals.pokeList[widget.pokeIndex].gifFront;
+        gifPath = hiveList[widget.pokeIndex].pokemon.gifFront;
         frontView = true;
       });
     }
@@ -86,7 +96,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
   }
 
   Widget pokemonStats(double height){
-    PokeStats pokemon_Stats = globals.pokeList[widget.pokeIndex].pokeStats;
+    PokeStats pokemon_Stats = hiveList[widget.pokeIndex].pokemon.pokeStats;
     double pokemon_hp = pokemon_Stats.hp;
     double pokemon_attack = pokemon_Stats.attack;
     double pokemon_defence = pokemon_Stats.defence;
@@ -94,7 +104,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
     double pokemon_sp_defence = pokemon_Stats.specialDefence;
     double pokemon_speed = pokemon_Stats.speed;
     List<double> pokeData = [pokemon_hp, pokemon_attack ,pokemon_defence, pokemon_sp_attack , pokemon_sp_defence, pokemon_speed];
-    Color? colorPokeCharts = typeColors[globals.pokeList[widget.pokeIndex].type.first];
+    Color? colorPokeCharts = typeColors[hiveList[widget.pokeIndex].pokemon.type.first];
     Color showColor = (colorPokeCharts!=null)? colorPokeCharts : Colors.blue.shade600;
     return radarChartPokemon(pokeData, showColor, height);
   }
@@ -113,7 +123,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${globals.pokeList[widget.pokeIndex].pokeStats.hp}",
+                "${hiveList[widget.pokeIndex].pokemon.pokeStats.hp}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -132,7 +142,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${globals.pokeList[widget.pokeIndex].pokeStats.attack}",
+                "${hiveList[widget.pokeIndex].pokemon.pokeStats.attack}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -151,7 +161,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${globals.pokeList[widget.pokeIndex].pokeStats.defence}",
+                "${hiveList[widget.pokeIndex].pokemon.pokeStats.defence}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -170,7 +180,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${globals.pokeList[widget.pokeIndex].pokeStats.specialAttack}",
+                "${hiveList[widget.pokeIndex].pokemon.pokeStats.specialAttack}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -189,7 +199,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${globals.pokeList[widget.pokeIndex].pokeStats.specialDefence}",
+                "${hiveList[widget.pokeIndex].pokemon.pokeStats.specialDefence}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -208,7 +218,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${globals.pokeList[widget.pokeIndex].pokeStats.speed}",
+                "${hiveList[widget.pokeIndex].pokemon.pokeStats.speed}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -219,10 +229,52 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
     );
   }
 
+  Future<void> setDataFromHivePokedexInitialized() async{
+    var box = await Hive.openBox("PokemonUserPokedex");
+
+    // Read the list from Hive and cast it to List<PokedexPokemonModel>
+    List<dynamic> pokeListFromHiveDynamic = box.get("Pokedex", defaultValue: []);
+
+    // Cast the list to List<PokedexPokemonModel>
+    List<PokedexPokemonModel> pokeListFromHive = pokeListFromHiveDynamic.cast<PokedexPokemonModel>();
+    setState(() {
+      hiveList = pokeListFromHive;
+      dataGet = true;
+    });
+
+    changeImageView();
+  }
+
+  String showPokemonNameCyrillic(String englishPokeName) {
+    // Mapping of English letters to Cyrillic equivalents (basic transliteration)
+    final Map<String, String> transliterationMap = {
+      'A': 'А', 'B': 'Б', 'C': 'С', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г',
+      'H': 'Х', 'I': 'И', 'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
+      'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р', 'S': 'С', 'T': 'Т', 'U': 'У',
+      'V': 'В', 'W': 'В', 'X': 'Кс', 'Y': 'Ы', 'Z': 'З',
+      'a': 'а', 'b': 'б', 'c': 'с', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г',
+      'h': 'х', 'i': 'и', 'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
+      'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
+      'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
+    };
+
+    String locale = Platform.localeName;
+    String languageCode = locale.split('_')[0];
+
+    if (languageCode == 'en') {
+      return englishPokeName;
+    } else {
+      String cyrillicName = englishPokeName.split('').map((letter) {
+        return transliterationMap[letter] ?? letter; // Use the mapped letter or fallback to the original
+      }).join('');
+      return cyrillicName;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    changeImageView();
+    setDataFromHivePokedexInitialized();
   }
 
   @override
@@ -232,7 +284,8 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
     return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
+          child: (dataGet)?
+          Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -243,11 +296,18 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                   Expanded(
                       child: InstaImageViewer(
                           backgroundColor: Colors.white,
-                          child: Image.asset(
+                          child: (hiveList[widget.pokeIndex].isFound || widget.showFind)?
+                          Image.asset(
                             gifPath,
                             height: width *0.6,
                             width: width,
                             fit: BoxFit.contain,
+                          ) : Image.asset(
+                            gifPath,
+                            height: width *0.6,
+                            width: width,
+                            fit: BoxFit.contain,
+                            color: Colors.transparent.withOpacity(0.5),
                           )
                       ),
                   ),
@@ -261,13 +321,13 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
               ),
               const SizedBox(height: 20),
               Text(//show correct name in ky/ru/en
-                  globals.pokeList[widget.pokeIndex].name,
+                showPokemonNameCyrillic(hiveList[widget.pokeIndex].pokemon.name),
                   style: TextStyle(color: Colors.black, fontSize: 24, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
               Wrap(
                 spacing: 5,
-                children: globals.pokeList[widget.pokeIndex].type.map((type) {
+                children: hiveList[widget.pokeIndex].pokemon.type.map((type) {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
@@ -305,7 +365,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                             const SizedBox(width: 5,),
                             Expanded(
                               child: Text(
-                                showRarityPokemon(globals.pokeList[widget.pokeIndex].rarity, context),
+                                showRarityPokemon(hiveList[widget.pokeIndex].pokemon.rarity, context),
                                 style: TextStyle(color: Colors.black , fontSize: 18,
                                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
                               ),
@@ -323,7 +383,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                             const SizedBox(width: 5,),
                             Expanded(
                               child: Text(
-                                showRegionPokemon(globals.pokeList[widget.pokeIndex].region, context),
+                                showRegionPokemon(hiveList[widget.pokeIndex].pokemon.region, context),
                                 style: TextStyle(color: Colors.black , fontSize: 18,
                                     decoration: TextDecoration.none, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
                               ),
@@ -339,7 +399,7 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                         Wrap(
                           spacing: 5,
                           runSpacing: 5,
-                          children: globals.pokeList[widget.pokeIndex].weakness.map((type) {
+                          children: hiveList[widget.pokeIndex].pokemon.weakness.map((type) {
                             if(type!=null){
                               return Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -378,7 +438,13 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                 ),
               )
             ],
-          ),
+          ) :
+          Center(
+            child: CircularProgressIndicator(
+              color: Colors.blue.shade400,
+              strokeWidth: 7,
+            ),
+          )
         )
     );
   }
