@@ -213,20 +213,3 @@ class AwardsBadges{
     required this.cityName
   });
 }
-
-List<AwardsBadges> kantoGym = [];
-List<AwardsBadges> johtoGym = [];
-List<AwardsBadges> hoennGym = [];
-List<AwardsBadges> sinnohGym = [];
-List<AwardsBadges> unovaGym = [];
-List<AwardsBadges> kalosGym = [];
-
-//todo : badges in contests
-List<AwardsBadges> kantoContest = [];
-
-List<AwardsBadges> johtoContest = [];
-List<AwardsBadges> hoennContest = [];
-List<AwardsBadges> sinnohContest = [];
-List<AwardsBadges> unovaContest = [];
-List<AwardsBadges> kalosContest = [];
-

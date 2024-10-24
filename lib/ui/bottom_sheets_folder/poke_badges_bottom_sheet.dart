@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:pokemonmap/ui/bottom_navigation_folder/shopPage.dart';
 
@@ -9,6 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
 
 
+import '../../models/pokeAwards.dart';
 import '../global_folder/globals.dart';
 
 //todo :=> multiple choice radio buttons with check right
@@ -22,9 +26,12 @@ class PokeBadgesBottomSheet extends StatefulWidget{
 
 class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
 
-  Widget storeItem(double width, globals.AwardsBadges shopItem) {
+  bool dataGet = false;
+  List<List<PokeAwards>> hiveList = [];
+
+  Widget storeItem(double width, PokeAwards shopItem) {
     return Container(
-      width: 100,
+      width: width*0.4,
       padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 2),
@@ -36,17 +43,40 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InstaImageViewer(
-                  child: Image.asset(
-                    shopItem.imagePath,
+                  backgroundColor: Colors.white,
+                  child: (shopItem.obtained)? Image.asset(
+                    shopItem.awardImagePath,
                     height: 80,
                     fit: BoxFit.contain,
+                  ) : Image.asset(
+                    shopItem.awardImagePath,
+                    height: 80,
+                    fit: BoxFit.contain,
+                    color: Colors.transparent.withOpacity(0.5),
                   )
               ),
               SizedBox(height: 8.0),
               // Item name
               Text(
-                shopItem.itemName,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: colors.darkBlack),
+                shopItem.awardName,
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: colors.darkBlack,
+                    decoration: TextDecoration.none
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 4.0),
+              // Item city name
+              Text(
+                shopItem.cityName,
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: colors.darkBlack,
+                    decoration: TextDecoration.none
+                ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -55,7 +85,7 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
     );
   }
 
-  Widget storeItems(double width, List eventList){
+  Widget storeItems(double width, List<PokeAwards> eventList){
     return Wrap(
       spacing: 10.0,
       runSpacing: 10.0,
@@ -65,7 +95,7 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
     );
   }
 
-  Widget regionGymAwards(String regionName, List eventList, double width){
+  Widget regionGymAwards(String regionName, double width, List<PokeAwards> pokeAwards){
     return Column(
       children: [
         Text(
@@ -75,59 +105,95 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 15,),
-        storeItems(width, eventList)
+        storeItems(width, pokeAwards)
       ],
     );
   }
 
+  Future<void> setDataFromHivePokedexInitialized() async {
+    var box = await Hive.openBox("PokemonUserDataBase");
+
+    if (widget.showGym) {
+      List<dynamic> pokeListAwards = box.get("PokeChallenge", defaultValue: []);
+      log("${pokeListAwards.length}");
+      // Create a new List<List<PokeAwards>> by safely casting each sublist
+      List<List<PokeAwards>> pokeListFromHive = pokeListAwards.map((dynamic sublist) {
+        return (sublist as List).map((dynamic item) {
+          return item as PokeAwards;  // Cast each item to PokeAwards
+        }).toList();
+      }).toList();
+
+      setState(() {
+        hiveList = pokeListFromHive;
+        dataGet = true;
+      });
+    } else {
+      List<dynamic> pokeListAwards = box.get("PokeContest", defaultValue: []);
+      log("${pokeListAwards.length}");
+      // Similar safe casting for contest awards
+      List<List<PokeAwards>> pokeListFromHive = pokeListAwards.map((dynamic sublist) {
+        return (sublist as List).map((dynamic item) {
+          return item as PokeAwards;
+        }).toList();
+      }).toList();
+
+      setState(() {
+        hiveList = pokeListFromHive;
+        dataGet = true;
+      });
+    }
+  }
+
+
   @override
   void initState() {
     super.initState();
+    setDataFromHivePokedexInitialized();
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
+          child: (dataGet)?
+          Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
               regionGymAwards(
                   AppLocalizations.of(context)!.region_kanto,
-                  (widget.showGym)?globals.kantoGym : globals.kantoContest,
-                  width),
+                  width, hiveList[0]),
               const SizedBox(height: 20,),
               regionGymAwards(
                   AppLocalizations.of(context)!.region_johto,
-                  (widget.showGym)?globals.johtoGym : globals.johtoContest,
-                  width),
+                  width, hiveList[1]),
               const SizedBox(height: 20,),
               regionGymAwards(
                   AppLocalizations.of(context)!.region_hoenn,
-                  (widget.showGym)?globals.hoennGym : globals.hoennContest,
-                  width),
+                  width, hiveList[2]),
               const SizedBox(height: 20,),
               regionGymAwards(
                   AppLocalizations.of(context)!.region_sinnoh,
-                  (widget.showGym)?globals.sinnohGym : globals.sinnohContest,
-                  width),
+                  width, hiveList[3]),
               const SizedBox(height: 20,),
               regionGymAwards(
                   AppLocalizations.of(context)!.region_unova,
-                  (widget.showGym)?globals.unovaGym : globals.unovaContest,
-                  width),
+                  width, hiveList[4]),
               const SizedBox(height: 20,),
               regionGymAwards(
                   AppLocalizations.of(context)!.region_kalos,
-                  (widget.showGym)?globals.kalosGym : globals.kalosContest,
-                  width),
+                  width, hiveList[5]),
               const SizedBox(height: 20,)
             ],
+          ) :
+          Center(
+            child: CircularProgressIndicator(
+              color: Colors.blue.shade400,
+              strokeWidth: 7,
+            ),
           ),
         )
     );
