@@ -158,6 +158,13 @@
   "ka7_city_string" : "Город Анистар",
   "ka8_city_string" : "Город Сноубелл",
 
-  "ribbon_string" : "Тасма"
+  "ribbon_string" : "Тасма",
 
+  "user_choose_first_pokemon_welcome" : "Салам машыктыруучу!",
+  "user_choose_first_pokemon_choose" : "Келгиле, сизге биринчи покемонду тандайлы",
+  "user_choose_first_pokemon_button" : "Тандоо",
+
+  "settings_string" : "Орнотуулар",
+  "settings_load_progress" : "Маалыматтарды жүктөө",
+  "settings_save_progress" : "Маалыматтарды сактоо"
 }

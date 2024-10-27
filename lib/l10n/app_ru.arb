@@ -158,5 +158,13 @@
   "ka7_city_string" : "Город Анистар",
   "ka8_city_string" : "Город Сноубелл",
 
-  "ribbon_string" : "Лента"
+  "ribbon_string" : "Лента",
+
+  "user_choose_first_pokemon_welcome" : "Здравствуй тренер!",
+  "user_choose_first_pokemon_choose" : "Давай веберем тебе первого покемона",
+  "user_choose_first_pokemon_button" : "Выбрать",
+
+  "settings_string" : "Настройки",
+  "settings_load_progress" : "Загрузить данные",
+  "settings_save_progress" : "Сохранить данные"
 }

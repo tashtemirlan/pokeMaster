@@ -39,14 +39,14 @@ class PokedexPageState extends State<PokedexPage>{
 
   bool userChoseSelectionType = false;
 
-  void viewPokeBottomSheet(int pokeIndex) async{
+  void viewPokeBottomSheet(int pokeIndex, bool find) async{
     showCupertinoModalBottomSheet<String>(
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
       context: context,
       expand: true,
       builder: (BuildContext context) {
-        return PokemonPokedexBottomSheet(pokeIndex: pokeIndex, showFind: false, );
+        return PokemonPokedexBottomSheet(pokeIndex: pokeIndex, showFind: find, );
       },
     );
   }
@@ -68,7 +68,7 @@ class PokedexPageState extends State<PokedexPage>{
     );
     if(result!=null){
       listCheckBox = result;
-      _filterByType();
+      _filterSearchPokemonPokedex();
     }
   }
 
@@ -78,7 +78,7 @@ class PokedexPageState extends State<PokedexPage>{
 
     return GestureDetector(
       onTap: (){
-          viewPokeBottomSheet(pokeInt);
+          viewPokeBottomSheet(pokeInt, isFound);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -151,7 +151,7 @@ class PokedexPageState extends State<PokedexPage>{
             textInputAction: TextInputAction.search,
             autofocus: false,
             onFieldSubmitted: (value) async{
-              _filterList(value);
+              _filterSearchPokemonPokedex();
             },
             decoration:  InputDecoration(
               enabledBorder: OutlineInputBorder(
@@ -189,7 +189,7 @@ class PokedexPageState extends State<PokedexPage>{
             ),
             style: TextStyle(fontSize: 16 , fontWeight: FontWeight.w500 , color: Colors.white.withOpacity(0.9)),
             onChanged: (value) {
-              _filterList(value);
+              _filterSearchPokemonPokedex();
             },
           ),
         ),),
@@ -223,29 +223,75 @@ class PokedexPageState extends State<PokedexPage>{
     });
   }
 
-  void _filterByType(){
-    List<PokeType> listSelectedTypes = [];
-    for(int a=0; a < listCheckBox.length; a++){
-      if(listCheckBox[a].itemSelected == true){
-        listSelectedTypes.add(listCheckBox[a].type);
+  void _filterSearchPokemonPokedex(){
+    //firstly we always check donut text =>
+    if(searchPokemon.text.isEmpty){
+      //If user not writed anything
+      List<PokeType> listSelectedTypes = [];
+      for(int a=0; a < listCheckBox.length; a++){
+        if(listCheckBox[a].itemSelected == true){
+          listSelectedTypes.add(listCheckBox[a].type);
+        }
       }
-    }
-    setState(() {
-      if(listSelectedTypes.isEmpty){
-        setDataFromHivePokedex();
-      }
-      else{
-        filteredPokemons = [];
-        for(int b=0; b < hiveList.length; b++){
-          for(int c=0; c < hiveList[b].pokemon.type.length; c++){
-            if(listSelectedTypes.contains(hiveList[b].pokemon.type[c])){
-              filteredPokemons.add(hiveList[b]);
-              break;
+      setState(() {
+        if(listSelectedTypes.isEmpty){
+          setDataFromHivePokedex();
+        }
+        else{
+          filteredPokemons = [];
+          for(int b=0; b < hiveList.length; b++){
+            for(int c=0; c < hiveList[b].pokemon.type.length; c++){
+              if(listSelectedTypes.contains(hiveList[b].pokemon.type[c])){
+                filteredPokemons.add(hiveList[b]);
+                break;
+              }
             }
           }
         }
+      });
+    }
+    else{
+      //if user have any writted data :
+      List<PokeType> listSelectedTypes = [];
+      for(int a=0; a < listCheckBox.length; a++){
+        if(listCheckBox[a].itemSelected == true){
+          listSelectedTypes.add(listCheckBox[a].type);
+        }
       }
-    });
+      setState(() {
+        if(listSelectedTypes.isEmpty){
+          //If user not choose any type :
+          filteredPokemons = [];
+          for (int i = 0; i < hiveList.length; i++) {
+            if (
+            showPokemonNameCyrillic(hiveList[i].pokemon.name).toLowerCase().contains(searchPokemon.text.toLowerCase())
+            ||
+                hiveList[i].pokemon.name.toLowerCase().contains(searchPokemon.text.toLowerCase())
+            ) {
+              filteredPokemons.add(hiveList[i]);
+            }
+          }
+        }
+        else{
+          //if user have write something on donut and have type
+          filteredPokemons = [];
+          for(int b=0; b < hiveList.length; b++){
+            for(int c=0; c < hiveList[b].pokemon.type.length; c++){
+              if(listSelectedTypes.contains(hiveList[b].pokemon.type[c])){
+                if(
+                showPokemonNameCyrillic(hiveList[b].pokemon.name).toLowerCase().contains(searchPokemon.text.toLowerCase())
+                ||
+                hiveList[b].pokemon.name.toLowerCase().contains(searchPokemon.text.toLowerCase())
+                ) {
+                  filteredPokemons.add(hiveList[b]);
+                }
+                break;
+              }
+            }
+          }
+        }
+      });
+    }
   }
 
   void fillCheckList(){

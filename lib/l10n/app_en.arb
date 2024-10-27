@@ -158,5 +158,13 @@
   "ka7_city_string" : "Anistar City",
   "ka8_city_string" : "Snowbelle City",
 
-  "ribbon_string" : "Ribbon"
+  "ribbon_string" : "Ribbon",
+
+  "user_choose_first_pokemon_welcome" : "Welcome trainer!",
+  "user_choose_first_pokemon_choose" : "Let's choose your first pokemon",
+  "user_choose_first_pokemon_button" : "Choose",
+
+  "settings_string" : "Settings",
+  "settings_load_progress" : "Upload data",
+  "settings_save_progress" : "Save data"
 }

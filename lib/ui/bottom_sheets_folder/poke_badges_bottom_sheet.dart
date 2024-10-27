@@ -1,19 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
-import 'package:pokemonmap/ui/bottom_navigation_folder/shopPage.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
 
 
 import '../../models/pokeAwards.dart';
-import '../global_folder/globals.dart';
 
 //todo :=> multiple choice radio buttons with check right
 class PokeBadgesBottomSheet extends StatefulWidget{
