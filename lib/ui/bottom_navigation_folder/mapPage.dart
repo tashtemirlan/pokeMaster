@@ -1,9 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pokemonmap/models/pokedexModel.dart';
+import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 
+import '../../models/pokemonFolder/pokeType.dart';
+import '../../models/pokemonUser.dart';
 import '../bottom_sheets_folder/poke_rullete_bottom_sheet.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../bottom_sheets_folder/pokemon_pokedex_bottom_sheet.dart';
+import '../global_folder/globals.dart';
+
 
 
 class MapPage extends StatefulWidget{
@@ -15,6 +27,7 @@ class MapPage extends StatefulWidget{
 }
 
 class MapPageState extends State<MapPage>{
+  List<Pokemon> firstPokemonList = [];
 
   void viewPokeRouletteBottomSheet() async{
     showCupertinoModalBottomSheet(
@@ -28,7 +41,367 @@ class MapPageState extends State<MapPage>{
     );
   }
 
+  void showSettings(BuildContext context){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28.0),
+          ),
+          title: Text(
+              AppLocalizations.of(context)!.settings_string, textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+              )
+          ),
+          actionsPadding: EdgeInsets.zero,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
 
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.settings_load_progress,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  const SizedBox(height: 20,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.settings_save_progress,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void chooseFirstPokemon(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String choosenPokemon = "";
+        return StatefulBuilder(
+            builder: (context, setState){
+              return AlertDialog(
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(28.0),
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.user_choose_first_pokemon_welcome,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: colors.darkBlack,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.1,
+                  ),
+                ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.user_choose_first_pokemon_choose,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: colors.darkBlack,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 0.1,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    // Scrollable Grid of Pokémon Options
+                    SizedBox(
+                      height: 400,
+                      width: double.maxFinite,
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: firstPokemonList.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.8,
+                        ),
+                        itemBuilder: (context, index) {
+                          return pokeDexPokemon(
+                              firstPokemonList[index].name,
+                              firstPokemonList[index].type,
+                              firstPokemonList[index].gifFront,
+                              firstPokemonList[index].pokeDexIndex,
+                              choosenPokemon,
+                                (pokemonName) {
+                              setState(() {
+                                choosenPokemon = pokemonName;
+                              });
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                actionsPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () async{
+                            if(choosenPokemon.isNotEmpty){
+                              for(int i=0; i<firstPokemonList.length; i++){
+                                if(firstPokemonList[i].name == choosenPokemon){
+                                  await registerFirstPokemon(firstPokemonList[i]);
+                                  break;
+                                }
+                              }
+                              Navigator.pop(context);
+                            }
+                          },
+                          style: ButtonStyle(
+                              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                              ),
+                              backgroundColor: (choosenPokemon.isNotEmpty)?
+                              WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                                  :
+                              WidgetStateProperty.all<Color>(colors.searchBoxColor.withOpacity(0.3))
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                                AppLocalizations.of(context)!.user_choose_first_pokemon_button,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                                )),
+                          )
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+        );
+
+      },
+    );
+  }
+
+  Future<void> registerFirstPokemon(Pokemon pokemon) async{
+    var box = await Hive.openBox("PokemonUserInventory");
+    var box1 = await Hive.openBox("PokemonUserPokedex");
+
+    List<dynamic> pokeListFromHiveDynamic = box.get("PokeUserInventory", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+
+    List<dynamic> pokeListFromHiveDynamic1 = box1.get("Pokedex", defaultValue: []);
+    List<PokedexPokemonModel> pokeListFromHive1 = pokeListFromHiveDynamic1.cast<PokedexPokemonModel>();
+
+    //add pokemon to user collection =>
+    PokemonUser firstPokemon = PokemonUser(pokemon: pokemon, lvl: 1);
+    pokeListFromHive.add(firstPokemon);
+    box.put("PokeUserInventory", pokeListFromHive);
+
+    //set this pokemon found in pokedex =>
+    for(int i=0; i<pokeListFromHive1.length; i++){
+      if(pokeListFromHive1[i].pokemon == pokemon){
+        pokeListFromHive1[i] = PokedexPokemonModel(pokemon: pokemon, isFound: true);
+        print("Yes here is pokemon which we register in pokedex : ${pokemon.name}");
+        break;
+      }
+    }
+    await box1.put("Pokedex", pokeListFromHive1);
+  }
+
+  Widget pokeDexPokemon(
+      String pokemonName,
+      List<PokeType> types,
+      String imagePath,
+      int pokeInt,
+      String selectedPokemon,
+      Function(String) onSelect) {
+    // Background color based on primary type
+    Color backgroundColor = typeColors[types[0]] ?? Colors.grey;
+
+    return GestureDetector(
+      onTap: (){
+        onSelect(pokemonName);
+      },
+      onLongPress: (){
+        viewPokeBottomSheet(pokeInt);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: backgroundColor.withOpacity(0.9),
+          borderRadius: BorderRadius.circular(25),
+          border: (selectedPokemon == pokemonName)? Border.all(
+            color: Colors.green.shade800,
+            width: 3
+          ) : null
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Pokémon GIF
+            Image.asset(
+              imagePath,
+              height: 60,
+              width: 60,
+              fit: BoxFit.contain,
+            ),
+            const SizedBox(height: 8),
+            // Pokémon Name
+            Text(
+              showPokemonNameCyrillic(pokemonName),
+              style: const TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String showPokemonNameCyrillic(String englishPokeName) {
+    // Mapping of English letters to Cyrillic equivalents (basic transliteration)
+    final Map<String, String> transliterationMap = {
+      'A': 'А', 'B': 'Б', 'C': 'С', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г',
+      'H': 'Х', 'I': 'И', 'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
+      'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р', 'S': 'С', 'T': 'Т', 'U': 'У',
+      'V': 'В', 'W': 'В', 'X': 'Кс', 'Y': 'Ы', 'Z': 'З',
+      'a': 'а', 'b': 'б', 'c': 'с', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г',
+      'h': 'х', 'i': 'и', 'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
+      'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
+      'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
+    };
+
+    String locale = Platform.localeName;
+    String languageCode = locale.split('_')[0];
+
+    if (languageCode == 'en') {
+      return englishPokeName;
+    } else {
+      String cyrillicName = englishPokeName.split('').map((letter) {
+        return transliterationMap[letter] ?? letter; // Use the mapped letter or fallback to the original
+      }).join('');
+      return cyrillicName;
+    }
+  }
+
+  void viewPokeBottomSheet(int pokeIndex) async{
+    showCupertinoModalBottomSheet<String>(
+      topRadius: const Radius.circular(40),
+      backgroundColor: colors.scaffoldColor,
+      context: context,
+      expand: true,
+      builder: (BuildContext context) {
+        return PokemonPokedexBottomSheet(pokeIndex: pokeIndex, showFind: true, );
+      },
+    );
+  }
+
+  Future<void> checkUserHavePokemon(BuildContext context) async{
+    var box = await Hive.openBox("PokemonUserInventory");
+    List<dynamic> pokeListFromHiveDynamic = box.get("PokeUserInventory", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+    if(pokeListFromHive.isEmpty){
+      chooseFirstPokemon(context);
+    }
+  }
+
+  Future<void> setDataFromHivePokedexInitialized() async{
+    var box = await Hive.openBox("PokemonUserPokedex");
+    List<dynamic> pokeListFromHiveDynamic = box.get("Pokemons", defaultValue: []);
+    List<Pokemon> pokeListFromHive = pokeListFromHiveDynamic.cast<Pokemon>();
+
+    firstPokemonList.add(pokeListFromHive[0]);
+    firstPokemonList.add(pokeListFromHive[3]);
+    firstPokemonList.add(pokeListFromHive[6]);
+
+    firstPokemonList.add(pokeListFromHive[151]);
+    firstPokemonList.add(pokeListFromHive[154]);
+    firstPokemonList.add(pokeListFromHive[157]);
+
+    firstPokemonList.add(pokeListFromHive[251]);
+    firstPokemonList.add(pokeListFromHive[254]);
+    firstPokemonList.add(pokeListFromHive[257]);
+
+    firstPokemonList.add(pokeListFromHive[386]);
+    firstPokemonList.add(pokeListFromHive[389]);
+    firstPokemonList.add(pokeListFromHive[392]);
+
+    firstPokemonList.add(pokeListFromHive[494]);
+    firstPokemonList.add(pokeListFromHive[497]);
+    firstPokemonList.add(pokeListFromHive[500]);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setDataFromHivePokedexInitialized();
+    checkUserHavePokemon(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,25 +428,45 @@ class MapPageState extends State<MapPage>{
                           SizedBox(height: 15,),
                           SizedBox(
                             width: width,
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
-                                onTap: (){
-                                  viewPokeRouletteBottomSheet();
-                                },
-                                child: Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: colors.searchBoxColor
-                                  ),
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Icon(Icons.catching_pokemon_outlined, color: Colors.white, size: 36,),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: (){
+                                    viewPokeRouletteBottomSheet();
+                                  },
+                                  child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: colors.searchBoxColor
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Icon(Icons.catching_pokemon_outlined, color: Colors.white, size: 36,),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                const SizedBox(width: 10,),
+                                GestureDetector(
+                                  onTap: (){
+                                    showSettings(context);
+                                  },
+                                  child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: colors.searchBoxColor
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Icon(Icons.settings, color: Colors.white, size: 36,),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           )
                         ],
