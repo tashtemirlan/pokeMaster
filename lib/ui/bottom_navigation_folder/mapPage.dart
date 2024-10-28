@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pokemonmap/models/pokedexModel.dart';
+import 'package:pokemonmap/models/pokemonFolder/pokeRegion.dart';
 import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
@@ -28,6 +29,7 @@ class MapPage extends StatefulWidget{
 
 class MapPageState extends State<MapPage>{
   List<Pokemon> firstPokemonList = [];
+  late Region selectedRegion;
 
   void viewPokeRouletteBottomSheet() async{
     showCupertinoModalBottomSheet(
@@ -122,6 +124,72 @@ class MapPageState extends State<MapPage>{
         );
       },
     );
+  }
+
+  Future<void> showRegions(BuildContext context) async{
+    Region? selectedRegionDialog = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28.0),
+          ),
+          title: Text(
+              AppLocalizations.of(context)!.choose_region_string, textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+              )
+          ),
+          actionsPadding: EdgeInsets.zero,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: listRegions.map((region) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () async{
+                            Navigator.of(context).pop(region);
+                          },
+                          style: ButtonStyle(
+                              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                              ),
+                              backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                                showRegionPokemon(region, context),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                                )),
+                          )
+                      ),
+                    )
+                  );
+                }).toList()
+              ),
+            )
+          ],
+        );
+      },
+    );
+
+    if (selectedRegionDialog != null) {
+      setState(() {
+        selectedRegion = selectedRegionDialog;
+      });
+    }
   }
 
   void chooseFirstPokemon(BuildContext context) {
@@ -401,6 +469,7 @@ class MapPageState extends State<MapPage>{
     super.initState();
     setDataFromHivePokedexInitialized();
     checkUserHavePokemon(context);
+    selectedRegion = Region.Kanto;
   }
 
   @override
@@ -425,7 +494,7 @@ class MapPageState extends State<MapPage>{
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(height: 15,),
+                          const SizedBox(height: 15,),
                           SizedBox(
                             width: width,
                             child: Row(
@@ -468,6 +537,37 @@ class MapPageState extends State<MapPage>{
                                 ),
                               ],
                             ),
+                          ),
+                          const SizedBox(height: 15,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: (){
+                                  showRegions(context);
+                                },
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: colors.searchBoxColor
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Icon(Icons.public, color: Colors.white, size: 36,),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10,),
+                              Text(
+                                  showRegionPokemon(selectedRegion, context),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+                                  )
+                              ),
+                            ],
                           )
                         ],
                       ),

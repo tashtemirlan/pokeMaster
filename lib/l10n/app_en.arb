@@ -1,6 +1,9 @@
 {
   "@@locale": "en",
   "welcomeMessage" : "Welcome!",
+  "find_string" : "Found",
+  "yes_string" : "Yes",
+  "no_string" : "No",
   "rarity_string" : "Rarity",
   "poke_rarity_casual" : "Casual",
   "poke_rarity_rare" : "Rare",
@@ -166,5 +169,7 @@
 
   "settings_string" : "Settings",
   "settings_load_progress" : "Upload data",
-  "settings_save_progress" : "Save data"
+  "settings_save_progress" : "Save data",
+
+  "choose_region_string" : "Choose region"
 }
