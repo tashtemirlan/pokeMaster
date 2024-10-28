@@ -113,10 +113,10 @@ class SplashScreenState extends State<SplashScreen>{
 
   Future<void> createUserDataCurrency() async{
     log("fill poke user currency");
-    //todo : we will fill our data of currency gold , gems :
-    List<int> currency = [0,0];
+    //todo : we will fill our data of currency gold:
+    int currencyGold = 50000;
     var box = await Hive.openBox("PokemonUserDataBase");
-    box.put("UserData", currency);
+    box.put("UserMoneys", currencyGold);
   }
 
   Future<void> createUserDataInventory() async{
@@ -129,7 +129,7 @@ class SplashScreenState extends State<SplashScreen>{
     // todo : Great Ball
     // todo : Ultra Ball
     // todo : Master Ball:
-    List<int> pokeballs = [0,0,0,0];
+    List<int> pokeballs = [10,1,0,0];
     var box = await Hive.openBox("PokemonUserInventory");
     box.put("PokeUserInventory", pokeUserList);
     box.put("PokeballsUserInventory", pokeballs);

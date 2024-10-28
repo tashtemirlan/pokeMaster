@@ -171,5 +171,18 @@
   "settings_load_progress" : "Маалыматтарды жүктөө",
   "settings_save_progress" : "Маалыматтарды сактоо",
 
-  "choose_region_string" : "Аймакты тандаңыз"
+  "choose_region_string" : "Аймакты тандаңыз",
+
+  "your_team_string" : "Сиздин команда",
+
+  "pokemons_string" : "Покемоны",
+  "items_string" : "Темалар",
+
+  "lvl_short_string" : "Ур.",
+  "lvl_long_string" : "Уровень",
+
+  "add_to_team_string" : "Отрядга кошуу",
+  "evolution_string" : "Эволюция!",
+  "release_pokemon_string" : "Кетүү"
+
 }

@@ -10,8 +10,12 @@ class PokemonUser{
   @HiveField(1)
   final int lvl;
 
+  @HiveField(2)
+  final String hashId;
+
   const PokemonUser({
     required this.pokemon,
     required this.lvl,
+    required this.hashId
   });
 }

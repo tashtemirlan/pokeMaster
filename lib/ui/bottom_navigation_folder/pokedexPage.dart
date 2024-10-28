@@ -206,23 +206,6 @@ class PokedexPageState extends State<PokedexPage>{
     );
   }
 
-  void _filterList(String query) {
-    listCheckBox = [];
-    fillCheckList();
-    setState(() {
-      if (query.isEmpty) {
-        setDataFromHivePokedex();
-      } else {
-        filteredPokemons = [];
-        for (int i = 0; i < hiveList.length; i++) {
-          if (hiveList[i].pokemon.name.toLowerCase().contains(query.toLowerCase())) {
-            filteredPokemons.add(hiveList[i]);
-          }
-        }
-      }
-    });
-  }
-
   void _filterSearchPokemonPokedex(){
     //firstly we always check donut text =>
     if(searchPokemon.text.isEmpty){
@@ -298,32 +281,6 @@ class PokedexPageState extends State<PokedexPage>{
     for(int i=0; i<globals.listTypes.length; i++){
       CheckBoxItem checkBoxItem = globals.CheckBoxItem(type: globals.listTypes[i], itemSelected: false);
       listCheckBox.add(checkBoxItem);
-    }
-  }
-
-  String showPokemonNameCyrillic(String englishPokeName) {
-    // Mapping of English letters to Cyrillic equivalents (basic transliteration)
-    final Map<String, String> transliterationMap = {
-      'A': 'А', 'B': 'Б', 'C': 'С', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г',
-      'H': 'Х', 'I': 'И', 'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
-      'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р', 'S': 'С', 'T': 'Т', 'U': 'У',
-      'V': 'В', 'W': 'В', 'X': 'Кс', 'Y': 'Ы', 'Z': 'З',
-      'a': 'а', 'b': 'б', 'c': 'с', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г',
-      'h': 'х', 'i': 'и', 'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
-      'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
-      'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
-    };
-
-    String locale = Platform.localeName;
-    String languageCode = locale.split('_')[0];
-
-    if (languageCode == 'en') {
-      return englishPokeName;
-    } else {
-      String cyrillicName = englishPokeName.split('').map((letter) {
-        return transliterationMap[letter] ?? letter; // Use the mapped letter or fallback to the original
-      }).join('');
-      return cyrillicName;
     }
   }
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
@@ -9,7 +10,10 @@ import 'package:pokemonmap/ui/bottom_sheets_folder/pokemon_pokedex_bottom_sheet.
 import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 
+import '../../models/pokedexModel.dart';
 import '../../models/pokemonFolder/pokeRarity.dart';
+import '../../models/pokemonUser.dart';
+import '../global_folder/globals.dart';
 
 
 class PokemonRouletteBottomSheet extends StatefulWidget {
@@ -31,6 +35,8 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
   double _itemWidth = 120;
   int randomVal = 0;
 
+  int showUserMoney = 0;
+  int costToSpin = 1;
 
   Widget listRarity(double width){
     return SizedBox(
@@ -81,30 +87,56 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
     _shufflePokemonList();
   }
 
-  String showPokemonNameCyrillic(String englishPokeName) {
-    // Mapping of English letters to Cyrillic equivalents (basic transliteration)
-    final Map<String, String> transliterationMap = {
-      'A': 'А', 'B': 'Б', 'C': 'С', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г',
-      'H': 'Х', 'I': 'И', 'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
-      'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р', 'S': 'С', 'T': 'Т', 'U': 'У',
-      'V': 'В', 'W': 'В', 'X': 'Кс', 'Y': 'Ы', 'Z': 'З',
-      'a': 'а', 'b': 'б', 'c': 'с', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г',
-      'h': 'х', 'i': 'и', 'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
-      'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
-      'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
-    };
+  Future<void> getUserCoins() async{
+    var box = await Hive.openBox("PokemonUserDataBase");
+    int userCoins = box.get("UserMoneys", defaultValue: 0);
+    setState(() {
+      showUserMoney = userCoins;
+    });
+  }
 
-    String locale = Platform.localeName;
-    String languageCode = locale.split('_')[0];
+  Future<void> payForRullete() async{
+    var box = await Hive.openBox("PokemonUserDataBase");
+    int userCoins = showUserMoney - costToSpin;
+    await box.put("UserMoneys", userCoins);
+    setState(() {
+      showUserMoney = userCoins;
+    });
+  }
 
-    if (languageCode == 'en') {
-      return englishPokeName;
-    } else {
-      String cyrillicName = englishPokeName.split('').map((letter) {
-        return transliterationMap[letter] ?? letter; // Use the mapped letter or fallback to the original
-      }).join('');
-      return cyrillicName;
+  Future<void> addPokemonToUserCollection(Pokemon pokemon) async{
+    var box = await Hive.openBox("PokemonUserInventory");
+    var box1 = await Hive.openBox("PokemonUserPokedex");
+
+    List<dynamic> pokeListFromHiveDynamic = box.get("PokeUserInventory", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+
+    List<dynamic> pokeListFromHiveDynamic1 = box1.get("Pokedex", defaultValue: []);
+    List<PokedexPokemonModel> pokeListFromHive1 = pokeListFromHiveDynamic1.cast<PokedexPokemonModel>();
+
+    //add pokemon to user collection =>
+    DateTime now = DateTime.now();
+    int year = now.year;
+    int month = now.month;
+    int day = now.day;
+    int minute = now.minute;
+    int second = now.second;
+    PokemonUser firstPokemon = PokemonUser(
+        pokemon: pokemon,
+        lvl: 1,
+        hashId: "${year}_${month}_${day}_${minute}_${second}_${pokemon.name}"
+    );
+    pokeListFromHive.add(firstPokemon);
+    await box.put("PokeUserInventory", pokeListFromHive);
+
+    //set this pokemon found in pokedex =>
+    for(int i=0; i<pokeListFromHive1.length; i++){
+      if(pokeListFromHive1[i].pokemon.name == pokemon.name){
+        pokeListFromHive1[i] = PokedexPokemonModel(pokemon: pokemon, isFound: true);
+        break;
+      }
     }
+    await box1.put("Pokedex", pokeListFromHive1);
   }
 
   @override
@@ -126,7 +158,7 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
     });
 
     setDataFromHivePokedexInitialized();
-
+    getUserCoins();
   }
 
   @override
@@ -152,7 +184,8 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
     _shuffledPokemonList = List.from(hiveList)..shuffle();
   }
 
-  void _startRoulette() {
+  void _startRoulette() async{
+    await payForRullete();
     setState(() {
       _currentOffset = 0;
     });
@@ -172,8 +205,9 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
     _animationController.forward(from: 0.0);
   }
 
-  void _stopRoulette() {
+  void _stopRoulette() async{
     int pokeRandomIndex = hiveList.indexOf(_shuffledPokemonList[randomVal+1]);
+    await addPokemonToUserCollection(hiveList[pokeRandomIndex]);
     viewPokeBottomSheet(pokeRandomIndex);
   }
 
@@ -187,6 +221,22 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+              width: width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "$showUserMoney",
+                    style: TextStyle(fontSize: 22, color: Colors.grey[600],
+                        fontWeight: FontWeight.w700, decoration: TextDecoration.none),
+                  ),
+                  const SizedBox(width: 5,),
+                  FaIcon(FontAwesomeIcons.coins , color: colors.goldColor, size: 16,)
+                ],
+              ),
+            ),
+            const SizedBox(height: 10,),
             Text(
               AppLocalizations.of(context)!.spin_roulette_string,
               style: TextStyle(
@@ -263,15 +313,28 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
                   ),
                   backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
               ),
-              child: Text(
-                AppLocalizations.of(context)!.spin_roulette_string,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  decoration: TextDecoration.none,
-                ),
-              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.spin_roulette_string,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                  const SizedBox(width: 20,),
+                  Text(
+                    "$costToSpin",
+                    style: TextStyle(fontSize: 32, color: Colors.white,
+                        fontWeight: FontWeight.w700, decoration: TextDecoration.none),
+                  ),
+                  const SizedBox(width: 5,),
+                  FaIcon(FontAwesomeIcons.coins , color: colors.goldColor, size: 16,)
+                ],
+              )
             ),
           ],
         ),

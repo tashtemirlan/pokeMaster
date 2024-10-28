@@ -171,5 +171,18 @@
   "settings_load_progress" : "Upload data",
   "settings_save_progress" : "Save data",
 
-  "choose_region_string" : "Choose region"
+  "choose_region_string" : "Choose region",
+
+  "your_team_string" : "Your team",
+
+  "pokemons_string" : "Pokemons",
+  "items_string" : "Items",
+
+  "lvl_short_string" : "Lvl",
+  "lvl_long_string" : "Level",
+
+  "add_to_team_string" : "Add to team",
+  "evolution_string" : "Evolution!",
+  "release_pokemon_string" : "Release"
+
 }

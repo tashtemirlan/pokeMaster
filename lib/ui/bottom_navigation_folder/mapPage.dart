@@ -323,15 +323,24 @@ class MapPageState extends State<MapPage>{
     List<PokedexPokemonModel> pokeListFromHive1 = pokeListFromHiveDynamic1.cast<PokedexPokemonModel>();
 
     //add pokemon to user collection =>
-    PokemonUser firstPokemon = PokemonUser(pokemon: pokemon, lvl: 1);
+    DateTime now = DateTime.now();
+    int year = now.year;
+    int month = now.month;
+    int day = now.day;
+    int minute = now.minute;
+    int second = now.second;
+    PokemonUser firstPokemon = PokemonUser(
+        pokemon: pokemon,
+        lvl: 1,
+        hashId: "${year}_${month}_${day}_${minute}_${second}_${pokemon.name}"
+    );
     pokeListFromHive.add(firstPokemon);
-    box.put("PokeUserInventory", pokeListFromHive);
+    await box.put("PokeUserInventory", pokeListFromHive);
 
     //set this pokemon found in pokedex =>
     for(int i=0; i<pokeListFromHive1.length; i++){
       if(pokeListFromHive1[i].pokemon == pokemon){
         pokeListFromHive1[i] = PokedexPokemonModel(pokemon: pokemon, isFound: true);
-        print("Yes here is pokemon which we register in pokedex : ${pokemon.name}");
         break;
       }
     }
@@ -389,32 +398,6 @@ class MapPageState extends State<MapPage>{
         ),
       ),
     );
-  }
-
-  String showPokemonNameCyrillic(String englishPokeName) {
-    // Mapping of English letters to Cyrillic equivalents (basic transliteration)
-    final Map<String, String> transliterationMap = {
-      'A': 'А', 'B': 'Б', 'C': 'С', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г',
-      'H': 'Х', 'I': 'И', 'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
-      'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р', 'S': 'С', 'T': 'Т', 'U': 'У',
-      'V': 'В', 'W': 'В', 'X': 'Кс', 'Y': 'Ы', 'Z': 'З',
-      'a': 'а', 'b': 'б', 'c': 'с', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г',
-      'h': 'х', 'i': 'и', 'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
-      'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
-      'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
-    };
-
-    String locale = Platform.localeName;
-    String languageCode = locale.split('_')[0];
-
-    if (languageCode == 'en') {
-      return englishPokeName;
-    } else {
-      String cyrillicName = englishPokeName.split('').map((letter) {
-        return transliterationMap[letter] ?? letter; // Use the mapped letter or fallback to the original
-      }).join('');
-      return cyrillicName;
-    }
   }
 
   void viewPokeBottomSheet(int pokeIndex) async{

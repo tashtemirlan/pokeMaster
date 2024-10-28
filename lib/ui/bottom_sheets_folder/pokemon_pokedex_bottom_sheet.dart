@@ -1,15 +1,9 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
-
-import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
-import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
-
 import '../../models/pokedexModel.dart';
 import '../../models/pokemonFolder/pokeStats.dart';
 import '../global_folder/globals.dart';
@@ -243,32 +237,6 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
     });
 
     changeImageView();
-  }
-
-  String showPokemonNameCyrillic(String englishPokeName) {
-    // Mapping of English letters to Cyrillic equivalents (basic transliteration)
-    final Map<String, String> transliterationMap = {
-      'A': 'А', 'B': 'Б', 'C': 'С', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г',
-      'H': 'Х', 'I': 'И', 'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
-      'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р', 'S': 'С', 'T': 'Т', 'U': 'У',
-      'V': 'В', 'W': 'В', 'X': 'Кс', 'Y': 'Ы', 'Z': 'З',
-      'a': 'а', 'b': 'б', 'c': 'с', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г',
-      'h': 'х', 'i': 'и', 'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
-      'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
-      'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
-    };
-
-    String locale = Platform.localeName;
-    String languageCode = locale.split('_')[0];
-
-    if (languageCode == 'en') {
-      return englishPokeName;
-    } else {
-      String cyrillicName = englishPokeName.split('').map((letter) {
-        return transliterationMap[letter] ?? letter; // Use the mapped letter or fallback to the original
-      }).join('');
-      return cyrillicName;
-    }
   }
 
   @override

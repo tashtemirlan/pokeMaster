@@ -13,7 +13,8 @@ import '../global_folder/globals.dart';
 //todo :=> multiple choice radio buttons with check right
 class PokeBallBuyBottomSheet extends StatefulWidget{
   final ShopItem shopItem;
-  const PokeBallBuyBottomSheet({super.key, required this.shopItem,});
+  final int totalAmmountMoneyUser;
+  const PokeBallBuyBottomSheet({super.key, required this.shopItem, required this.totalAmmountMoneyUser});
 
   @override
   PokeBallBuyBottomSheetState createState() => PokeBallBuyBottomSheetState();
@@ -30,8 +31,6 @@ class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -101,7 +100,7 @@ class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
                               child: Text(
                                 "$pokeBallCount",
                                 style: TextStyle(
-                                    color: colors.colorElectric,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w900,
                                     fontSize: 32,
                                     letterSpacing: 0.02,
@@ -131,10 +130,8 @@ class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
                   Expanded(
                       child: ElevatedButton(
                           onPressed: (){
-                            if(globals.userCoins >= pokeBallCount * int.parse(widget.shopItem.itemPrice)){
-                              setState(() {
-                                globals.userCoins -= pokeBallCount * int.parse(widget.shopItem.itemPrice);
-                              });
+                            if(widget.totalAmmountMoneyUser >= pokeBallCount * int.parse(widget.shopItem.itemPrice)){
+                              Navigator.pop(context, int.parse(widget.shopItem.itemPrice));
                             }
                             else{
                               Fluttertoast.showToast(
@@ -145,8 +142,8 @@ class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
                                 textColor: Colors.black,
                                 fontSize: 12.0,
                               );
+                              Navigator.pop(context);
                             }
-                            Navigator.pop(context, globals.userCoins);
                           },
                           style: ButtonStyle(
                               shape: WidgetStateProperty.all<RoundedRectangleBorder>(

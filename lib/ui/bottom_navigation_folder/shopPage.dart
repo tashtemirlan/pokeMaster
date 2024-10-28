@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -19,7 +20,7 @@ class ShopPage extends StatefulWidget{
 
 class ShopPageState extends State<ShopPage>{
 
-  String showUserMoney = "";
+  int showUserMoney = 0;
 
   Widget storeItem(double width, globals.ShopItem shopItem) {
     return Container(
@@ -106,20 +107,57 @@ class ShopPageState extends State<ShopPage>{
       context: context,
       expand: false,
       builder: (BuildContext context) {
-        return PokeBallBuyBottomSheet(shopItem: shopItem);
+        return PokeBallBuyBottomSheet(shopItem: shopItem, totalAmmountMoneyUser: showUserMoney,);
       },
     );
     if(result!=null){
+      //we need to charge data :
+      var box = await Hive.openBox("PokemonUserDataBase");
+      int userCoins = showUserMoney - result;
+      await box.put("UserMoneys", userCoins);
+      //we need to registry our ball to system :
+      var box1 = await Hive.openBox("PokemonUserInventory");
+      List<dynamic> pokeListFromHiveDynamic = box1.get("PokeballsUserInventory", defaultValue: []);
+      List<int> pokeListFromHive = pokeListFromHiveDynamic.cast<int>();
+      if(shopItem.itemName == "Pokeball"){
+        //Add Pokeball
+        int pokeBallsCount = pokeListFromHive[0];
+        pokeListFromHive[0] = pokeBallsCount + 1;
+      }
+      else if(shopItem.itemName == "Great Ball"){
+        //Add Great Ball
+        int greatBallsCount = pokeListFromHive[1];
+        pokeListFromHive[1] = greatBallsCount + 1;
+      }
+      else if(shopItem.itemName == "Ultra Ball"){
+        //Add Ultra Ball
+        int ultraBallsCount = pokeListFromHive[2];
+        pokeListFromHive[2] = ultraBallsCount + 1;
+      }
+      else{
+        //Add master ball
+        int masterBallsCount = pokeListFromHive[3];
+        pokeListFromHive[3] = masterBallsCount + 1;
+      }
+      await box1.put("PokeballsUserInventory", pokeListFromHive);
       setState(() {
-        showUserMoney = result.toString();
+        showUserMoney = userCoins;
       });
     }
+  }
+
+  Future<void> getUserCoins() async{
+    var box = await Hive.openBox("PokemonUserDataBase");
+    int userCoins = box.get("UserMoneys", defaultValue: 0);
+    setState(() {
+      showUserMoney = userCoins;
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    showUserMoney = globals.userCoins.toString();
+    getUserCoins();
   }
 
   @override
@@ -150,7 +188,7 @@ class ShopPageState extends State<ShopPage>{
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Text(
-                                  NumberFormat("###,###", "en_US").format(int.parse(showUserMoney)).replaceAll(",", " "),
+                                  "$showUserMoney",
                                   style: TextStyle(fontSize: 18, color: Colors.grey[600], fontWeight: FontWeight.w700),
                                 ),
                                 const SizedBox(width: 5,),

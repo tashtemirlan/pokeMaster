@@ -1,5 +1,6 @@
 library pokemon.globals;
 
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
@@ -8,8 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/pokemonFolder/pokeRegion.dart';
 import '../../models/pokemonFolder/pokeType.dart';
 import '../../models/pokemonFolder/pokeRarity.dart';
-
-int userCoins = 0;
 
 List<PokeType> listTypes = [
   PokeType.Normal,
@@ -221,4 +220,30 @@ class AwardsBadges{
     required this.itemName,
     required this.cityName
   });
+}
+
+String showPokemonNameCyrillic(String englishPokeName) {
+  // Mapping of English letters to Cyrillic equivalents (basic transliteration)
+  final Map<String, String> transliterationMap = {
+    'A': 'А', 'B': 'Б', 'C': 'С', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г',
+    'H': 'Х', 'I': 'И', 'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
+    'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р', 'S': 'С', 'T': 'Т', 'U': 'У',
+    'V': 'В', 'W': 'В', 'X': 'Кс', 'Y': 'Ы', 'Z': 'З',
+    'a': 'а', 'b': 'б', 'c': 'с', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г',
+    'h': 'х', 'i': 'и', 'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
+    'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'с', 't': 'т', 'u': 'у',
+    'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
+  };
+
+  String locale = Platform.localeName;
+  String languageCode = locale.split('_')[0];
+
+  if (languageCode == 'en') {
+    return englishPokeName;
+  } else {
+    String cyrillicName = englishPokeName.split('').map((letter) {
+      return transliterationMap[letter] ?? letter; // Use the mapped letter or fallback to the original
+    }).join('');
+    return cyrillicName;
+  }
 }
