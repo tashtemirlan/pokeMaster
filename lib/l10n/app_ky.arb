@@ -1,6 +1,9 @@
 {
   "@@locale": "ky",
   "welcomeMessage" : "Кош келиңиздер!",
+  "find_string" : "Табылды",
+  "yes_string" : "Ооба",
+  "no_string" : "Жок",
   "rarity_string" : "Сейрек",
   "poke_rarity_casual" : "Кадимки",
   "poke_rarity_rare" : "Сейрек",
@@ -166,5 +169,7 @@
 
   "settings_string" : "Орнотуулар",
   "settings_load_progress" : "Маалыматтарды жүктөө",
-  "settings_save_progress" : "Маалыматтарды сактоо"
+  "settings_save_progress" : "Маалыматтарды сактоо",
+
+  "choose_region_string" : "Аймакты тандаңыз"
 }

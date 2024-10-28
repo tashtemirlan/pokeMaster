@@ -359,6 +359,24 @@ class PokemonPokedexBottomSheetState extends State<PokemonPokedexBottomSheet> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
+                              "${AppLocalizations.of(context)!.find_string} : ",
+                              style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(width: 5,),
+                            Expanded(
+                              child: Text(
+                                (hiveList[widget.pokeIndex].isFound)? AppLocalizations.of(context)!.yes_string : AppLocalizations.of(context)!.no_string,
+                                style: TextStyle(color: Colors.black , fontSize: 18,
+                                    decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
                               "${AppLocalizations.of(context)!.rarity_string} : ",
                               style: TextStyle(color: Colors.black , fontSize: 18, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
                             ),

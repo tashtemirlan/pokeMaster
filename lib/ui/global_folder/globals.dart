@@ -40,6 +40,15 @@ List<Rarity> listRarity = [
   Rarity.legendary
 ];
 
+List<Region> listRegions = [
+  Region.Kanto,
+  Region.Johto,
+  Region.Hoenn,
+  Region.Sinnoh,
+  Region.Unova,
+  Region.Kalos
+];
+
 Map<PokeType, Color> typeColors = {
   PokeType.Normal: colors.colorNormal,
   PokeType.Fire: colors.colorFire,

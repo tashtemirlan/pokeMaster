@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
+
+import '../../models/pokemonUser.dart';
 
 
 class UserInventoryPage extends StatefulWidget{
@@ -11,12 +14,56 @@ class UserInventoryPage extends StatefulWidget{
 
 }
 
-class UserInventoryPageState extends State<UserInventoryPage>{
+class UserInventoryPageState extends State<UserInventoryPage> with SingleTickerProviderStateMixin{
+  List<PokemonUser> userTeam = []; // user team for 6 Pokémon
+  List<PokemonUser> userPokemons = [];
+  List<int> userPokeBalls = [];
+
+  bool dataGet = false;
+  TabController? _tabController;
+
+  Future<void> getUserData() async{
+    await getUserPokemons();
+    await getUserInventory();
+    await getUserPokemons();
+    setState(() {
+      dataGet = true;
+    });
+  }
+
+  Future<void> getUserInventory() async{
+    var box = await Hive.openBox("PokemonUserInventory");
+    List<dynamic> pokeListFromHiveDynamic = box.get("PokeballsUserInventory", defaultValue: []);
+    List<int> pokeListFromHive = pokeListFromHiveDynamic.cast<int>();
+    setState(() {
+      userPokeBalls = pokeListFromHive;
+    });
+  }
+
+  Future<void> getUserPokemons() async{
+    var box = await Hive.openBox("PokemonUserInventory");
+    List<dynamic> pokeListFromHiveDynamic = box.get("PokeUserInventory", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+    setState(() {
+      userPokemons = pokeListFromHive;
+    });
+  }
+
+  Future<void> getUserTeamPokemons() async{
+    var box = await Hive.openBox("PokemonUserTeam");
+    List<dynamic> pokeListFromHiveDynamic = box.get("UserTeam", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+    setState(() {
+      userTeam = pokeListFromHive;
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    getUserData();
   }
 
   @override
@@ -38,15 +85,7 @@ class UserInventoryPageState extends State<UserInventoryPage>{
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Text(
-                          "Inventory",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
+
                       ],
                     ),
                   )

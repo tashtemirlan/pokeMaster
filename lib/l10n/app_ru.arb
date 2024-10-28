@@ -1,6 +1,9 @@
 {
   "@@locale": "ru",
   "welcomeMessage" : "Добро пожаловать!!",
+  "find_string" : "Найден",
+  "yes_string" : "Да",
+  "no_string" : "Нет",
   "rarity_string" : "Редкость",
   "poke_rarity_casual" : "Обычный",
   "poke_rarity_rare" : "Редкий",
@@ -166,5 +169,7 @@
 
   "settings_string" : "Настройки",
   "settings_load_progress" : "Загрузить данные",
-  "settings_save_progress" : "Сохранить данные"
+  "settings_save_progress" : "Сохранить данные",
+
+  "choose_region_string" : "Выберите регион"
 }
