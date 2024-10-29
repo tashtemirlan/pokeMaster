@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:pokemonmap/ui/global_folder/globals.dart';
 
 import '../../models/pokemonUser.dart';
+import '../bottom_sheets_folder/pokemon_user_pokedex_bottom_sheet.dart';
 import '../skeleton_folder/skeleton.dart';
 import '../user_inventory_parts_folder/user_pokeballs_inventory.dart';
 import '../user_inventory_parts_folder/user_pokemons_inventory.dart';
@@ -60,7 +62,9 @@ class UserInventoryPageState extends State<UserInventoryPage> with SingleTickerP
     var box = await Hive.openBox("PokemonUserTeam");
     List<dynamic> pokeListFromHiveDynamic = box.get("UserTeam", defaultValue: []);
     List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+
     setState(() {
+      userTeam = List.filled(6, null);
       for (int i = 0; i < pokeListFromHive.length && i < userTeam.length; i++) {
         userTeam[i] = pokeListFromHive[i];
       }
@@ -81,21 +85,23 @@ class UserInventoryPageState extends State<UserInventoryPage> with SingleTickerP
       ),
       itemBuilder: (context, index) {
         final pokemon = userTeam[index];
-        return Container(
-          decoration: BoxDecoration(
-            color: pokemon != null ? Colors.white : Colors.grey[300],
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: pokemon != null ? Colors.green : Colors.grey,
-              width: 2,
+        return GestureDetector(
+          onTap: (){
+            if(pokemon!=null){
+              viewPokeBottomSheet(pokemon);
+            }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: pokemon != null ? Colors.white : Colors.grey[300],
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: pokemon != null ? Colors.green : Colors.grey,
+                width: 2,
+              ),
             ),
-          ),
-          child: pokemon != null ?
-          GestureDetector(
-            onTap: (){
-
-            },
-            child: Column(
+            child: pokemon != null ?
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(pokemon.pokemon.gifFront, height: 50, width: 50),
@@ -109,22 +115,53 @@ class UserInventoryPageState extends State<UserInventoryPage> with SingleTickerP
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],
-            ),
-          )
-              : Center(child: Icon(Icons.add, color: Colors.grey, size: 40)),
+            )
+                : Center(child: Icon(Icons.add, color: Colors.grey, size: 40)),
+          ),
         );
       },
     );
   }
 
   void refreshTeamData() async {
+    await getUserTeamPokemons();
+  }
+
+  void refreshAllData() async {
     setState(() {
       dataGet = false;
     });
-    await getUserTeamPokemons();
+    await getUserData();
     setState(() {
       dataGet = true;
     });
+  }
+
+  void viewPokeBottomSheet(PokemonUser poke) async{
+    String? pokemonUserResult = await showCupertinoModalBottomSheet<String>(
+      topRadius: const Radius.circular(40),
+      backgroundColor: colors.scaffoldColor,
+      context: context,
+      expand: true,
+      builder: (BuildContext context) {
+        return PokemonUserPokedexBottomSheet(pokemonUser: poke, isPokemonInUserTeam: true,);
+      },
+    );
+
+    print("Pokemon result is : $pokemonUserResult");
+
+    if(pokemonUserResult!=null){
+      //Add to team or remove from it
+      if(pokemonUserResult=="AddTeam" || pokemonUserResult=="DeleteTeam"){
+        print("refresh user team");
+        refreshTeamData();
+      }
+      //Release pokemon or evolve it
+      else{
+        print("Refreshing all");
+        refreshAllData();
+      }
+    }
   }
 
   @override
@@ -238,7 +275,9 @@ class UserInventoryPageState extends State<UserInventoryPage> with SingleTickerP
                 },
                 body: TabBarView(
                   children: (dataGet)? [
-                    UserPokemonsTab(pokemonsUser: userPokemons, pokemonsUserTeam: userTeam, onTeamUpdate: refreshTeamData, ),
+                    UserPokemonsTab(
+                      pokemonsUser: userPokemons, pokemonsUserTeam: userTeam,
+                      onTeamUpdate: refreshTeamData, onAllUpdate: refreshAllData,),
                     UserPokeballsTab(pokeballsList: userPokeBalls,),
                   ]
                       :

@@ -14,8 +14,9 @@ class UserPokemonsTab extends StatefulWidget {
   final List<PokemonUser> pokemonsUser;
   final List<PokemonUser?> pokemonsUserTeam;
   final VoidCallback onTeamUpdate;
+  final VoidCallback onAllUpdate;
   const UserPokemonsTab({super.key, required this.pokemonsUser,
-    required this.pokemonsUserTeam, required this.onTeamUpdate});
+    required this.pokemonsUserTeam, required this.onTeamUpdate, required this.onAllUpdate});
 
 
   @override
@@ -28,40 +29,37 @@ class _UserPokemonsTabState extends State<UserPokemonsTab> {
     return widget.pokemonsUserTeam.any((teamPokemon) => teamPokemon?.hashId == pokemon.hashId);
   }
 
-  Future<void> addToTeam(PokemonUser poke) async{
-    var box = await Hive.openBox("PokemonUserTeam");
-    List<dynamic> pokeListFromHiveDynamic = box.get("UserTeam", defaultValue: []);
-    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
-    if(pokeListFromHive.length >=5 || isPokemonInTeam(poke)){
-      print("Here is already so much pokemons!");
-    }
-    else{
-      pokeListFromHive.add(poke);
-      box.put("UserTeam", pokeListFromHive);
-      widget.onTeamUpdate();
-    }
-  }
-
   void viewPokeBottomSheet(PokemonUser poke) async{
-    PokemonUser? pokemonUserResult = await showCupertinoModalBottomSheet<PokemonUser>(
+    String? pokemonUserResult = await showCupertinoModalBottomSheet<String>(
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
       context: context,
       expand: true,
       builder: (BuildContext context) {
-        return PokemonUserPokedexBottomSheet(pokemonUser: poke,);
+        return PokemonUserPokedexBottomSheet(pokemonUser: poke, isPokemonInUserTeam: isPokemonInTeam(poke),);
       },
     );
 
+    print("Pokemon result is : $pokemonUserResult");
+
     if(pokemonUserResult!=null){
-      addToTeam(pokemonUserResult);
+      //Add to team or remove from it
+      if(pokemonUserResult=="AddTeam" || pokemonUserResult=="DeleteTeam"){
+        print("refresh user team");
+        widget.onTeamUpdate();
+      }
+      //Release pokemon or evolve it
+      else{
+        print("Refreshing all");
+        widget.onAllUpdate();
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 0,bottom: 25),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -75,7 +73,6 @@ class _UserPokemonsTabState extends State<UserPokemonsTab> {
         itemBuilder: (context, index) {
           final pokemon = widget.pokemonsUser[index];
           final isInTeam = isPokemonInTeam(pokemon);
-
           return GestureDetector(
             onTap: () {
               viewPokeBottomSheet(pokemon);

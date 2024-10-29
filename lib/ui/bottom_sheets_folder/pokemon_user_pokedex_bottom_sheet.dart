@@ -18,7 +18,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PokemonUserPokedexBottomSheet extends StatefulWidget{
   final PokemonUser pokemonUser;
-  const PokemonUserPokedexBottomSheet({super.key, required this.pokemonUser});
+  final bool isPokemonInUserTeam;
+  const PokemonUserPokedexBottomSheet({super.key, required this.pokemonUser, required this.isPokemonInUserTeam});
 
   @override
   PokemonUserPokedexBottomSheetState createState() => PokemonUserPokedexBottomSheetState();
@@ -233,6 +234,135 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
     changeImageView();
   }
 
+  Future<void> addToTeam(PokemonUser poke) async{
+    var box = await Hive.openBox("PokemonUserTeam");
+    List<dynamic> pokeListFromHiveDynamic = box.get("UserTeam", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+    if(pokeListFromHive.length >=5 || widget.isPokemonInUserTeam){
+      print("Here is already so much pokemons!");
+    }
+    else{
+      pokeListFromHive.add(poke);
+      box.put("UserTeam", pokeListFromHive);
+    }
+  }
+
+  Future<void> removeFromTeam(PokemonUser poke) async{
+    var box = await Hive.openBox("PokemonUserTeam");
+    List<dynamic> pokeListFromHiveDynamic = box.get("UserTeam", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+
+    // Remove the Pokémon if it exists in the team
+    pokeListFromHive.removeWhere((teamPokemon) => teamPokemon.hashId == poke.hashId);
+
+    // Update the box
+    await box.put("UserTeam", pokeListFromHive);
+  }
+
+  Future<void> evolvePokemon(PokemonUser poke) async{
+
+  }
+
+  Future<void> releasePokemon(PokemonUser poke) async{
+    var box = await Hive.openBox("PokemonUserInventory");
+    List<dynamic> pokeListFromHiveDynamic = box.get("PokeUserInventory", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+
+    // Remove the Pokémon from the inventory
+    pokeListFromHive.removeWhere((inventoryPokemon) => inventoryPokemon.hashId == poke.hashId);
+
+    // Update the box
+    await box.put("PokeUserInventory", pokeListFromHive);
+
+    // Also remove from the team if it exists there
+    await removeFromTeam(poke);
+    Navigator.pop(context);
+  }
+
+  void showReleaseAlert(){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28.0),
+          ),
+          title: Text(
+              AppLocalizations.of(context)!.release_pokemon_string, textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+              )
+          ),
+          actionsPadding: EdgeInsets.zero,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                            await releasePokemon(widget.pokemonUser);
+                            Navigator.pop(context, "ReleasePokemon");
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.colorFire)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.yes_string,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  const SizedBox(height: 20,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          Navigator.pop(context);
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.no_string,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -413,7 +543,15 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                               children: [
                                 ElevatedButton(
                                     onPressed: () async{
-                                      Navigator.pop(context, widget.pokemonUser);
+                                      //Add or remove from user team
+                                      if(widget.isPokemonInUserTeam){
+                                        await removeFromTeam(widget.pokemonUser);
+                                        Navigator.pop(context, "DeleteTeam");
+                                      }
+                                      else{
+                                        await addToTeam(widget.pokemonUser);
+                                        Navigator.pop(context, "AddTeam");
+                                      }
                                     },
                                     style: ButtonStyle(
                                         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -426,15 +564,18 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 20),
                                       child: Text(
+                                          (widget.isPokemonInUserTeam)?
+                                          AppLocalizations.of(context)!.remove_from_team_string :
                                           AppLocalizations.of(context)!.add_to_team_string,
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
-                                              fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                                              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold , letterSpacing: 0.01
                                           )),
                                     )
                                 ),
                                 ElevatedButton(
                                     onPressed: () async{
+                                      //Evolve pokemon
                                       Navigator.pop(context);
                                     },
                                     style: ButtonStyle(
@@ -451,7 +592,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                                           AppLocalizations.of(context)!.evolution_string,
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
-                                              fontSize: 18, color: Colors.black, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                                              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold , letterSpacing: 0.01
                                           )),
                                     )
                                 )
@@ -465,7 +606,8 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                             alignment: Alignment.center,
                             child: ElevatedButton(
                                 onPressed: () async{
-                                  Navigator.pop(context);
+                                  //Release pokemon
+                                  showReleaseAlert();
                                 },
                                 style: ButtonStyle(
                                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -481,7 +623,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                                       AppLocalizations.of(context)!.release_pokemon_string,
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
-                                          fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                                          fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold , letterSpacing: 0.01
                                       )),
                                 )
                             ),

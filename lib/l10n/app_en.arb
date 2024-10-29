@@ -182,6 +182,7 @@
   "lvl_long_string" : "Level",
 
   "add_to_team_string" : "Add to team",
+  "remove_from_team_string" : "Remove from team",
   "evolution_string" : "Evolution!",
   "release_pokemon_string" : "Release"
 
