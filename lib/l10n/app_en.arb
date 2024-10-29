@@ -191,7 +191,11 @@
   "pokeball_ultra_description_string" : "An Ultra Ball is a type of Poké Ball that has an even higher catch rate than a Great Ball.",
   "pokeball_master_description_string" : "A Master Ball is a special type of Poké Ball that has a 100% catch rate, guaranteeing the capture of any wild Pokémon.",
 
-  "catch_rate_string" : "Pokem catch rate"
+  "catch_rate_string" : "Pokem catch rate",
+
+  "buy_pokeball_error" : "You don't have enought money for this transaction",
+  "pokemons_team_overload_title_string" : "So much pokemons",
+  "pokemons_team_overload_description_string" : "You already have 6 pokemons!"
 
 
 }

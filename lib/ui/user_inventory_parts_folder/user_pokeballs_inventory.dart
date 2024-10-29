@@ -31,7 +31,7 @@ class _UserPokeballsTabState extends State<UserPokeballsTab> {
           SizedBox(height: 8.0),
           // Item name
           Text(
-            shopItem.itemName,
+            showPokemonNameCyrillic(shopItem.itemName),
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: colors.darkBlack),
             textAlign: TextAlign.center,
           ),

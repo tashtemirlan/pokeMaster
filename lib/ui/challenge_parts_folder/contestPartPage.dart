@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../bottom_sheets_folder/poke_badges_bottom_sheet.dart';
 

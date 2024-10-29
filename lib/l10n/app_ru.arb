@@ -191,5 +191,9 @@
   "pokeball_ultra_description_string" : "Ультрабол - высокоуровневый Покебол, еще больше повышающий шансы поймать покемона.",
   "pokeball_master_description_string" : "Мастербол - специальный Покебол, гарантирующий 100% успешный захват любого покемона.",
 
-  "catch_rate_string" : "Шанс поймать покемона"
+  "catch_rate_string" : "Шанс поймать покемона",
+
+  "buy_pokeball_error" : "У вас не хватает средств для этой покупки",
+  "pokemons_team_overload_title_string" : "Слишком много покемонов",
+  "pokemons_team_overload_description_string" : "У вас уже 6 покемонов!"
 }

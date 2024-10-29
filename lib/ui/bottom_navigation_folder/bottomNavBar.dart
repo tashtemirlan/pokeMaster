@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:pokemonmap/ui/bottom_navigation_folder/pokedexPage.dart';
@@ -68,7 +68,7 @@ class BottomPokeNavigationBarState extends State<BottomPokeNavigationBar> {
           width: width,
           height: 80,
           padding: EdgeInsets.zero,
-          color: colors.scaffoldColor.withOpacity(0.75),
+          color: colors.scaffoldColor.withOpacity(0.6),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,7 +80,10 @@ class BottomPokeNavigationBarState extends State<BottomPokeNavigationBar> {
                   width: width / 5,
                   child: Align(
                     alignment: Alignment.center,
-                    child: Container(color: Colors.pink.shade100,)
+                    child: Container(
+                      color: Colors.transparent,
+                      child: FaIcon(FontAwesomeIcons.shop, color: colors.darkBlack, size: 24,),
+                    )
                   ),
                 ),
               ),
@@ -91,7 +94,10 @@ class BottomPokeNavigationBarState extends State<BottomPokeNavigationBar> {
                   width: width / 5,
                   child: Align(
                       alignment: Alignment.center,
-                      child: Container(color: Colors.pink.shade200,)
+                      child: Container(
+                        color: Colors.transparent,
+                          child: FaIcon(FontAwesomeIcons.inbox, color: colors.darkBlack, size: 24,)
+                      )
                   ),
                 ),
               ),
@@ -102,7 +108,10 @@ class BottomPokeNavigationBarState extends State<BottomPokeNavigationBar> {
                   width: width / 5,
                   child: Align(
                     alignment: Alignment.center,
-                    child: Container(color: Colors.pink.shade300,)
+                    child: Container(
+                        color: Colors.transparent,
+                        child: FaIcon(FontAwesomeIcons.solidMap, color: colors.darkBlack, size: 24,)
+                    )
                   ),
                 ),
               ),
@@ -113,7 +122,10 @@ class BottomPokeNavigationBarState extends State<BottomPokeNavigationBar> {
                   width: width / 5,
                   child: Align(
                       alignment: Alignment.center,
-                      child: Container(color: Colors.pink.shade400,)
+                      child: Container(
+                          color: Colors.transparent,
+                          child: FaIcon(FontAwesomeIcons.trophy, color: colors.darkBlack, size: 24,)
+                      )
                   ),
                 ),
               ),
@@ -124,7 +136,10 @@ class BottomPokeNavigationBarState extends State<BottomPokeNavigationBar> {
                   width: width / 5,
                   child: Align(
                       alignment: Alignment.center,
-                      child: Container(color: Colors.pink.shade500,)
+                      child: Container(
+                          color: Colors.transparent,
+                          child: FaIcon(FontAwesomeIcons.layerGroup, color: colors.darkBlack, size: 24,)
+                      )
                   ),
                 ),
               ),
