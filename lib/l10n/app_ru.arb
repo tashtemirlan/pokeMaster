@@ -184,5 +184,12 @@
   "add_to_team_string" : "Добавить в отряд",
   "remove_from_team_string" : "Убрать из отряда",
   "evolution_string" : "Эволюция!",
-  "release_pokemon_string" : "Отпустить"
+  "release_pokemon_string" : "Отпустить",
+
+  "pokeball_description_string" : "Покебол - это базовое устройство, используемое для ловли покемонов",
+  "pokeball_great_description_string" : "Грейтбол - улучшенный Покебол, повышающий шансы поймать покемона.",
+  "pokeball_ultra_description_string" : "Ультрабол - высокоуровневый Покебол, еще больше повышающий шансы поймать покемона.",
+  "pokeball_master_description_string" : "Мастербол - специальный Покебол, гарантирующий 100% успешный захват любого покемона.",
+
+  "catch_rate_string" : "Шанс поймать покемона"
 }

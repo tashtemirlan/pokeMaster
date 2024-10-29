@@ -184,6 +184,14 @@
   "add_to_team_string" : "Add to team",
   "remove_from_team_string" : "Remove from team",
   "evolution_string" : "Evolution!",
-  "release_pokemon_string" : "Release"
+  "release_pokemon_string" : "Release",
+
+  "pokeball_description_string" : "A Poké Ball is a spherical device used for catching Pokémon.",
+  "pokeball_great_description_string" : "A Great Ball is a type of Poké Ball that has a higher catch rate than a standard Poké Ball.",
+  "pokeball_ultra_description_string" : "An Ultra Ball is a type of Poké Ball that has an even higher catch rate than a Great Ball.",
+  "pokeball_master_description_string" : "A Master Ball is a special type of Poké Ball that has a 100% catch rate, guaranteeing the capture of any wild Pokémon.",
+
+  "catch_rate_string" : "Pokem catch rate"
+
 
 }

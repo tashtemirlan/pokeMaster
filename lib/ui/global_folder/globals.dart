@@ -191,21 +191,43 @@ class CheckBoxItem {
 
 // todo : items of store
 List<ShopItem> shopItems = [
-  ShopItem(imagePath: "assets/pokeimages/pb1.png", itemName: "Pokeball", itemPrice: "200"),
-  ShopItem(imagePath: "assets/pokeimages/pb2.png", itemName: "Great Ball", itemPrice: "1500"),
-  ShopItem(imagePath: "assets/pokeimages/pb3.png", itemName: "Ultra Ball", itemPrice: "10000"),
-  ShopItem(imagePath: "assets/pokeimages/pb4.png", itemName: "Master Ball", itemPrice: "1000000"),
+  ShopItem(
+      imagePath: "assets/pokeimages/pb1.png",
+      itemName: "Pokeball",
+      itemPrice: "200",
+      catchRate: "1%"
+  ),
+  ShopItem(
+      imagePath: "assets/pokeimages/pb2.png",
+      itemName: "Great Ball",
+      itemPrice: "1500",
+      catchRate: "5%"
+  ),
+  ShopItem(
+      imagePath: "assets/pokeimages/pb3.png",
+      itemName: "Ultra Ball",
+      itemPrice: "10000",
+      catchRate: "10%"
+  ),
+  ShopItem(
+      imagePath: "assets/pokeimages/pb4.png",
+      itemName: "Master Ball",
+      itemPrice: "1000000",
+      catchRate: "100%"
+  ),
 ];
 
 class ShopItem{
   final String imagePath;
   final String itemName;
   final String itemPrice;
+  final String catchRate;
 
   ShopItem({
     required this.imagePath,
     required this.itemName,
-    required this.itemPrice
+    required this.itemPrice,
+    required this.catchRate
   });
 }
 

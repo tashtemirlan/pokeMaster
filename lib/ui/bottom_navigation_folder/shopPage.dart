@@ -23,69 +23,74 @@ class ShopPageState extends State<ShopPage>{
   int showUserMoney = 0;
 
   Widget storeItem(double width, globals.ShopItem shopItem) {
-    return Container(
-      width: width/2.5,
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 2),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            shopItem.imagePath,
-            height: 80,
-            fit: BoxFit.contain,
-          ),
-          SizedBox(height: 8.0),
-          // Item name
-          Text(
-            shopItem.itemName,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: colors.darkBlack),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 4.0),
-          // Item price
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                shopItem.itemPrice,
-                style: TextStyle(fontSize: 18, color: Colors.grey[600], fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(width: 5,),
-              FaIcon(FontAwesomeIcons.coins , color: colors.goldColor, size: 16,)
-            ],
-          ),
-          SizedBox(height: 8.0),
-          // Buy Button
-          ElevatedButton(
-            onPressed: (){
-              viewPokeBallBottomSheet(shopItem);
-            },
-            style: ButtonStyle(
-                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+    return GestureDetector(
+      onTap: (){
+        viewPokeBallBottomSheet(shopItem);
+      },
+      child: Container(
+        width: width/2.5,
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black, width: 2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              shopItem.imagePath,
+              height: 80,
+              fit: BoxFit.contain,
             ),
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  AppLocalizations.of(context)!.buy_string,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    decoration: TextDecoration.none,
-                  ),
+            SizedBox(height: 8.0),
+            // Item name
+            Text(
+              shopItem.itemName,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: colors.darkBlack),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 4.0),
+            // Item price
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  shopItem.itemPrice,
+                  style: TextStyle(fontSize: 18, color: Colors.grey[600], fontWeight: FontWeight.w700),
                 ),
-            )
-          ),
-        ],
+                const SizedBox(width: 5,),
+                FaIcon(FontAwesomeIcons.coins , color: colors.goldColor, size: 16,)
+              ],
+            ),
+            SizedBox(height: 8.0),
+            // Buy Button
+            ElevatedButton(
+                onPressed: (){
+                  viewPokeBallBottomSheet(shopItem);
+                },
+                style: ButtonStyle(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    AppLocalizations.of(context)!.buy_string,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                )
+            ),
+          ],
+        ),
       ),
     );
   }
