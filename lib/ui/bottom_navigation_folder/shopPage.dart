@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
-import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
@@ -45,7 +44,7 @@ class ShopPageState extends State<ShopPage>{
             SizedBox(height: 8.0),
             // Item name
             Text(
-              shopItem.itemName,
+              globals.showPokemonNameCyrillic(shopItem.itemName),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: colors.darkBlack),
               textAlign: TextAlign.center,
             ),

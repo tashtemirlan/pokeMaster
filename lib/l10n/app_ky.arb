@@ -191,6 +191,10 @@
   "pokeball_ultra_description_string" : "Ультрабол - Покемондорду кармоо мүмкүнчүлүгүн дагы да жогорулаткан жогорку деңгээлдеги Покебол.",
   "pokeball_master_description_string" : "Мастербол - ар кандай Покемонду 100% ийгилик менен кармоого кепилдик берген атайын Покебол.",
 
-  "catch_rate_string" : "Покемонду кармоо мүмкүнчүлүгү"
+  "catch_rate_string" : "Покемонду кармоо мүмкүнчүлүгү",
+
+  "buy_pokeball_error" : "Сиз бул сатып алуу үчүн жетиштүү каражат жок",
+  "pokemons_team_overload_title_string" : "Покемон өтө көп",
+  "pokemons_team_overload_description_string" : "Сизде 6 Покемон бар!"
 
 }

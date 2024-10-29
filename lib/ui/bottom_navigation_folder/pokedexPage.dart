@@ -1,12 +1,8 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pokemonmap/models/pokemonFolder/pokeType.dart';
-import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 
 import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
@@ -315,7 +311,7 @@ class PokedexPageState extends State<PokedexPage>{
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double statusBarHeight = MediaQuery.of(context).padding.top;
-    double mainSizedBoxHeightUserNotLogged = height  - statusBarHeight - 80;
+    double mainSizedBoxHeightUserNotLogged = height  - statusBarHeight;
 
     return PopScope(
       canPop: false,

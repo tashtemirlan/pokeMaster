@@ -3,7 +3,6 @@ library pokemon.globals;
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/pokemonFolder/pokeRegion.dart';

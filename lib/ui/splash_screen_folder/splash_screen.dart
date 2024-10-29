@@ -1,7 +1,7 @@
 import 'dart:developer';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:pokemonmap/models/pokeAwards.dart';
 import 'package:pokemonmap/models/pokedexModel.dart';
@@ -17,7 +17,6 @@ import 'package:pokemonmap/database_instructions/pokeRegion.dart' as pokeRegion;
 import 'package:pokemonmap/database_instructions/pokeStats.dart' as pokeStats;
 import 'package:pokemonmap/database_instructions/pokeTypes.dart' as pokeTypes;
 import 'package:pokemonmap/database_instructions/pokeWeakness.dart' as pokeWeakness;
-import 'package:pokemonmap/ui/global_folder/globals.dart' as globals;
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -821,18 +820,24 @@ class SplashScreenState extends State<SplashScreen>{
     await showWelcomeMessage();
     //todo : navigate to our app =>
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (BuildContext context) => const BottomPokeNavigationBar()));
+      builder: (BuildContext context) => const BottomPokeNavigationBar(),
+    ));
   }
 
   Future<void> showWelcomeMessage() async{
-    Fluttertoast.showToast(
-      msg: AppLocalizations.of(context)!.welcomeMessage,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.white,
-      textColor: Colors.black,
-      fontSize: 12.0,
+    final snackBar = SnackBar(
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: AppLocalizations.of(context)!.user_choose_first_pokemon_welcome,
+        message: AppLocalizations.of(context)!.welcomeMessage,
+        contentType: ContentType.success,
+      ),
     );
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 
   @override
