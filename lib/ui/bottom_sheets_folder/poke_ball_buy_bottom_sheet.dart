@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,10 +25,66 @@ class PokeBallBuyBottomSheet extends StatefulWidget{
 class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
 
   int pokeBallCount = 1;
+  Timer? _timer;
+
+  String showPokeBalldescripton(){
+    if(widget.shopItem.itemName == "Pokeball"){
+      //Pokeball
+      return AppLocalizations.of(context)!.pokeball_description_string;
+    }
+    else if(widget.shopItem.itemName == "Great Ball"){
+      // Great Ball
+      return AppLocalizations.of(context)!.pokeball_great_description_string;
+    }
+    else if(widget.shopItem.itemName == "Ultra Ball"){
+      // Ultra Ball
+      return AppLocalizations.of(context)!.pokeball_ultra_description_string;
+    }
+    else{
+      // master ball
+      return AppLocalizations.of(context)!.pokeball_master_description_string;
+    }
+  }
+
+  void _incrementCounter() {
+    if (pokeBallCount < 99) {
+      setState(() {
+        pokeBallCount++;
+      });
+    }
+  }
+
+  void _decrementCounter() {
+    if (pokeBallCount > 1) {
+      setState(() {
+        pokeBallCount--;
+      });
+    }
+  }
+
+  void _startTimer(bool isIncrement) {
+    _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      if (isIncrement) {
+        _incrementCounter();
+      } else {
+        _decrementCounter();
+      }
+    });
+  }
+
+  void _stopTimer() {
+    _timer?.cancel();
+  }
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _stopTimer();
+    super.dispose();
   }
 
   @override
@@ -52,7 +110,22 @@ class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.none),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 4.0),
+              SizedBox(height: 5.0),
+              // Item description
+              Text(
+                showPokeBalldescripton(),
+                style: TextStyle(fontSize: 20, fontWeight:
+                FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.none),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 10.0),
+              Text(
+                "${AppLocalizations.of(context)!.catch_rate_string} : ${widget.shopItem.catchRate}",
+                style: TextStyle(fontSize: 20, fontWeight:
+                FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.none),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 10.0),
               // Item price
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -80,13 +153,9 @@ class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                if (pokeBallCount > 1) {
-                                  setState(() {
-                                    pokeBallCount--;
-                                  });
-                                }
-                              },
+                              onTap: _decrementCounter,
+                              onLongPress: () => _startTimer(false),
+                              onLongPressUp: _stopTimer,
                               child: FaIcon(
                                 FontAwesomeIcons.minus,
                                 color: Colors.white,
@@ -109,13 +178,9 @@ class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
                             ),
                             const SizedBox(width: 5,),
                             GestureDetector(
-                              onTap: () {
-                                if (pokeBallCount < 99) {
-                                  setState(() {
-                                    pokeBallCount++;
-                                  });
-                                }
-                              },
+                              onTap: _incrementCounter,
+                              onLongPress: () => _startTimer(true),
+                              onLongPressUp: _stopTimer,
                               child: FaIcon(
                                 FontAwesomeIcons.plus,
                                 color: Colors.white,

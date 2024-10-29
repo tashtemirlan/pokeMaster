@@ -184,6 +184,13 @@
   "add_to_team_string" : "Отрядга кошуу",
   "remove_from_team_string" : "Отряддан алып салуу",
   "evolution_string" : "Эволюция!",
-  "release_pokemon_string" : "Кетүү"
+  "release_pokemon_string" : "Кетүү",
+
+  "pokeball_description_string" : "Покебол - бул Покемондорду кармоо үчүн колдонулган негизги түзүлүш.",
+  "pokeball_great_description_string" : "Грейтбол - Покемондорду кармоо мүмкүнчүлүгүн жогорулаткан өркүндөтүлгөн Покебол.",
+  "pokeball_ultra_description_string" : "Ультрабол - Покемондорду кармоо мүмкүнчүлүгүн дагы да жогорулаткан жогорку деңгээлдеги Покебол.",
+  "pokeball_master_description_string" : "Мастербол - ар кандай Покемонду 100% ийгилик менен кармоого кепилдик берген атайын Покебол.",
+
+  "catch_rate_string" : "Покемонду кармоо мүмкүнчүлүгү"
 
 }
