@@ -6,6 +6,27 @@ This project is developed by me under the [Attribution-NonCommercial 4.0 Interna
 
 ---
 
+## 🌳 Project Ideology
+
+As a lifelong Pokémon enthusiast, I set out to create a Pokémon game that captures the excitement of capturing, training, and exploring with any Pokémon you’ve ever dreamed of. This project is entirely free, works offline, and provides users with the freedom to save or retrieve their progress from the cloud seamlessly. 
+
+### Project Highlights
+
+- **📖 Pokédex Tracking**: Track your personal journey through the Pokédex, seeing all Pokémon you’ve encountered or captured along the way.
+- **🎲 Map Screen - The Pokémon Roulette**: An interactive roulette on the map screen gives users the chance to obtain new Pokémon randomly—spin the wheel and see which Pokémon is destined to join your team!
+- **🎒 Inventory Management**: Take full control of your Pokémon on the inventory screen, where you can add or remove team members, view detailed stats, evolve Pokémon, or even release them back into the wild. Your Pokémon journey is truly in your hands!
+- **🏆 Challenge Screen**: Step up and prove your strength by battling against the most formidable gym leaders and contest champions. Earn stars, unlock achievements, and aim to be legendary in the Pokémon world!
+
+### Screens Overview
+
+1. **🏪 Store Screen**: Visit the store to purchase Poké Balls and view your current inventory of essential items.
+2. **🎒 User Inventory**: View and manage all your Pokémon and items here—organize your team and prepare for adventure!
+3. **🗺️ Map Page**: Explore the world map to search for locations and discover Pokémon from every region.
+4. **⚔️ Challenge Page**: Test your might against the strongest opponents and cement your place as a champion.
+5. **📚 Pokédex Page**: Your ultimate guide to the Pokémon world! Track all Pokémon, read detailed information, and see which ones you've yet to encounter.
+
+---
+
 ## 📷 Images and GIFs
 All Pokémon images and GIFs are stored within the project under two main directories:
 
@@ -27,6 +48,7 @@ This box contains data related to user challenges, contests, and user currency.
 - **`PokeChallenge`**: Stores all challenges for the user.
 - **`PokeContest`**: Stores all contest data for the user.
 - **`UserMoneys`**: Holds the user’s gold balance.
+- **`initialized`**: Holds if system initialized.
 
 ### **2. `PokemonUserPokedex` Box**
 This box contains the Pokédex information and all Pokémon data, facilitating global Pokémon management.
@@ -38,7 +60,172 @@ This box contains the Pokédex information and all Pokémon data, facilitating g
 This box houses user-specific data, including inventory, team, and Poké Balls.
 
 - **`PokeUserInventory`**: Stores all Pokémon owned by the user.
-- **`UserTeam`**: Contains the user’s current Pokémon team.
 - **`PokeballsUserInventory`**: Holds the user’s collection of Poké Balls.
 
+### **4. `PokemonUserTeam` Box**
+This box houses user pokemons team.
+- **`UserTeam`**: Contains the user’s current Pokémon team.
+  
 ---
+
+## 📄 Dart Code Database Structure
+
+The following code snippet defines the `PokedexPokemonModel` class structure in Dart, used to store and manage Pokedex data in the application.
+
+```dart
+@HiveType(typeId: 0)
+class PokedexPokemonModel{
+  @HiveField(0)
+  final Pokemon pokemon;
+
+  @HiveField(1)
+  final bool isFound;
+
+  const PokedexPokemonModel({
+    required this.pokemon,
+    required this.isFound,
+  });
+}
+```
+
+The following code snippet defines the `Pokemon` class structure in Dart, used to store and manage Pokemon data in the application.
+
+```dart
+@HiveType(typeId: 1)
+class Pokemon {
+  @HiveField(0)
+  int pokeDexIndex;
+
+  @HiveField(1)
+  String name;
+
+  @HiveField(2)
+  Rarity rarity;
+
+  @HiveField(3)
+  List<PokeType> type;
+
+  @HiveField(4)
+  PokeStats pokeStats;
+
+  @HiveField(5)
+  Region region;
+
+  @HiveField(6)
+  List<PokeType?> weakness;
+
+  @HiveField(7)
+  String gifFront;
+
+  @HiveField(8)
+  String gifBack;
+
+  Pokemon({
+    required this.pokeDexIndex,
+    required this.name,
+    required this.rarity,
+    required this.type,
+    required this.pokeStats,
+    required this.region,
+    required this.weakness,
+    required this.gifFront,
+    required this.gifBack,
+  });
+}
+```
+
+The following code snippet defines the `PokeStats` class structure in Dart, used to store and manage Pokemon stats data in the application.
+
+```dart
+@HiveType(typeId: 2)
+class PokeStats {
+  @HiveField(0)
+  double hp;
+
+  @HiveField(1)
+  double attack;
+
+  @HiveField(2)
+  double defence;
+
+  @HiveField(3)
+  double specialAttack;
+
+  @HiveField(4)
+  double specialDefence;
+
+  @HiveField(5)
+  double speed;
+
+  PokeStats({
+    required this.hp,
+    required this.attack,
+    required this.defence,
+    required this.specialAttack,
+    required this.specialDefence,
+    required this.speed,
+  });
+}
+```
+
+The following code snippet defines the `PokeAwards` class structure in Dart, used to store and manage Pokemon Awards data in the application.
+
+```dart
+@HiveType(typeId: 6)
+class PokeAwards{
+  @HiveField(0)
+  final String awardImagePath;
+
+  @HiveField(1)
+  final bool obtained;
+
+  @HiveField(2)
+  final String awardName;
+
+  @HiveField(3)
+  final String cityName;
+
+  const PokeAwards({
+    required this.awardImagePath,
+    required this.obtained,
+    required this.awardName,
+    required this.cityName
+  });
+}
+```
+
+The following code snippet defines the `PokemonUser` class structure in Dart, used to store and manage Pokemon User data in the application.
+
+```dart
+@HiveType(typeId: 7)
+class PokemonUser{
+  @HiveField(0)
+  final Pokemon pokemon;
+
+  @HiveField(1)
+  final int lvl;
+
+  @HiveField(2)
+  final String hashId;
+
+  const PokemonUser({
+    required this.pokemon,
+    required this.lvl,
+    required this.hashId
+  });
+}
+```
+
+---
+
+## 📸 Screenshots
+
+Take a closer look at some screenshots highlights of the project:
+
+---
+
+## 🙏 Thanks & Support
+
+Thank you for exploring **PokeMaster**! If you enjoyed the project, consider giving it a ⭐ on GitHub. Your support helps me continue building and improving this project. 
+
+**Follow me** : [GitHub Profile](https://github.com/tashtemirlan)
