@@ -16,7 +16,9 @@ import '../global_folder/globals.dart';
 
 
 class PokemonRouletteBottomSheet extends StatefulWidget {
-  const PokemonRouletteBottomSheet({super.key});
+  final int typeId;
+  final int cost;
+  const PokemonRouletteBottomSheet({super.key, required this.typeId , required this.cost});
 
   @override
   PokemonRouletteBottomSheetState createState() =>
@@ -31,11 +33,11 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
   double _currentOffset = 0;
   List<Pokemon> _shuffledPokemonList = [];
   List<Pokemon> hiveList = [];
+  List<Pokemon> allPokemons = [];
   double _itemWidth = 120;
   int randomVal = 0;
 
   int showUserMoney = 0;
-  int costToSpin = 1;
 
   Widget listRarity(double width){
     return SizedBox(
@@ -79,10 +81,60 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
     // Cast the list to List<Pokemons>
     List<Pokemon> pokeListFromHive = pokeListFromHiveDynamic.cast<Pokemon>();
 
-    setState(() {
-      hiveList = pokeListFromHive;
-    });
-    
+    //Todo : set all pokemons :
+    allPokemons = pokeListFromHive;
+
+    //Todo : => 1 - all pokemons ; 2 - common pokemons ; 3 - rare pokemons ; 4 - epic pokemons; 5 - mystic pokemons; 6 - legendary pokemons
+    if(widget.typeId == 1){
+      setState(() {
+        hiveList = pokeListFromHive;
+      });
+    }
+    else if(widget.typeId == 2){
+      for(int a=0 ; a<pokeListFromHive.length; a++){
+        Pokemon pokeFromHive = pokeListFromHive[a];
+        if(pokeFromHive.rarity == Rarity.casual){
+          hiveList.add(pokeFromHive);
+        }
+      }
+    }
+    else if(widget.typeId == 3){
+      for(int a=0 ; a<pokeListFromHive.length; a++){
+        Pokemon pokeFromHive = pokeListFromHive[a];
+        if(pokeFromHive.rarity == Rarity.rare){
+          hiveList.add(pokeFromHive);
+        }
+      }
+    }
+    else if(widget.typeId == 4){
+      for(int a=0 ; a<pokeListFromHive.length; a++){
+        Pokemon pokeFromHive = pokeListFromHive[a];
+        if(pokeFromHive.rarity == Rarity.epic){
+          hiveList.add(pokeFromHive);
+        }
+      }
+    }
+    else if(widget.typeId == 5){
+      for(int a=0 ; a<pokeListFromHive.length; a++){
+        Pokemon pokeFromHive = pokeListFromHive[a];
+        if(pokeFromHive.rarity == Rarity.mystic){
+          hiveList.add(pokeFromHive);
+        }
+      }
+    }
+    else if(widget.typeId == 6){
+      for(int a=0 ; a<pokeListFromHive.length; a++){
+        Pokemon pokeFromHive = pokeListFromHive[a];
+        if(pokeFromHive.rarity == Rarity.legendary){
+          hiveList.add(pokeFromHive);
+        }
+      }
+    }
+    else{
+      setState(() {
+        hiveList = pokeListFromHive;
+      });
+    }
     _shufflePokemonList();
   }
 
@@ -96,7 +148,7 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
 
   Future<void> payForRullete() async{
     var box = await Hive.openBox("PokemonUserDataBase");
-    int userCoins = showUserMoney - costToSpin;
+    int userCoins = showUserMoney - widget.cost;
     await box.put("UserMoneys", userCoins);
     setState(() {
       showUserMoney = userCoins;
@@ -207,7 +259,8 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
   void _stopRoulette() async{
     int pokeRandomIndex = hiveList.indexOf(_shuffledPokemonList[randomVal+1]);
     await addPokemonToUserCollection(hiveList[pokeRandomIndex]);
-    viewPokeBottomSheet(pokeRandomIndex);
+    int pokemonIndexPokedex = allPokemons.indexOf(hiveList[pokeRandomIndex]);
+    viewPokeBottomSheet(pokemonIndexPokedex);
   }
 
   @override
@@ -326,7 +379,7 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
                   ),
                   const SizedBox(width: 20,),
                   Text(
-                    "$costToSpin",
+                    "${widget.cost}",
                     style: TextStyle(fontSize: 32, color: Colors.white,
                         fontWeight: FontWeight.w700, decoration: TextDecoration.none),
                   ),

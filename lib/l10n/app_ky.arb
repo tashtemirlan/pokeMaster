@@ -195,6 +195,16 @@
 
   "buy_pokeball_error" : "Сиз бул сатып алуу үчүн жетиштүү каражат жок",
   "pokemons_team_overload_title_string" : "Покемон өтө көп",
-  "pokemons_team_overload_description_string" : "Сизде 6 Покемон бар!"
+  "pokemons_team_overload_description_string" : "Сизде 6 Покемон бар!",
 
+  "poke_rullete_string" : "Покемон рулеткасы",
+  "poke_rullete_all_pokemons" : "Бардык Покемон",
+  "poke_rullete_common_pokemons" : "Кадимки Покемон",
+  "poke_rullete_rare_pokemons" : "Сейрек Покемон",
+  "poke_rullete_epic_pokemons" : "Эпикалык Покемон",
+  "poke_rullete_mystic_pokemons" : "Мистикалык Покемон",
+  "poke_rullete_legendary_pokemons" : "Легендарлуу Покемон",
+
+  "settings_version_string" : "Нускасы",
+  "setting_creator_string" : "Түзүлдү Таштанов Темирлан"
 }

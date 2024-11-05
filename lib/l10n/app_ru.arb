@@ -195,5 +195,16 @@
 
   "buy_pokeball_error" : "У вас не хватает средств для этой покупки",
   "pokemons_team_overload_title_string" : "Слишком много покемонов",
-  "pokemons_team_overload_description_string" : "У вас уже 6 покемонов!"
+  "pokemons_team_overload_description_string" : "У вас уже 6 покемонов!",
+
+  "poke_rullete_string" : "Рулетка покемонов",
+  "poke_rullete_all_pokemons" : "Все покемоны",
+  "poke_rullete_common_pokemons" : "Обычные покемоны",
+  "poke_rullete_rare_pokemons" : "Редкие покемоны",
+  "poke_rullete_epic_pokemons" : "Эпические покемоны",
+  "poke_rullete_mystic_pokemons" : "Мистические покемоны",
+  "poke_rullete_legendary_pokemons" : "Легендарные покемоны",
+
+  "settings_version_string" : "Версия",
+  "setting_creator_string" : "Создано Таштановым Темирланом"
 }
