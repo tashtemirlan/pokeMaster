@@ -195,7 +195,17 @@
 
   "buy_pokeball_error" : "You don't have enought money for this transaction",
   "pokemons_team_overload_title_string" : "So much pokemons",
-  "pokemons_team_overload_description_string" : "You already have 6 pokemons!"
+  "pokemons_team_overload_description_string" : "You already have 6 pokemons!",
 
+  "poke_rullete_string" : "Roulette pokemons",
+  "poke_rullete_all_pokemons" : "All pokemons",
+  "poke_rullete_common_pokemons" : "Common pokemons",
+  "poke_rullete_rare_pokemons" : "Rare pokemons",
+  "poke_rullete_epic_pokemons" : "Epic pokemons",
+  "poke_rullete_mystic_pokemons" : "Mystic pokemons",
+  "poke_rullete_legendary_pokemons" : "Legendary pokemons",
+
+  "settings_version_string" : "Version",
+  "setting_creator_string" : "Created by Tashtanov Temirlan"
 
 }

@@ -29,14 +29,209 @@ class MapPageState extends State<MapPage>{
   List<Pokemon> firstPokemonList = [];
   late Region selectedRegion;
 
-  void viewPokeRouletteBottomSheet() async{
+  void viewPokeRouletteBottomSheet(int typeId, int cost) async{
     showCupertinoModalBottomSheet(
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
       context: context,
       expand: false,
       builder: (BuildContext context) {
-        return PokemonRouletteBottomSheet();
+        return PokemonRouletteBottomSheet(typeId: typeId, cost: cost,);
+      },
+    );
+  }
+
+  void showPokeRulleteOptions(BuildContext context){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28.0),
+          ),
+          title: Text(
+              AppLocalizations.of(context)!.poke_rullete_string, textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+              )
+          ),
+          actionsPadding: EdgeInsets.zero,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //Todo : => 1 - all pokemons ; 2 - common pokemons ; 3 - rare pokemons ; 4 - epic pokemons; 5 - mystic pokemons; 6 - legendary pokemons
+                  //All pokemons
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                            viewPokeRouletteBottomSheet(1, 10);
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.poke_rullete_all_pokemons,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  //Common pokemons
+                  const SizedBox(height: 10,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          viewPokeRouletteBottomSheet(2, 1);
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.poke_rullete_common_pokemons,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  //Rare pokemons
+                  const SizedBox(height: 10,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          viewPokeRouletteBottomSheet(3, 10);
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.poke_rullete_rare_pokemons,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  //Epic pokemons
+                  const SizedBox(height: 10,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          viewPokeRouletteBottomSheet(4, 50);
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.poke_rullete_epic_pokemons,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  //Mystic pokemons
+                  const SizedBox(height: 10,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          viewPokeRouletteBottomSheet(5, 100);
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.poke_rullete_mystic_pokemons,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  //Legendary pokemons
+                  const SizedBox(height: 10,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          viewPokeRouletteBottomSheet(6, 1000);
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.poke_rullete_legendary_pokemons,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                ],
+              ),
+            )
+          ],
+        );
       },
     );
   }
@@ -114,6 +309,20 @@ class MapPageState extends State<MapPage>{
                               )),
                         )
                     ),
+                  ),
+                  const SizedBox(height: 15,),
+                  Text(
+                      AppLocalizations.of(context)!.setting_creator_string, textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 16, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+                      )
+                  ),
+                  const SizedBox(height: 10,),
+                  Text(
+                      "${AppLocalizations.of(context)!.settings_version_string} 1.0", textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 12, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+                      )
                   ),
                 ],
               ),
@@ -483,7 +692,7 @@ class MapPageState extends State<MapPage>{
                               children: [
                                 GestureDetector(
                                   onTap: (){
-                                    viewPokeRouletteBottomSheet();
+                                    showPokeRulleteOptions(context);
                                   },
                                   child: Container(
                                     width: 50,
