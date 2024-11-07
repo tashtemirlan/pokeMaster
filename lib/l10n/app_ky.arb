@@ -206,5 +206,9 @@
   "poke_rullete_legendary_pokemons" : "Легендарлуу Покемон",
 
   "settings_version_string" : "Нускасы",
-  "setting_creator_string" : "Түзүлдү Таштанов Темирлан"
+  "setting_creator_string" : "Түзүлдү Таштанов Темирлан",
+
+  "location_map_string" : "Жайгашуу #",
+  "location_map_search" : "Покемонду издөө"
+
 }

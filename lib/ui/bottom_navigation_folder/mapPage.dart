@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pokemonmap/models/pokedexModel.dart';
@@ -6,14 +7,21 @@ import 'package:pokemonmap/models/pokemonFolder/pokeRegion.dart';
 import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
+import 'package:pokemonmap/ui/global_folder/pokemon_area_folder/pokemons_area_johto.dart';
+import 'package:pokemonmap/ui/global_folder/pokemon_area_folder/pokemons_area_kanto.dart';
 
 import '../../models/pokemonFolder/pokeType.dart';
 import '../../models/pokemonUser.dart';
 import '../bottom_sheets_folder/poke_rullete_bottom_sheet.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../bottom_sheets_folder/pokemon_area_bottom_sheet.dart';
 import '../bottom_sheets_folder/pokemon_pokedex_bottom_sheet.dart';
 import '../global_folder/globals.dart';
+import '../global_folder/pokemon_area_folder/pokemons_area_hoenn.dart';
+import '../global_folder/pokemon_area_folder/pokemons_area_kalos.dart';
+import '../global_folder/pokemon_area_folder/pokemons_area_sinnoh.dart';
+import '../global_folder/pokemon_area_folder/pokemons_area_unova.dart';
 
 
 
@@ -624,6 +632,7 @@ class MapPageState extends State<MapPage>{
     List<dynamic> pokeListFromHiveDynamic = box.get("PokeUserInventory", defaultValue: []);
     List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
     if(pokeListFromHive.isEmpty){
+      await setDataFromHivePokedexInitialized();
       chooseFirstPokemon(context);
     }
   }
@@ -654,10 +663,120 @@ class MapPageState extends State<MapPage>{
     firstPokemonList.add(pokeListFromHive[500]);
   }
 
+  Widget locationList() {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      children: List.generate(50, (index) {
+        return Align(
+          alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
+          child: GestureDetector(
+            onTap: (){
+              showPokemonsArea(index);
+            },
+            child: Padding(
+                padding: EdgeInsets.only(top: (index==0)? 0 : 10),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: colors.searchBoxColor
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 13, vertical: 5),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                            "${AppLocalizations.of(context)!.location_map_string} ${index+1}",
+                            style: TextStyle(
+                                fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+                            )
+                        ),
+                        const SizedBox(width: 8,),
+                        Icon(FontAwesomeIcons.mapLocationDot, color: Colors.white, size: 36,)
+                      ],
+                    ),
+                  ),
+                ),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+
+  Future<void> showPokemonsArea(int pos) async{
+    if(selectedRegion == Region.Kanto){
+      showCupertinoModalBottomSheet<String>(
+        topRadius: const Radius.circular(40),
+        backgroundColor: colors.scaffoldColor,
+        context: context,
+        expand: true,
+        builder: (BuildContext context) {
+          return PokemonAreaBottomSheet(pokeWildList: kanto_pokemons[pos], locationNumber: pos);
+        },
+      );
+    }
+    else if(selectedRegion == Region.Johto){
+      showCupertinoModalBottomSheet<String>(
+        topRadius: const Radius.circular(40),
+        backgroundColor: colors.scaffoldColor,
+        context: context,
+        expand: true,
+        builder: (BuildContext context) {
+          return PokemonAreaBottomSheet(pokeWildList: johto_pokemons[pos], locationNumber: pos);
+        },
+      );
+    }
+    else if(selectedRegion == Region.Hoenn){
+      showCupertinoModalBottomSheet<String>(
+        topRadius: const Radius.circular(40),
+        backgroundColor: colors.scaffoldColor,
+        context: context,
+        expand: true,
+        builder: (BuildContext context) {
+          return PokemonAreaBottomSheet(pokeWildList: hoenn_pokemons[pos],locationNumber: pos);
+        },
+      );
+    }
+    else if(selectedRegion == Region.Sinnoh){
+      showCupertinoModalBottomSheet<String>(
+        topRadius: const Radius.circular(40),
+        backgroundColor: colors.scaffoldColor,
+        context: context,
+        expand: true,
+        builder: (BuildContext context) {
+          return PokemonAreaBottomSheet(pokeWildList: sinnoh_pokemons[pos],locationNumber: pos);
+        },
+      );
+    }
+    else if(selectedRegion == Region.Unova){
+      showCupertinoModalBottomSheet<String>(
+        topRadius: const Radius.circular(40),
+        backgroundColor: colors.scaffoldColor,
+        context: context,
+        expand: true,
+        builder: (BuildContext context) {
+          return PokemonAreaBottomSheet(pokeWildList: unova_pokemons[pos],locationNumber: pos);
+        },
+      );
+    }
+    else{
+      showCupertinoModalBottomSheet<String>(
+        topRadius: const Radius.circular(40),
+        backgroundColor: colors.scaffoldColor,
+        context: context,
+        expand: true,
+        builder: (BuildContext context) {
+          return PokemonAreaBottomSheet(pokeWildList: kalos_pokemons[pos],locationNumber: pos);
+        },
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    setDataFromHivePokedexInitialized();
     checkUserHavePokemon(context);
     selectedRegion = Region.Kanto;
   }
@@ -667,7 +786,7 @@ class MapPageState extends State<MapPage>{
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double statusBarHeight = MediaQuery.of(context).padding.top;
-    double mainSizedBoxHeightUserNotLogged = height  - statusBarHeight - 80;
+    double mainSizedBoxHeightUserNotLogged = height  - statusBarHeight;
     return PopScope(
         canPop: false,
         child: Scaffold(
@@ -676,7 +795,14 @@ class MapPageState extends State<MapPage>{
               child: Container(
                   width: width,
                   height: mainSizedBoxHeightUserNotLogged,
-                  color: colors.scaffoldColor,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/background_map.png"),
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                        opacity: 0.2
+                    )
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: SingleChildScrollView(
@@ -758,7 +884,10 @@ class MapPageState extends State<MapPage>{
                                   )
                               ),
                             ],
-                          )
+                          ),
+                          const SizedBox(height: 10,),
+                          locationList(),
+                          const SizedBox(height: 90,),
                         ],
                       ),
                     ),

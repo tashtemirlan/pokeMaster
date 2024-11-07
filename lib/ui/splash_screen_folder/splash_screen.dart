@@ -22,6 +22,7 @@ import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/pokemonUser.dart';
 import '../bottom_navigation_folder/bottomNavBar.dart';
+import '../global_folder/globals.dart';
 
 
 class SplashScreen extends StatefulWidget{
@@ -795,6 +796,16 @@ class SplashScreenState extends State<SplashScreen>{
 
   Future<void> setUserPokeData() async{
     log("set user poke data");
+    //we should define allpokemons = =>
+    setAllPokemonsGlobal();
+  }
+
+  Future<void> setAllPokemonsGlobal() async{
+    //To do : here we need to set data to globals pokemons :
+    var box = await Hive.openBox("PokemonUserPokedex");
+    List<dynamic> pokeListFromHiveDynamic = box.get("Pokemons", defaultValue: []);
+    List<Pokemon> pokeListFromHive = pokeListFromHiveDynamic.cast<Pokemon>();
+    pokemonsAllList = pokeListFromHive;
   }
 
   Future<void> registerHiveAdapters() async{
@@ -816,28 +827,10 @@ class SplashScreenState extends State<SplashScreen>{
     await registerHiveAdapters();
     // todo : check poke data =>
     await checkPokeData();
-    // todo : show welcome message =>
-    await showWelcomeMessage();
     //todo : navigate to our app =>
     Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (BuildContext context) => const BottomPokeNavigationBar(),
     ));
-  }
-
-  Future<void> showWelcomeMessage() async{
-    final snackBar = SnackBar(
-      elevation: 0,
-      behavior: SnackBarBehavior.floating,
-      backgroundColor: Colors.transparent,
-      content: AwesomeSnackbarContent(
-        title: AppLocalizations.of(context)!.user_choose_first_pokemon_welcome,
-        message: AppLocalizations.of(context)!.welcomeMessage,
-        contentType: ContentType.success,
-      ),
-    );
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(snackBar);
   }
 
   @override
