@@ -206,5 +206,8 @@
   "poke_rullete_legendary_pokemons" : "Легендарные покемоны",
 
   "settings_version_string" : "Версия",
-  "setting_creator_string" : "Создано Таштановым Темирланом"
+  "setting_creator_string" : "Создано Таштановым Темирланом",
+
+  "location_map_string" : "Локация #",
+  "location_map_search" : "Поиск покемонов"
 }

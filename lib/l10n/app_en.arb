@@ -206,6 +206,9 @@
   "poke_rullete_legendary_pokemons" : "Legendary pokemons",
 
   "settings_version_string" : "Version",
-  "setting_creator_string" : "Created by Tashtanov Temirlan"
+  "setting_creator_string" : "Created by Tashtanov Temirlan",
+
+  "location_map_string" : "Location #",
+  "location_map_search" : "Search pokemons"
 
 }
