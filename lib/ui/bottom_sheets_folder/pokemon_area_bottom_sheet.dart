@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pokemonmap/models/pokemonWildModel.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
@@ -9,8 +10,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pokemonmap/ui/global_folder/globals.dart';
 
 import '../../models/pokedexModel.dart';
+import 'battle_bottom_sheet_screen.dart';
 
-//todo :=> multiple choice radio buttons with check right
 class PokemonAreaBottomSheet extends StatefulWidget{
   final List<PokemonWild> pokeWildList;
   final int locationNumber;
@@ -31,6 +32,18 @@ class PokemonAreaBottomSheetState extends State<PokemonAreaBottomSheet> {
     setState(() {
       pokedexList = pokeListFromHive1;
     });
+  }
+
+  Future<void> startBattle() async{
+    showCupertinoModalBottomSheet<String>(
+      topRadius: const Radius.circular(40),
+      backgroundColor: colors.scaffoldColor,
+      context: context,
+      expand: true,
+      builder: (BuildContext context) {
+        return BattleBottomSheetScreen(pokeWildList: widget.pokeWildList);
+      },
+    );
   }
 
   Widget _buildPokemonTile(PokemonWild wildPokemon, bool isCaught) {
@@ -132,7 +145,7 @@ class PokemonAreaBottomSheetState extends State<PokemonAreaBottomSheet> {
                     width: double.infinity,
                     child: ElevatedButton(
                         onPressed: () async{
-
+                            startBattle();
                         },
                         style: ButtonStyle(
                             shape: WidgetStateProperty.all<RoundedRectangleBorder>(

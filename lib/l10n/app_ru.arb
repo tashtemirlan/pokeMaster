@@ -209,5 +209,9 @@
   "setting_creator_string" : "Создано Таштановым Темирланом",
 
   "location_map_string" : "Локация #",
-  "location_map_search" : "Поиск покемонов"
+  "location_map_search" : "Поиск покемонов",
+
+  "evolution_error" : "Дальнейшая эволюция невозможна!",
+  "evolution_alert_title" : "Вы уверены в эволюции?",
+  "evolution_alert_subtitle" : "Действие нельзя будет отменить"
 }

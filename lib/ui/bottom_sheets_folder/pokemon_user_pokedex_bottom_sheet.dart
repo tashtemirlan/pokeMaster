@@ -7,6 +7,7 @@ import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:pokemonmap/models/pokemonUser.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
+import 'package:pokemonmap/ui/global_folder/evolution_folder/evolution.dart';
 
 import '../../models/pokemonFolder/pokeStats.dart';
 import '../global_folder/globals.dart';
@@ -26,6 +27,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
   String gifPath = "";
   bool dataGet = false;
   bool frontView = false;
+  bool evolutionIsPossible = false;
 
   void changeImageView(){
     if(frontView==true){
@@ -224,10 +226,11 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
   }
 
   Future<void> setData() async{
+    changeImageView();
     setState(() {
+      evolutionIsPossible = pokemonCanEvolve(widget.pokemonUser);
       dataGet = true;
     });
-    changeImageView();
   }
 
   Future<void> addToTeam(PokemonUser poke) async{
@@ -267,10 +270,6 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
     await box.put("UserTeam", pokeListFromHive);
   }
 
-  Future<void> evolvePokemon(PokemonUser poke) async{
-
-  }
-
   Future<void> releasePokemon(PokemonUser poke) async{
     var box = await Hive.openBox("PokemonUserInventory");
     List<dynamic> pokeListFromHiveDynamic = box.get("PokeUserInventory", defaultValue: []);
@@ -302,6 +301,12 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                   fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
               )
           ),
+          content: Text(
+              AppLocalizations.of(context)!.evolution_alert_subtitle, textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 14, color: colors.casualColor, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+              )
+          ),
           actionsPadding: EdgeInsets.zero,
           actions: [
             Padding(
@@ -316,6 +321,96 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                         onPressed: () async{
                             await releasePokemon(widget.pokemonUser);
                             Navigator.pop(context, "ReleasePokemon");
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.colorFire)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.yes_string,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                  const SizedBox(height: 20,),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          Navigator.pop(context);
+                        },
+                        style: ButtonStyle(
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                              AppLocalizations.of(context)!.no_string,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              )),
+                        )
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void showEvolveAlert(){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28.0),
+          ),
+          title: Text(
+              AppLocalizations.of(context)!.evolution_alert_title, textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+              )
+          ),
+          content: Text(
+              AppLocalizations.of(context)!.evolution_alert_subtitle, textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 14, color: colors.casualColor, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+              )
+          ),
+          actionsPadding: EdgeInsets.zero,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async{
+                          //await releasePokemon(widget.pokemonUser);
+                          Navigator.pop(context, "ReleasePokemon");
                         },
                         style: ButtonStyle(
                             shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -583,8 +678,27 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                                 ),
                                 ElevatedButton(
                                     onPressed: () async{
-                                      //Evolve pokemon
-                                      Navigator.pop(context);
+                                      if(evolutionIsPossible){
+                                        //Evolve pokemon show alert
+                                        showEvolveAlert();
+                                      }
+                                      else{
+                                        //show alert dialog that pokemon can't be evolved
+                                        Navigator.pop(context);
+                                        final snackBar = SnackBar(
+                                          elevation: 0,
+                                          behavior: SnackBarBehavior.floating,
+                                          backgroundColor: Colors.transparent,
+                                          content: AwesomeSnackbarContent(
+                                            title: AppLocalizations.of(context)!.evolution_error,
+                                            message: AppLocalizations.of(context)!.evolution_error,
+                                            contentType: ContentType.failure,
+                                          ),
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                          ..hideCurrentSnackBar()
+                                          ..showSnackBar(snackBar);
+                                      }
                                     },
                                     style: ButtonStyle(
                                         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -592,7 +706,8 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                                             borderRadius: BorderRadius.circular(999),
                                           ),
                                         ),
-                                        backgroundColor: WidgetStateProperty.all<Color>(Colors.orange)
+                                        backgroundColor: (evolutionIsPossible)? WidgetStateProperty.all<Color>(Colors.orange) :
+                                        WidgetStateProperty.all<Color>(colors.colorSteel.withOpacity(0.3))
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 20),
