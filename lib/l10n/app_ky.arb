@@ -209,6 +209,9 @@
   "setting_creator_string" : "Түзүлдү Таштанов Темирлан",
 
   "location_map_string" : "Жайгашуу #",
-  "location_map_search" : "Покемонду издөө"
+  "location_map_search" : "Покемонду издөө",
 
+  "evolution_error" : "Кийинки эволюция мүмкүн эмес!",
+  "evolution_alert_title" : "Сиз эволюцияга ишенесизби?",
+  "evolution_alert_subtitle" : "Аракетти артка кайтаруу мүмкүн эмес"
 }

@@ -148,8 +148,6 @@
         },
       );
 
-      print("Pokemon result is : $pokemonUserResult");
-
       if(pokemonUserResult!=null){
         //Add to team or remove from it
         if(pokemonUserResult=="AddTeam" || pokemonUserResult=="DeleteTeam"){
