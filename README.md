@@ -4,6 +4,9 @@ Pokemon app - find them all!
 
 This project is developed by me under the [Attribution-NonCommercial 4.0 International license](https://creativecommons.org/licenses/by-nc/4.0/).
 
+## And just some favorite poke gifs
+- ![493](https://github.com/user-attachments/assets/b420a606-3d44-4f4d-902e-1c2188a6c081)
+![384](https://github.com/user-attachments/assets/358d5087-acec-428d-82ff-73ea39046b87)![483](https://github.com/user-attachments/assets/1cbcd863-63ce-40b0-9716-79cecb6d6389)![484](https://github.com/user-attachments/assets/3a0693b1-4394-4da9-bca9-d8f143115129)![487](https://github.com/user-attachments/assets/83d3c1e9-cff7-432c-a8ed-2b57cc60dc41)![350](https://github.com/user-attachments/assets/c21df2d1-0ecd-42a8-99c0-0e1f0df9f513)
 ---
 
 ## 🌳 Project Ideology
