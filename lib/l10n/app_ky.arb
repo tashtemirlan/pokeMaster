@@ -213,5 +213,7 @@
 
   "evolution_error" : "Кийинки эволюция мүмкүн эмес!",
   "evolution_alert_title" : "Сиз эволюцияга ишенесизби?",
-  "evolution_alert_subtitle" : "Аракетти артка кайтаруу мүмкүн эмес"
+  "evolution_alert_subtitle" : "Аракетти артка кайтаруу мүмкүн эмес",
+  "evolution_to_string" : "Сиздин покемон өнүгөт"
+
 }

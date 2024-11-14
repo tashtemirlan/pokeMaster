@@ -10,6 +10,7 @@ import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:pokemonmap/ui/global_folder/evolution_folder/evolution.dart';
 
 import '../../models/pokemonFolder/pokeStats.dart';
+import '../../models/pokemonFolder/pokemonModel.dart';
 import '../global_folder/globals.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -376,91 +377,163 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
     );
   }
 
-  void showEvolveAlert(){
+  void showEvolveAlert(double width, PokemonUser pokemonUser) {
+    List<Pokemon?> pokemonToEvolveList = pokemonOnWhichEvolve(pokemonUser);
+    Pokemon? selectedPokemon;
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(28.0),
-          ),
-          title: Text(
-              AppLocalizations.of(context)!.evolution_alert_title, textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-              )
-          ),
-          content: Text(
-              AppLocalizations.of(context)!.evolution_alert_subtitle, textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 14, color: colors.casualColor, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-              )
-          ),
-          actionsPadding: EdgeInsets.zero,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              backgroundColor: Colors.white,
+              scrollable: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(28.0),
+              ),
+              title: Text(
+                  AppLocalizations.of(context)!.evolution_alert_title, textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 24, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+                  )
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        onPressed: () async{
-                          //await releasePokemon(widget.pokemonUser);
-                          Navigator.pop(context, "ReleasePokemon");
+                  Text(
+                      AppLocalizations.of(context)!.evolution_alert_subtitle, textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 14, color: colors.casualColor, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+                      )
+                  ),
+                  const SizedBox(height: 5,),
+                  Text(
+                      AppLocalizations.of(context)!.evolution_to_string, textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 14, color: colors.casualColor, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+                      )
+                  ),
+                  const SizedBox(height: 10,),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: pokemonToEvolveList.map((pokemonEvolution) {
+                      final isSelected = selectedPokemon == pokemonEvolution;
+
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedPokemon = pokemonEvolution;
+                          });
                         },
-                        style: ButtonStyle(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: isSelected
+                                ? Border.all(color: Colors.green, width: 3)
+                                : Border.all(color: Colors.transparent),
+                          ),
+                          child: Column(
+                            children: [
+                              if (pokemonEvolution != null)
+                                Image.asset(
+                                  pokemonEvolution.gifFront,
+                                  height: 100,
+                                  width: 100,
+                                  fit: BoxFit.contain,
+                                ),
+                              const SizedBox(height: 10),
+                              if (pokemonEvolution != null)
+                                Text(
+                                    showPokemonNameCyrillic(pokemonEvolution.name),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 18, color: colors.darkBlack, fontWeight: FontWeight.w500 , letterSpacing: 0.1
+                                    )
+                                ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
+              actionsPadding: EdgeInsets.zero,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: (pokemonToEvolveList.length == 1 || selectedPokemon != null)
+                              ? () {
+                            Navigator.pop(context, selectedPokemon ?? pokemonToEvolveList.first);
+                          }
+                              : null, // Disable if nothing selected and multiple options
+                          style: ButtonStyle(
                             shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(999),
                               ),
                             ),
-                            backgroundColor: WidgetStateProperty.all<Color>(colors.colorFire)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Text(
+                            backgroundColor: (selectedPokemon!=null)?WidgetStateProperty.all<Color>(
+                                colors.colorFire
+                            ) : WidgetStateProperty.all<Color>(
+                                colors.colorFire.withOpacity(0.1)
+                            )
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
                               AppLocalizations.of(context)!.yes_string,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
-                              )),
-                        )
-                    ),
-                  ),
-                  const SizedBox(height: 20,),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        onPressed: () async{
-                          Navigator.pop(context);
-                        },
-                        style: ButtonStyle(
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20,),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ButtonStyle(
                             shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(999),
                               ),
                             ),
-                            backgroundColor: WidgetStateProperty.all<Color>(colors.searchBoxColor)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Text(
+                            backgroundColor: WidgetStateProperty.all<Color>(
+                                colors.searchBoxColor
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
                               AppLocalizations.of(context)!.no_string,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
-                              )),
-                        )
-                    ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            );
+          },
         );
       },
     );
@@ -680,7 +753,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                                     onPressed: () async{
                                       if(evolutionIsPossible){
                                         //Evolve pokemon show alert
-                                        showEvolveAlert();
+                                        showEvolveAlert(width, widget.pokemonUser);
                                       }
                                       else{
                                         //show alert dialog that pokemon can't be evolved

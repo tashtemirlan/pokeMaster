@@ -2,66 +2,361 @@
 import 'package:pokemonmap/ui/global_folder/globals.dart';
 import '../../../models/pokemonWildModel.dart';
 
-List<PokemonWild> kanto_route1 = [PokemonWild(pokemon: pokemonsAllList[0], lvl: 1)];
-List<PokemonWild> kanto_route2 = [PokemonWild(pokemon: pokemonsAllList[1], lvl: 1)];
-List<PokemonWild> kanto_route3 = [PokemonWild(pokemon: pokemonsAllList[2], lvl: 1)];
-List<PokemonWild> kanto_route4 = [PokemonWild(pokemon: pokemonsAllList[3], lvl: 1)];
-List<PokemonWild> kanto_route5 = [PokemonWild(pokemon: pokemonsAllList[4], lvl: 1)];
-List<PokemonWild> kanto_route6 = [PokemonWild(pokemon: pokemonsAllList[5], lvl: 1)];
-List<PokemonWild> kanto_route7 = [PokemonWild(pokemon: pokemonsAllList[6], lvl: 1)];
-List<PokemonWild> kanto_route8 = [PokemonWild(pokemon: pokemonsAllList[7], lvl: 1)];
-List<PokemonWild> kanto_route9 = [PokemonWild(pokemon: pokemonsAllList[8], lvl: 1)];
+List<PokemonWild> kanto_route1 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 3),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 3),
+  PokemonWild(pokemon: pokemonsAllList[42], lvl: 3),
+  PokemonWild(pokemon: pokemonsAllList[68], lvl: 3),
+];
+List<PokemonWild> kanto_route2 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 5),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 5),
+  PokemonWild(pokemon: pokemonsAllList[42], lvl: 5),
+  PokemonWild(pokemon: pokemonsAllList[68], lvl: 5),
+  PokemonWild(pokemon: pokemonsAllList[9], lvl: 5),
+  PokemonWild(pokemon: pokemonsAllList[12], lvl: 5),
+];
+List<PokemonWild> kanto_route3 = [
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 7),
+  PokemonWild(pokemon: pokemonsAllList[20], lvl: 7),
+  PokemonWild(pokemon: pokemonsAllList[22], lvl: 7),
+  PokemonWild(pokemon: pokemonsAllList[26], lvl: 7),
+  PokemonWild(pokemon: pokemonsAllList[55], lvl: 7),
+];
+List<PokemonWild> kanto_route4 = [
+  PokemonWild(pokemon: pokemonsAllList[20], lvl: 9),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 9),
+  PokemonWild(pokemon: pokemonsAllList[22], lvl: 9),
+  PokemonWild(pokemon: pokemonsAllList[26], lvl: 9),
+  PokemonWild(pokemon: pokemonsAllList[55], lvl: 9),
+  PokemonWild(pokemon: pokemonsAllList[53], lvl: 9),
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 9),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 9),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 9),
+];
+List<PokemonWild> kanto_route5 = [
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[36], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[57], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[38], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[62], lvl: 11),
+];
+List<PokemonWild> kanto_route6 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[36], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[57], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[38], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[53], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[62], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[117], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 11),
+  PokemonWild(pokemon: pokemonsAllList[118], lvl: 11),
+];
+List<PokemonWild> kanto_route7 = [
+  PokemonWild(pokemon: pokemonsAllList[36], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[57], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[38], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[62], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[37], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[58], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[63], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 22),
+];
+List<PokemonWild> kanto_route8 = [
+  PokemonWild(pokemon: pokemonsAllList[36], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[57], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[38], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[62], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[37], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[58], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[63], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 22),
+  PokemonWild(pokemon: pokemonsAllList[136], lvl: 22),
+];
+List<PokemonWild> kanto_route9 = [
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 17),
+  PokemonWild(pokemon: pokemonsAllList[20], lvl: 17),
+  PokemonWild(pokemon: pokemonsAllList[28], lvl: 17),
+  PokemonWild(pokemon: pokemonsAllList[31], lvl: 17),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 17),
+  PokemonWild(pokemon: pokemonsAllList[21], lvl: 17),
+  PokemonWild(pokemon: pokemonsAllList[29], lvl: 17),
+  PokemonWild(pokemon: pokemonsAllList[32], lvl: 17),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 17),
+];
 
-List<PokemonWild> kanto_route10 = [PokemonWild(pokemon: pokemonsAllList[9], lvl: 1)];
-List<PokemonWild> kanto_route11 = [PokemonWild(pokemon: pokemonsAllList[10], lvl: 1)];
-List<PokemonWild> kanto_route12 = [PokemonWild(pokemon: pokemonsAllList[11], lvl: 1)];
-List<PokemonWild> kanto_route13 = [PokemonWild(pokemon: pokemonsAllList[12], lvl: 1)];
-List<PokemonWild> kanto_route14 = [PokemonWild(pokemon: pokemonsAllList[13], lvl: 1)];
-List<PokemonWild> kanto_route15 = [PokemonWild(pokemon: pokemonsAllList[14], lvl: 1)];
-List<PokemonWild> kanto_route16 = [PokemonWild(pokemon: pokemonsAllList[15], lvl: 1)];
-List<PokemonWild> kanto_route17 = [PokemonWild(pokemon: pokemonsAllList[16], lvl: 1)];
-List<PokemonWild> kanto_route18 = [PokemonWild(pokemon: pokemonsAllList[17], lvl: 1)];
-List<PokemonWild> kanto_route19 = [PokemonWild(pokemon: pokemonsAllList[18], lvl: 1)];
+List<PokemonWild> kanto_route10 = [
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[20], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[28], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[31], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[21], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[98], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[29], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[32], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[146], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[147], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[0], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[3], lvl: 23),
+  PokemonWild(pokemon: pokemonsAllList[6], lvl: 23),
+];
+List<PokemonWild> kanto_route11 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[95], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[121], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[115], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 13),
+  PokemonWild(pokemon: pokemonsAllList[116], lvl: 13),
 
-List<PokemonWild> kanto_route20 = [PokemonWild(pokemon: pokemonsAllList[19], lvl: 1)];
-List<PokemonWild> kanto_route21 = [PokemonWild(pokemon: pokemonsAllList[20], lvl: 1)];
-List<PokemonWild> kanto_route22 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route23 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route24 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route25 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route26 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route27 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route28 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route29 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
+];
+List<PokemonWild> kanto_route12 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[42], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[43], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[68], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[69], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[97], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[82], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[98], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[115], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[116], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[142], lvl: 31),
+];
+List<PokemonWild> kanto_route13 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[42], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[43], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[68], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[69], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[97], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[82], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[98], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[115], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[116], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[142], lvl: 33),
+];
+List<PokemonWild> kanto_route14 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[42], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[43], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[47], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[68], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[69], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[48], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[127], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[122], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[126], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 33),
+];
+List<PokemonWild> kanto_route15 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[42], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[43], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[47], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[68], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[69], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[48], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[127], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[122], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[126], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 33),
+];
+List<PokemonWild> kanto_route16 = [
+  PokemonWild(pokemon: pokemonsAllList[83], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[84], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 31),
+  PokemonWild(pokemon: pokemonsAllList[142], lvl: 31),
+];
+List<PokemonWild> kanto_route17 = [
+  PokemonWild(pokemon: pokemonsAllList[76], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[83], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[53], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[77], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[84], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[132], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[5], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[148], lvl: 33),
+];
+List<PokemonWild> kanto_route18 = [
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[83], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[84], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[119], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[129], lvl: 33),
+  PokemonWild(pokemon: pokemonsAllList[120], lvl: 33),
+];
+List<PokemonWild> kanto_route19 = [
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 37),
+  PokemonWild(pokemon: pokemonsAllList[119], lvl: 37),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 37),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 37),
+  PokemonWild(pokemon: pokemonsAllList[120], lvl: 37),
+  PokemonWild(pokemon: pokemonsAllList[130], lvl: 37),
+];
 
-List<PokemonWild> kanto_route30 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route31 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route32 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route33 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route34 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route35 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route36 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route37 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route38 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route39 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
+List<PokemonWild> kanto_route20 = [
+  PokemonWild(pokemon: pokemonsAllList[130], lvl: 39),
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 39),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 39),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 39),
+  PokemonWild(pokemon: pokemonsAllList[129], lvl: 39),
+];
+List<PokemonWild> kanto_route21 = [
+  PokemonWild(pokemon: pokemonsAllList[16], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[19], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[113], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[43], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[69], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[15], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[42], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[68], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[44], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[70], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[71], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[119], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[72], lvl: 42),
+  PokemonWild(pokemon: pokemonsAllList[120], lvl: 42),
+];
+List<PokemonWild> kanto_route22 = [
+  PokemonWild(pokemon: pokemonsAllList[18], lvl: 4),
+  PokemonWild(pokemon: pokemonsAllList[20], lvl: 4),
+  PokemonWild(pokemon: pokemonsAllList[28], lvl: 4),
+  PokemonWild(pokemon: pokemonsAllList[31], lvl: 4),
+  PokemonWild(pokemon: pokemonsAllList[59], lvl: 4),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 4),
+  PokemonWild(pokemon: pokemonsAllList[60], lvl: 4),
+];
+List<PokemonWild> kanto_route23 = [
+  PokemonWild(pokemon: pokemonsAllList[29], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[32], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[21], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[101], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[20], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[28], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[31], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[30], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[33], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[102], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[112], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[59], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[128], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[60], lvl: 41),
+];
+List<PokemonWild> kanto_route24 = [
+  PokemonWild(pokemon: pokemonsAllList[24], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[25], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[34], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[40], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[45], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[49], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[51], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[65], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[73], lvl: 41),
+];
+List<PokemonWild> kanto_route25 = [
+  PokemonWild(pokemon: pokemonsAllList[73], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[78], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[80], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[85], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[87], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[89], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[91], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[94], lvl: 41),
 
-List<PokemonWild> kanto_route40 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route41 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route42 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route43 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route44 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route45 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route46 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route47 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route48 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-List<PokemonWild> kanto_route49 = [PokemonWild(pokemon: pokemonsAllList[37], lvl: 1)];
-
-List<PokemonWild> kanto_route50 =[
+];
+List<PokemonWild> kanto_route26 = [
+  PokemonWild(pokemon: pokemonsAllList[99], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[103], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[105], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[106], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[107], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[108], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[110], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[114], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[123], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[124], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[125], lvl: 41),
+  PokemonWild(pokemon: pokemonsAllList[131], lvl: 41),
+];
+List<PokemonWild> kanto_route27 = [
+  PokemonWild(pokemon: pokemonsAllList[132], lvl: 55),
+  PokemonWild(pokemon: pokemonsAllList[133], lvl: 55),
+  PokemonWild(pokemon: pokemonsAllList[134], lvl: 55),
+  PokemonWild(pokemon: pokemonsAllList[135], lvl: 55),
+  PokemonWild(pokemon: pokemonsAllList[137], lvl: 55),
+  PokemonWild(pokemon: pokemonsAllList[139], lvl: 55),
+  PokemonWild(pokemon: pokemonsAllList[141], lvl: 55),
+];
+List<PokemonWild> kanto_route28 = [
   PokemonWild(pokemon: pokemonsAllList[143], lvl: 80),
   PokemonWild(pokemon: pokemonsAllList[144], lvl: 80),
   PokemonWild(pokemon: pokemonsAllList[145], lvl: 80),
-  PokemonWild(pokemon: pokemonsAllList[149], lvl: 80),
-  PokemonWild(pokemon: pokemonsAllList[150], lvl: 80),
+];
+List<PokemonWild> kanto_route29 = [
+  PokemonWild(pokemon: pokemonsAllList[146], lvl: 50),
+  PokemonWild(pokemon: pokemonsAllList[147], lvl: 50),
+  PokemonWild(pokemon: pokemonsAllList[148], lvl: 50),
+];
+
+List<PokemonWild> kanto_route30 =[
+  PokemonWild(pokemon: pokemonsAllList[149], lvl: 100),
+  PokemonWild(pokemon: pokemonsAllList[150], lvl: 120),
+
 ];
 
 
@@ -96,24 +391,4 @@ List<List<PokemonWild>> kanto_pokemons = [
   kanto_route28,
   kanto_route29,
   kanto_route30,
-  kanto_route31,
-  kanto_route32,
-  kanto_route33,
-  kanto_route34,
-  kanto_route35,
-  kanto_route36,
-  kanto_route37,
-  kanto_route38,
-  kanto_route39,
-  kanto_route40,
-  kanto_route41,
-  kanto_route42,
-  kanto_route43,
-  kanto_route44,
-  kanto_route45,
-  kanto_route46,
-  kanto_route47,
-  kanto_route48,
-  kanto_route49,
-  kanto_route50
 ];

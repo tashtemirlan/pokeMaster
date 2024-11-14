@@ -213,5 +213,6 @@
 
   "evolution_error" : "Дальнейшая эволюция невозможна!",
   "evolution_alert_title" : "Вы уверены в эволюции?",
-  "evolution_alert_subtitle" : "Действие нельзя будет отменить"
+  "evolution_alert_subtitle" : "Действие нельзя будет отменить",
+  "evolution_to_string" : "Ваш покемон будет эволюцианирован в"
 }

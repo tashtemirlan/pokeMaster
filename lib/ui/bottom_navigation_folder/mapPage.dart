@@ -666,7 +666,7 @@ class MapPageState extends State<MapPage>{
   Widget locationList() {
     return Wrap(
       alignment: WrapAlignment.center,
-      children: List.generate(50, (index) {
+      children: List.generate(30, (index) {
         return Align(
           alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
           child: GestureDetector(

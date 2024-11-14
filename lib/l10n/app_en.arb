@@ -213,5 +213,7 @@
 
   "evolution_error" : "Further evolution is impossible!",
   "evolution_alert_title" : "Are you sure about evolution?",
-  "evolution_alert_subtitle" : "The action can't be undone"
+  "evolution_alert_subtitle" : "The action can't be undone",
+  "evolution_to_string" : "Your pokemon will evolve to"
+
 }
