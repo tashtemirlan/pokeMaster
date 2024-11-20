@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pokemonmap/models/pokemonWildModel.dart';
 
-class BattleChallengeBottomSheetScreen extends StatefulWidget{
-  final List<PokemonWild> pokeWildList;
-  const BattleChallengeBottomSheetScreen({super.key, required this.pokeWildList});
+class BattleContestBottomSheetScreen extends StatefulWidget{
+  const BattleContestBottomSheetScreen({super.key});
 
   @override
-  BattleChallengeBottomSheetScreenState createState() => BattleChallengeBottomSheetScreenState();
+  BattleContestBottomSheetScreenState createState() => BattleContestBottomSheetScreenState();
 }
 
-class BattleChallengeBottomSheetScreenState extends State<BattleChallengeBottomSheetScreen> {
+class BattleContestBottomSheetScreenState extends State<BattleContestBottomSheetScreen> {
 
   @override
   void initState() {
@@ -31,7 +30,7 @@ class BattleChallengeBottomSheetScreenState extends State<BattleChallengeBottomS
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              Text("battle_challenge_bottom_sheet")
+              Text("battle_contest_bottom_sheet")
             ],
           ),
         )

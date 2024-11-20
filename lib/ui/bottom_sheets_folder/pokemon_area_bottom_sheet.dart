@@ -116,7 +116,7 @@ class PokemonAreaBottomSheetState extends State<PokemonAreaBottomSheet> {
             children: [
               const SizedBox(height: 20),
               Text(
-                "${AppLocalizations.of(context)!.location_map_string}${widget.locationNumber}",
+                "${AppLocalizations.of(context)!.location_map_string}${widget.locationNumber+1}",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold, decoration : TextDecoration.none,

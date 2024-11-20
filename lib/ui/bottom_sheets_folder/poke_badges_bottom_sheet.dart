@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
@@ -23,6 +21,10 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
 
   bool dataGet = false;
   List<List<PokeAwards>> hiveList = [];
+
+  List<List<PokeAwards>> eliteFourChallenge = [];
+  List<PokeAwards> mastersChallenge = [];
+
 
   Widget storeItem(double width, PokeAwards shopItem) {
     return Container(
@@ -110,7 +112,6 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
 
     if (widget.showGym) {
       List<dynamic> pokeListAwards = box.get("PokeChallenge", defaultValue: []);
-      log("${pokeListAwards.length}");
       // Create a new List<List<PokeAwards>> by safely casting each sublist
       List<List<PokeAwards>> pokeListFromHive = pokeListAwards.map((dynamic sublist) {
         return (sublist as List).map((dynamic item) {
@@ -118,13 +119,29 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
         }).toList();
       }).toList();
 
+      //Here we need to get our elite 4:
+      List<dynamic> pokeListEliteFourAwards = box.get("PokeChallengeElite", defaultValue: []);
+      // Create a new List<List<PokeAwards>> by safely casting each sublist
+      List<List<PokeAwards>> pokeListEliteFourFromHive = pokeListEliteFourAwards.map((dynamic sublist) {
+        return (sublist as List).map((dynamic item) {
+          return item as PokeAwards;  // Cast each item to PokeAwards
+        }).toList();
+      }).toList();
+
+      //Here we got masters :
+      List<dynamic> pokeListMasterAwards = box.get("PokeChallengeMaster", defaultValue: []);
+      List<PokeAwards> pokeMasterList = pokeListMasterAwards.map((dynamic item) {
+        return item as PokeAwards; // Cast each item to PokeAwards
+      }).toList();
+
       setState(() {
         hiveList = pokeListFromHive;
+        eliteFourChallenge = pokeListEliteFourFromHive;
+        mastersChallenge = pokeMasterList;
         dataGet = true;
       });
     } else {
       List<dynamic> pokeListAwards = box.get("PokeContest", defaultValue: []);
-      log("${pokeListAwards.length}");
       // Similar safe casting for contest awards
       List<List<PokeAwards>> pokeListFromHive = pokeListAwards.map((dynamic sublist) {
         return (sublist as List).map((dynamic item) {
@@ -132,11 +149,38 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
         }).toList();
       }).toList();
 
+      //Here we got masters :
+      List<dynamic> pokeListMasterAwards = box.get("PokeContestBigFestival", defaultValue: []);
+      List<PokeAwards> pokeMasterList = pokeListMasterAwards.map((dynamic item) {
+        return item as PokeAwards; // Cast each item to PokeAwards
+      }).toList();
+
       setState(() {
         hiveList = pokeListFromHive;
+        mastersChallenge = pokeMasterList;
         dataGet = true;
       });
     }
+  }
+
+  Widget tournametsChallengeAwards(double width, List<PokeAwards> eliteFourList, PokeAwards masterPokeAward){
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        children: [
+          storeItems(width, eliteFourList),
+          const SizedBox(height: 10,),
+          storeItem(width, masterPokeAward)
+        ],
+      ),
+    );
+  }
+
+  Widget tournametsContestAwards(double width, PokeAwards masterPokeAward){
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: storeItem(width, masterPokeAward),
+    );
   }
 
 
@@ -161,26 +205,37 @@ class PokeBadgesBottomSheetState extends State<PokeBadgesBottomSheet> {
               regionGymAwards(
                   AppLocalizations.of(context)!.region_kanto,
                   width, hiveList[0]),
+              (widget.showGym)? tournametsChallengeAwards(width, eliteFourChallenge[0], mastersChallenge[0]) : tournametsContestAwards(width, mastersChallenge[0]),
               const SizedBox(height: 20,),
+
               regionGymAwards(
                   AppLocalizations.of(context)!.region_johto,
                   width, hiveList[1]),
+              (widget.showGym)? tournametsChallengeAwards(width, eliteFourChallenge[1], mastersChallenge[1]) : tournametsContestAwards(width, mastersChallenge[1]),
               const SizedBox(height: 20,),
+
               regionGymAwards(
                   AppLocalizations.of(context)!.region_hoenn,
                   width, hiveList[2]),
+              (widget.showGym)? tournametsChallengeAwards(width, eliteFourChallenge[2], mastersChallenge[2]) : tournametsContestAwards(width, mastersChallenge[2]),
               const SizedBox(height: 20,),
+
               regionGymAwards(
                   AppLocalizations.of(context)!.region_sinnoh,
                   width, hiveList[3]),
+              (widget.showGym)? tournametsChallengeAwards(width, eliteFourChallenge[3], mastersChallenge[3]) : tournametsContestAwards(width, mastersChallenge[3]),
               const SizedBox(height: 20,),
+
               regionGymAwards(
                   AppLocalizations.of(context)!.region_unova,
                   width, hiveList[4]),
+              (widget.showGym)? tournametsChallengeAwards(width, eliteFourChallenge[4], mastersChallenge[4]) : tournametsContestAwards(width, mastersChallenge[4]),
               const SizedBox(height: 20,),
+
               regionGymAwards(
                   AppLocalizations.of(context)!.region_kalos,
                   width, hiveList[5]),
+              (widget.showGym)? tournametsChallengeAwards(width, eliteFourChallenge[5], mastersChallenge[5]) : tournametsContestAwards(width, mastersChallenge[5]),
               const SizedBox(height: 20,)
             ],
           ) :

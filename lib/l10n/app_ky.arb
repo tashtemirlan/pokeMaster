@@ -213,5 +213,16 @@
 
   "evolution_error" : "Кийинки эволюция мүмкүн эмес!",
   "evolution_alert_title" : "Сиз эволюцияга ишенесизби?",
-  "evolution_alert_subtitle" : "Аракетти артка кайтаруу мүмкүн эмес"
+  "evolution_alert_subtitle" : "Аракетти артка кайтаруу мүмкүн эмес",
+  "evolution_to_string" : "Сиздин покемон өнүгөт",
+
+  "elite_four_string" : "Элит төрттүк",
+  "master_string" : "Чемпион",
+  "average_lvl_string" : "Орто деңгээл",
+  "start_battle_string" : "Чакыруу",
+  "big_festival_string" : "Чоң фестиваль",
+
+  "legend_route_string" : "Легендалар залы",
+  "legend_elite_winner" : "Элита",
+  "legend_master_winner" : "Чемпион"
 }
