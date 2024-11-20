@@ -214,5 +214,16 @@
   "evolution_error" : "Дальнейшая эволюция невозможна!",
   "evolution_alert_title" : "Вы уверены в эволюции?",
   "evolution_alert_subtitle" : "Действие нельзя будет отменить",
-  "evolution_to_string" : "Ваш покемон будет эволюцианирован в"
+  "evolution_to_string" : "Ваш покемон будет эволюцианирован в",
+
+  "elite_four_string" : "Элитная четверка",
+  "master_string" : "Чемпион",
+  "average_lvl_string" : "Средний уровень",
+  "start_battle_string" : "Бросить вызов",
+  "big_festival_string" : "Большой фестиваль",
+
+  "legend_route_string" : "Зал легенд",
+  "legend_elite_winner" : "Элита",
+  "legend_master_winner" : "Чемпион"
+
 }

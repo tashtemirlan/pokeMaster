@@ -64,6 +64,8 @@ class SplashScreenState extends State<SplashScreen>{
     await createUserDataInventory();
     await createUserDataChallenge();
     await createUserDataContest();
+    //moreover we need to set data :
+    await setAllPokemonsGlobal();
     //we need to set that user data is initialized
     var box = await Hive.openBox("PokemonUserDataBase");
     box.put("initialized", true);
@@ -457,11 +459,196 @@ class SplashScreenState extends State<SplashScreen>{
     mainList.add(challengePokeAwardsSinho);
     mainList.add(challengePokeAwardsUnova);
     mainList.add(challengePokeAwardsKalos);
+    //Todo we need to create elite four and master for each region
+    List<PokeAwards> challengeEliteMastersPokeAwardsKanto = [
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №1",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №2",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №3",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №4",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+    ];
+    List<PokeAwards> challengeEliteMastersPokeAwardsJhoto = [
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №1",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №2",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №3",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №4",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+    ];
+    List<PokeAwards> challengeEliteMastersPokeAwardsHoenn = [
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №1",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №2",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №3",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №4",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+    ];
+    List<PokeAwards> challengeEliteMastersPokeAwardsSinnoh = [
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №1",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №2",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №3",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №4",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+    ];
+    List<PokeAwards> challengeEliteMastersPokeAwardsUnova = [
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №1",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №2",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №3",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №4",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+    ];
+    List<PokeAwards> challengeEliteMastersPokeAwardsKalos = [
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №1",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №2",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №3",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+      PokeAwards(
+          awardImagePath: "assets/pokeimages/elite_four_award.png",
+          obtained: false,
+          awardName: "${AppLocalizations.of(context)!.legend_elite_winner} №4",
+          cityName: AppLocalizations.of(context)!.legend_route_string),
+    ];
+    List<List<PokeAwards>> list_elites_regions = [
+      challengeEliteMastersPokeAwardsKanto,
+      challengeEliteMastersPokeAwardsJhoto,
+      challengeEliteMastersPokeAwardsHoenn,
+      challengeEliteMastersPokeAwardsSinnoh,
+      challengeEliteMastersPokeAwardsUnova,
+      challengeEliteMastersPokeAwardsKalos
+    ];
 
+    PokeAwards masterKanto = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: AppLocalizations.of(context)!.legend_master_winner,
+        cityName: AppLocalizations.of(context)!.legend_route_string);
 
-    //Todo we need to write to our hive box data for user poke awards challenge :
+    PokeAwards masterJhoto = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: AppLocalizations.of(context)!.legend_master_winner,
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    PokeAwards masterHoenn = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: AppLocalizations.of(context)!.legend_master_winner,
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    PokeAwards masterSinnoh = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: AppLocalizations.of(context)!.legend_master_winner,
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    PokeAwards masterUnova = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: AppLocalizations.of(context)!.legend_master_winner,
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    PokeAwards masterKalos = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: AppLocalizations.of(context)!.legend_master_winner,
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    List<PokeAwards> list_masters_regions = [
+      masterKanto, masterJhoto, masterHoenn, masterSinnoh, masterUnova, masterKalos
+    ];
+
     var box = await Hive.openBox("PokemonUserDataBase");
+    //Todo we need to write to our hive box data for user poke awards challenge :
     box.put("PokeChallenge", mainList);
+    //Todo here we register our eite 4
+    box.put("PokeChallengeElite", list_elites_regions);
+    //Todo here we register our champions
+    box.put("PokeChallengeMaster", list_masters_regions);
+
   }
 
   Future<void> createUserDataContest() async{
@@ -788,10 +975,52 @@ class SplashScreenState extends State<SplashScreen>{
     mainList.add(contestPokeAwardsUnova);
     mainList.add(contestPokeAwardsKalos);
 
+    PokeAwards masterFestivalKanto = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: "${AppLocalizations.of(context)!.ribbon_string} ${AppLocalizations.of(context)!.legend_master_winner}",
+        cityName: AppLocalizations.of(context)!.legend_route_string);
 
-    //Todo we need to write to our hive box data for user poke awards challenge :
+    PokeAwards masterFestivalJhoto = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: "${AppLocalizations.of(context)!.ribbon_string} ${AppLocalizations.of(context)!.legend_master_winner}",
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    PokeAwards masterFestivalHoenn = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: "${AppLocalizations.of(context)!.ribbon_string} ${AppLocalizations.of(context)!.legend_master_winner}",
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    PokeAwards masterFestivalSinnoh = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: "${AppLocalizations.of(context)!.ribbon_string} ${AppLocalizations.of(context)!.legend_master_winner}",
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    PokeAwards masterFestivalUnova = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: "${AppLocalizations.of(context)!.ribbon_string} ${AppLocalizations.of(context)!.legend_master_winner}",
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    PokeAwards masterFestivalKalos = PokeAwards(
+        awardImagePath: "assets/pokeimages/champion_award.png",
+        obtained: false,
+        awardName: "${AppLocalizations.of(context)!.ribbon_string} ${AppLocalizations.of(context)!.legend_master_winner}",
+        cityName: AppLocalizations.of(context)!.legend_route_string);
+
+    List<PokeAwards> list_masters_festival_regions = [
+      masterFestivalKanto, masterFestivalJhoto, masterFestivalHoenn, masterFestivalSinnoh, masterFestivalUnova, masterFestivalKalos
+    ];
+
+
     var box = await Hive.openBox("PokemonUserDataBase");
+    //Todo we need to write to our hive box data for user poke awards challenge :
     box.put("PokeContest", mainList);
+    //Todo register big festival
+    box.put("PokeContestBigFestival", list_masters_festival_regions);
   }
 
   Future<void> setUserPokeData() async{

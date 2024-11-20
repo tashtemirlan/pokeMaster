@@ -214,6 +214,15 @@
   "evolution_error" : "Further evolution is impossible!",
   "evolution_alert_title" : "Are you sure about evolution?",
   "evolution_alert_subtitle" : "The action can't be undone",
-  "evolution_to_string" : "Your pokemon will evolve to"
+  "evolution_to_string" : "Your pokemon will evolve to",
 
+  "elite_four_string" : "Elite four",
+  "master_string" : "Champion",
+  "average_lvl_string" : "Average lvl",
+  "start_battle_string" : "Defy the odds",
+  "big_festival_string" : "Big festival",
+
+  "legend_route_string" : "Legend Hall",
+  "legend_elite_winner" : "Elite",
+  "legend_master_winner" : "Champion"
 }

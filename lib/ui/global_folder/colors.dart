@@ -32,3 +32,6 @@ Color legendaryColor = Color.fromRGBO(255, 215, 0, 1);
 
 Color goldColor = Color.fromRGBO(255, 215, 0, 1);
 Color darkBlack = Color.fromRGBO(32, 32, 32, 1);
+
+Color areaEliteFour = Color.fromRGBO(193, 18, 31, 1);
+Color areaChampion = Color.fromRGBO(94, 84, 142, 1);
