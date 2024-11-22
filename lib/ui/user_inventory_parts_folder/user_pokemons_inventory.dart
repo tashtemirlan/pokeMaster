@@ -21,10 +21,10 @@ class UserPokemonsTab extends StatefulWidget {
 
 
   @override
-  _UserPokemonsTabState createState() => _UserPokemonsTabState();
+  UserPokemonsTabState createState() => UserPokemonsTabState();
 }
 
-class _UserPokemonsTabState extends State<UserPokemonsTab> {
+class UserPokemonsTabState extends State<UserPokemonsTab> {
 
   bool sortDescend = true;
   List<PokemonUser> filteredList = [];
@@ -50,12 +50,21 @@ class _UserPokemonsTabState extends State<UserPokemonsTab> {
       //Add to team or remove from it
       if(pokemonUserResult=="AddTeam" || pokemonUserResult=="DeleteTeam"){
         widget.onTeamUpdate();
+        await updateDataUI();
       }
       //Release pokemon or evolve it
       else{
         widget.onAllUpdate();
+        await updateDataUI();
       }
     }
+  }
+
+  Future<void> updateDataUI() async{
+    setState(() {
+      dataGet = false;
+    });
+    setData();
   }
 
   Future<void> toggleSortOrder() async{

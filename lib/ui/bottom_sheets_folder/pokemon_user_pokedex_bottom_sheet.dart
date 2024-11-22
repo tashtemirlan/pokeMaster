@@ -419,7 +419,6 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                     runSpacing: 10,
                     children: pokemonToEvolveList.map((pokemonEvolution) {
                       final isSelected = selectedPokemon == pokemonEvolution;
-
                       return GestureDetector(
                         onTap: () {
                           setState(() {
@@ -471,8 +470,9 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: (pokemonToEvolveList.length == 1 || selectedPokemon != null)
-                              ? () {
-                            Navigator.pop(context, selectedPokemon ?? pokemonToEvolveList.first);
+                              ? () async{
+                            await evolvePokemon(pokemonUser, selectedPokemon!);
+                            Navigator.pop(context, "EvolvePokemon");
                           }
                               : null, // Disable if nothing selected and multiple options
                           style: ButtonStyle(
@@ -537,6 +537,57 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
         );
       },
     );
+  }
+
+  Future<void> evolvePokemon(PokemonUser pokemonUser, Pokemon pokemon) async{
+    //get evolved pokemonUser =>
+    PokemonUser evolvedPokemonUser = evolvePokemonUser(pokemonUser, pokemon);
+    var box = await Hive.openBox("PokemonUserInventory");
+
+    // Retrieve the current Pokémon inventory
+    List<dynamic> pokeListFromHiveDynamic = box.get("PokeUserInventory", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+
+    // Find the Pokémon in the inventory by hashId
+    int pokemonIndex = pokeListFromHive.indexWhere((inventoryPokemon) => inventoryPokemon.hashId == pokemonUser.hashId);
+    if (pokemonIndex != -1) {
+      // Replace the Pokémon with its evolved form
+      pokeListFromHive[pokemonIndex] = PokemonUser(
+        pokemon: evolvedPokemonUser.pokemon,
+        lvl: pokemonUser.lvl,
+        hashId: pokemonUser.hashId,
+      );
+
+      // Update the inventory in the box
+      await box.put("PokeUserInventory", pokeListFromHive);
+    }
+
+    // If the Pokémon is in the user's team, update it there as well
+    await updateTeamPokemon(pokemonUser, evolvedPokemonUser.pokemon);
+    Navigator.pop(context);
+  }
+
+  // Helper method to update the evolved Pokémon in the team
+  Future<void> updateTeamPokemon(PokemonUser oldPokemon, Pokemon newPokemon) async {
+    var teamBox = await Hive.openBox("PokemonUserTeam");
+
+    // Retrieve the current team
+    List<dynamic> teamListFromHiveDynamic = teamBox.get("UserTeam", defaultValue: []);
+    List<PokemonUser> teamListFromHive = teamListFromHiveDynamic.cast<PokemonUser>();
+
+    // Find and update the Pokémon in the team by hashId
+    int teamPokemonIndex = teamListFromHive.indexWhere((teamPokemon) => teamPokemon.hashId == oldPokemon.hashId);
+    if (teamPokemonIndex != -1) {
+      // Replace the Pokémon with its evolved form
+      teamListFromHive[teamPokemonIndex] = PokemonUser(
+        pokemon: newPokemon,
+        lvl: oldPokemon.lvl,
+        hashId: oldPokemon.hashId,
+      );
+
+      // Update the team in the box
+      await teamBox.put("UserTeam", teamListFromHive);
+    }
   }
 
   @override

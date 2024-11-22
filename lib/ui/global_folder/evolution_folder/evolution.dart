@@ -477,7 +477,7 @@ Map<Pokemon, List<Pokemon?>> pokemonEvolutionStageOne = {
   pokemonsAllList[176] : [pokemonsAllList[177]],
   pokemonsAllList[178] : [pokemonsAllList[179]],
   pokemonsAllList[297] : [pokemonsAllList[182]],
-  pokemonsAllList[438] : [pokemonsAllList[184]],
+  pokemonsAllList[437] : [pokemonsAllList[184]],
   pokemonsAllList[186] : [pokemonsAllList[187]],
   pokemonsAllList[189] : [pokemonsAllList[423]],
   pokemonsAllList[190] : [pokemonsAllList[191]],
@@ -756,7 +756,7 @@ bool pokemonCanEvolve(PokemonUser pokemonUser) {
   final userPokemon = pokemonUser.pokemon;
   //define it so it will always have a value
   Pokemon pokemon = userPokemon;
-  final level = 100;
+  final level = pokemonUser.lvl;
 
   //we need to assign pokemon
   for(int i=0; i<pokemonsAllList.length;i++){
@@ -793,7 +793,7 @@ List<Pokemon?> pokemonOnWhichEvolve(PokemonUser pokemonUser) {
   final userPokemon = pokemonUser.pokemon;
   //define it so it will always have a value
   Pokemon pokemon = userPokemon;
-  final level = 100;
+  final level = pokemonUser.lvl;
 
   //we need to assign pokemon
   for(int i=0; i<pokemonsAllList.length;i++){
@@ -819,6 +819,11 @@ List<Pokemon?> pokemonOnWhichEvolve(PokemonUser pokemonUser) {
   return pokemonEvolutionListToReturn;
 }
 
-PokemonUser evolvePokemonUser(PokemonUser pokemonUser){
-  return pokemonUser;
+PokemonUser evolvePokemonUser(PokemonUser pokemonUser, Pokemon desiredEvolution) {
+  return PokemonUser(
+    pokemon: desiredEvolution,
+    lvl: pokemonUser.lvl,
+    hashId: pokemonUser.hashId,
+  );
 }
+
