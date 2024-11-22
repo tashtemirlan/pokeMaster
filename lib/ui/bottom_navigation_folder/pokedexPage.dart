@@ -331,7 +331,7 @@ class PokedexPageState extends State<PokedexPage>{
                   ),
                   pokeDexList(width),
                   SliverToBoxAdapter(
-                    child: const SizedBox(height: 20,),
+                    child: const SizedBox(height: 90,),
                   )
                 ],
               ),

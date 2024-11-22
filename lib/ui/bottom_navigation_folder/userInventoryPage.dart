@@ -30,6 +30,7 @@
     bool dataGet = false;
 
     ScrollController scrollController = ScrollController();
+    final GlobalKey<UserPokemonsTabState> pokemonsTabKey = GlobalKey<UserPokemonsTabState>();
 
     Future<void> getUserData() async{
       await getUserPokemons();
@@ -151,13 +152,15 @@
       if(pokemonUserResult!=null){
         //Add to team or remove from it
         if(pokemonUserResult=="AddTeam" || pokemonUserResult=="DeleteTeam"){
-          print("refresh user team");
           refreshTeamData();
         }
         //Release pokemon or evolve it
         else{
-          print("Refreshing all");
           refreshAllData();
+          pokemonsTabKey.currentState?.setState(() {
+            dataGet = false;
+          });
+          pokemonsTabKey.currentState?.updateDataUI();
         }
       }
     }
@@ -276,6 +279,7 @@
                       child: TabBarView(
                         children: (dataGet)? [
                           UserPokemonsTab(
+                            key: pokemonsTabKey,
                             pokemonsUser: userPokemons, pokemonsUserTeam: userTeam,
                             onTeamUpdate: refreshTeamData, onAllUpdate: refreshAllData,),
                           UserPokeballsTab(pokeballsList: userPokeBalls,),
