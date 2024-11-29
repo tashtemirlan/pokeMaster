@@ -191,7 +191,7 @@
   "pokeball_ultra_description_string" : "An Ultra Ball is a type of Poké Ball that has an even higher catch rate than a Great Ball.",
   "pokeball_master_description_string" : "A Master Ball is a special type of Poké Ball that has a 100% catch rate, guaranteeing the capture of any wild Pokémon.",
 
-  "catch_rate_string" : "Pokem catch rate",
+  "catch_rate_string" : "Pokemon catch rate",
 
   "buy_pokeball_error" : "You don't have enought money for this transaction",
   "pokemons_team_overload_title_string" : "So much pokemons",
@@ -224,5 +224,28 @@
 
   "legend_route_string" : "Legend Hall",
   "legend_elite_winner" : "Elite",
-  "legend_master_winner" : "Champion"
+  "legend_master_winner" : "Champion",
+  "team_empty_string" : "Add to team at least\none pokemon",
+
+  "catch_string" : "Catch",
+  "catch_all_pokemons_string" : "All pokemons",
+  "catch_new_pokemons_string" : "New pokemons",
+
+  "attack_casual_string" : "Attack",
+  "attack_elemental_string" : "Elemental attack",
+  "defence_casual_string" : "Defence",
+  "defence_elemental_string" : "Elemental defence",
+  "pokeballs_string" : "Pokeballs",
+
+  "used_string" : "used",
+  "pokeball_throwed" : "Pokeball thrown",
+  "pokemon_cathed" : "Pokemon catched",
+  "pokemon_uncatched" : "Pokemon escaped",
+  "close_string" : "Close",
+  "logs_string" : "Battle logs",
+
+  "defeat_string" : "Defeat",
+  "no_more_pokemons_string" : "Coach, all your Pokémon are defeated. Please recover your strength and try again",
+  "no_more_pokeballs" : "Please choose another pokeball or buy another one from the shop"
+
 }

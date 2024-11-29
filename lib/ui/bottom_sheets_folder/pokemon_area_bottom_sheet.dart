@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pokemonmap/models/pokemonWildModel.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pokemonmap/ui/global_folder/globals.dart';
 
 import '../../models/pokedexModel.dart';
+import '../../models/pokemonUser.dart';
 import 'battle_bottom_sheet_screen.dart';
 
 class PokemonAreaBottomSheet extends StatefulWidget{
@@ -24,6 +26,7 @@ class PokemonAreaBottomSheet extends StatefulWidget{
 class PokemonAreaBottomSheetState extends State<PokemonAreaBottomSheet> {
 
   List<PokedexPokemonModel> pokedexList = [];
+  bool userHaveAnyPokemonTeam = false;
 
   Future<void> getPokedexData() async{
     var box1 = await Hive.openBox("PokemonUserPokedex");
@@ -34,16 +37,47 @@ class PokemonAreaBottomSheetState extends State<PokemonAreaBottomSheet> {
     });
   }
 
+  Future<void> getUserTeamPokemons() async {
+    var box = await Hive.openBox("PokemonUserTeam");
+    List<dynamic> pokeListFromHiveDynamic = box.get("UserTeam", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
+    if(pokeListFromHive.isNotEmpty){
+      setState(() {
+        userHaveAnyPokemonTeam = true;
+      });
+    }
+  }
+
+  Future<void> initVoid() async{
+    await getPokedexData();
+    await getUserTeamPokemons();
+  }
+
   Future<void> startBattle() async{
-    showCupertinoModalBottomSheet<String>(
-      topRadius: const Radius.circular(40),
-      backgroundColor: colors.scaffoldColor,
-      context: context,
-      expand: true,
-      builder: (BuildContext context) {
-        return BattleBottomSheetScreen(pokeWildList: widget.pokeWildList);
-      },
-    );
+    //here we need to check if in user team there any pokemon or not and only if pokemon exist we can batlle :
+    if(userHaveAnyPokemonTeam){
+      showCupertinoModalBottomSheet<String>(
+        topRadius: const Radius.circular(40),
+        backgroundColor: colors.scaffoldColor,
+        context: context,
+        expand: true,
+        builder: (BuildContext context) {
+          return BattleBottomSheetScreen(pokeWildList: widget.pokeWildList);
+        },
+      );
+    }
+    else{
+      //Here we need to show erorr message :
+      Fluttertoast.showToast(
+        msg: AppLocalizations.of(context)!.team_empty_string,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+    }
   }
 
   Widget _buildPokemonTile(PokemonWild wildPokemon, bool isCaught) {
@@ -97,7 +131,7 @@ class PokemonAreaBottomSheetState extends State<PokemonAreaBottomSheet> {
   @override
   void initState() {
     super.initState();
-    getPokedexData();
+    initVoid();
   }
 
   @override

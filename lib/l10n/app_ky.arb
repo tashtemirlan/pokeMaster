@@ -224,5 +224,28 @@
 
   "legend_route_string" : "Легендалар залы",
   "legend_elite_winner" : "Элита",
-  "legend_master_winner" : "Чемпион"
+  "legend_master_winner" : "Чемпион",
+  "team_empty_string" : "Командага жок дегенде\nбир покемонду кошуңуз",
+
+  "catch_string" : "Кармоо",
+  "catch_all_pokemons_string" : "Бардык покемондор",
+  "catch_new_pokemons_string" : "Жаңы Покемон",
+
+  "attack_casual_string" : "Чабуул",
+  "attack_elemental_string" : "Элемент чабуул",
+  "defence_casual_string" : "Коргоо",
+  "defence_elemental_string" : "Элемент коргоо",
+  "pokeballs_string" : "Покеболлы",
+
+  "used_string" : "колдонулган",
+  "pokeball_throwed" : "Покебол ыргытылды",
+  "pokemon_cathed" : "Покемон кармалды",
+  "pokemon_uncatched" : "Покемон кармалган жок",
+  "close_string" : "Жабуу",
+  "logs_string" : "Согуш журналдары",
+
+  "defeat_string" : "Жеңилүү",
+  "no_more_pokemons_string" : "Машыктыруучу сиздин бардык покемонуңуз жеңилип калды. Сураныч калыбына келтирип, дагы бир жолу аракет кылыңыз",
+  "no_more_pokeballs" : "Тандаңыз башка покеболл же дүкөндөн дагы сатып алыңыз"
+
 }
