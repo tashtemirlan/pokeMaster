@@ -195,25 +195,25 @@ List<ShopItem> shopItems = [
       imagePath: "assets/pokeimages/pb1.png",
       itemName: "Pokeball",
       itemPrice: "200",
-      catchRate: "1%"
+      catchRate: "1x"
   ),
   ShopItem(
       imagePath: "assets/pokeimages/pb2.png",
       itemName: "Great Ball",
       itemPrice: "1500",
-      catchRate: "5%"
+      catchRate: "5x"
   ),
   ShopItem(
       imagePath: "assets/pokeimages/pb3.png",
       itemName: "Ultra Ball",
       itemPrice: "10000",
-      catchRate: "10%"
+      catchRate: "10x"
   ),
   ShopItem(
       imagePath: "assets/pokeimages/pb4.png",
       itemName: "Master Ball",
       itemPrice: "1000000",
-      catchRate: "100%"
+      catchRate: "100x"
   ),
 ];
 

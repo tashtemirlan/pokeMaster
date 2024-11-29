@@ -105,7 +105,7 @@ class ShopPageState extends State<ShopPage>{
   }
 
   void viewPokeBallBottomSheet(globals.ShopItem shopItem) async{
-    final result = await showCupertinoModalBottomSheet<int>(
+    final result = await showCupertinoModalBottomSheet<List<String>>(
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
       context: context,
@@ -117,8 +117,7 @@ class ShopPageState extends State<ShopPage>{
     if(result!=null){
       //we need to charge data :
       var box = await Hive.openBox("PokemonUserDataBase");
-      int userCoins = showUserMoney - result;
-      await box.put("UserMoneys", userCoins);
+      int userCoins = showUserMoney;
       //we need to registry our ball to system :
       var box1 = await Hive.openBox("PokemonUserInventory");
       List<dynamic> pokeListFromHiveDynamic = box1.get("PokeballsUserInventory", defaultValue: []);
@@ -126,24 +125,29 @@ class ShopPageState extends State<ShopPage>{
       if(shopItem.itemName == "Pokeball"){
         //Add Pokeball
         int pokeBallsCount = pokeListFromHive[0];
-        pokeListFromHive[0] = pokeBallsCount + 1;
+        pokeListFromHive[0] = pokeBallsCount + int.parse(result[1]);
+        userCoins = userCoins - (int.parse(result[1]) * 200);
       }
       else if(shopItem.itemName == "Great Ball"){
         //Add Great Ball
         int greatBallsCount = pokeListFromHive[1];
-        pokeListFromHive[1] = greatBallsCount + 1;
+        pokeListFromHive[1] = greatBallsCount + int.parse(result[1]);
+        userCoins = userCoins - (int.parse(result[1]) * 1500);
       }
       else if(shopItem.itemName == "Ultra Ball"){
         //Add Ultra Ball
         int ultraBallsCount = pokeListFromHive[2];
-        pokeListFromHive[2] = ultraBallsCount + 1;
+        pokeListFromHive[2] = ultraBallsCount + int.parse(result[1]);
+        userCoins = userCoins - (int.parse(result[1]) * 10000);
       }
       else{
         //Add master ball
         int masterBallsCount = pokeListFromHive[3];
-        pokeListFromHive[3] = masterBallsCount + 1;
+        pokeListFromHive[3] = masterBallsCount + int.parse(result[1]);
+        userCoins = userCoins - (int.parse(result[1]) * 1000000);
       }
       await box1.put("PokeballsUserInventory", pokeListFromHive);
+      await box.put("UserMoneys", userCoins);
       setState(() {
         showUserMoney = userCoins;
       });

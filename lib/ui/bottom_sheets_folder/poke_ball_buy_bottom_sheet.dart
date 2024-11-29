@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
@@ -192,23 +192,18 @@ class PokeBallBuyBottomSheetState extends State<PokeBallBuyBottomSheet> {
                       child: ElevatedButton(
                           onPressed: (){
                             if(widget.totalAmmountMoneyUser >= pokeBallCount * int.parse(widget.shopItem.itemPrice)){
-                              Navigator.pop(context, int.parse(widget.shopItem.itemPrice));
+                              Navigator.pop(context, [widget.shopItem.itemName,"$pokeBallCount"]);
                             }
                             else{
-                              Navigator.pop(context);
-                              final snackBar = SnackBar(
-                                elevation: 0,
-                                behavior: SnackBarBehavior.floating,
-                                backgroundColor: Colors.transparent,
-                                content: AwesomeSnackbarContent(
-                                  title: AppLocalizations.of(context)!.low_money_string,
-                                  message: AppLocalizations.of(context)!.buy_pokeball_error,
-                                  contentType: ContentType.failure,
-                                ),
+                              Fluttertoast.showToast(
+                                msg: "${AppLocalizations.of(context)!.low_money_string}\n${AppLocalizations.of(context)!.buy_pokeball_error}",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.white,
+                                textColor: Colors.black,
+                                fontSize: 16.0,
                               );
-                              ScaffoldMessenger.of(context)
-                                ..hideCurrentSnackBar()
-                                ..showSnackBar(snackBar);
                             }
                           },
                           style: ButtonStyle(

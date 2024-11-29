@@ -1,6 +1,6 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
@@ -239,19 +239,15 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
     List<dynamic> pokeListFromHiveDynamic = box.get("UserTeam", defaultValue: []);
     List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
     if(pokeListFromHive.length >5 || widget.isPokemonInUserTeam){
-      final snackBar = SnackBar(
-        elevation: 0,
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        content: AwesomeSnackbarContent(
-          title: AppLocalizations.of(context)!.pokemons_team_overload_title_string,
-          message: AppLocalizations.of(context)!.pokemons_team_overload_description_string,
-          contentType: ContentType.failure,
-        ),
+      Fluttertoast.showToast(
+        msg: AppLocalizations.of(context)!.pokemons_team_overload_description_string,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 16.0,
       );
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(snackBar);
     }
     else{
       pokeListFromHive.add(poke);
@@ -808,20 +804,15 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                                       }
                                       else{
                                         //show alert dialog that pokemon can't be evolved
-                                        Navigator.pop(context);
-                                        final snackBar = SnackBar(
-                                          elevation: 0,
-                                          behavior: SnackBarBehavior.floating,
-                                          backgroundColor: Colors.transparent,
-                                          content: AwesomeSnackbarContent(
-                                            title: AppLocalizations.of(context)!.evolution_error,
-                                            message: AppLocalizations.of(context)!.evolution_error,
-                                            contentType: ContentType.failure,
-                                          ),
+                                        Fluttertoast.showToast(
+                                          msg: AppLocalizations.of(context)!.evolution_error,
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.white,
+                                          textColor: Colors.black,
+                                          fontSize: 16.0,
                                         );
-                                        ScaffoldMessenger.of(context)
-                                          ..hideCurrentSnackBar()
-                                          ..showSnackBar(snackBar);
                                       }
                                     },
                                     style: ButtonStyle(

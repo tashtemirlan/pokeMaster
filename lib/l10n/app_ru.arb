@@ -224,6 +224,28 @@
 
   "legend_route_string" : "Зал легенд",
   "legend_elite_winner" : "Элита",
-  "legend_master_winner" : "Чемпион"
+  "legend_master_winner" : "Чемпион",
+  "team_empty_string" : "Добавьте в команду\nхоть одного покемона",
+
+  "catch_string" : "Поймать",
+  "catch_all_pokemons_string" : "Всех покемонов",
+  "catch_new_pokemons_string" : "Новых покемонов",
+
+  "attack_casual_string" : "Атака",
+  "attack_elemental_string" : "Элементальная атака",
+  "defence_casual_string" : "Защита",
+  "defence_elemental_string" : "Элементальная защита",
+  "pokeballs_string" : "Покеболлы",
+
+  "used_string" : "использовал",
+  "pokeball_throwed" : "Покеболл брошен",
+  "pokemon_cathed" : "Покемон пойман",
+  "pokemon_uncatched" : "Покемон не пойман",
+  "close_string" : "Закрыть",
+  "logs_string" : "Логи битвы",
+
+  "defeat_string" : "Поражение",
+  "no_more_pokemons_string" : "Тренер все твои покемоны побеждены. Пожалуйста восстанови силы и попробуй еще раз",
+  "no_more_pokeballs" : "Пожалуйста выберите другой покеболл или купите еще в магазине"
 
 }
