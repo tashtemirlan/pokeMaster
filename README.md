@@ -71,6 +71,15 @@ This box houses user pokemons team.
   
 ---
 
+## 📜🏛️ History of development
+
+Here links how project started and all way throw development :
+- [Project start](https://www.linkedin.com/posts/tashtanov_github-tashtemirlanpokemaster-pokemon-activity-7250876090334810112-bcAk?utm_source=combined_share_message&utm_medium=member_desktop_web)
+- [First steps](https://www.linkedin.com/pulse/pokedex-pokeroulette-temirlan-tashtanov-fo5de/?trackingId=4FtVEHjiKPw0RDq%2Bpj3wTg%3D%3D)
+- [Major update](https://www.linkedin.com/pulse/pokemaster-v20-temirlan-tashtanov-ttfce/?trackingId=Lb4smk61zxIAIHJ3A7O2VQ%3D%3D)
+
+---
+
 ## 📄 Dart Code Database Structure
 
 The following code snippet defines the `PokedexPokemonModel` class structure in Dart, used to store and manage Pokedex data in the application.
@@ -224,7 +233,14 @@ class PokemonUser{
 ## 📸 Screenshots
 
 Take a closer look at some screenshots highlights of the project:
-
+![Screenshot_2024-11-30-13-03-46-324_com teit pokemonmap](https://github.com/user-attachments/assets/5e3ed041-21fe-457f-8214-db5e7e7e44dc)
+![Screenshot_2024-11-30-13-04-44-086_com teit pokemonmap](https://github.com/user-attachments/assets/5125d0a0-60eb-4e1f-921c-59cf7696c93f)
+![Screenshot_2024-11-30-13-04-51-781_com teit pokemonmap](https://github.com/user-attachments/assets/86af0c56-6154-4709-8851-7c9db70c233a)
+![Screenshot_2024-11-30-13-05-25-563_com teit pokemonmap](https://github.com/user-attachments/assets/8b834663-f688-4857-8473-eca85fc23aeb)
+![Screenshot_2024-11-30-13-05-04-692_com teit pokemonmap](https://github.com/user-attachments/assets/57e5f20c-4582-4365-a420-991bd2915bf9)
+![Screenshot_2024-11-30-13-05-18-800_com teit pokemonmap](https://github.com/user-attachments/assets/2b987e35-6fae-4c26-8b77-9cfcb69938d3)
+![Screenshot_2024-11-30-13-05-43-723_com teit pokemonmap](https://github.com/user-attachments/assets/b43455ca-ef86-4b07-909a-88ead79a3621)
+![Screenshot_2024-11-30-13-05-48-825_com teit pokemonmap](https://github.com/user-attachments/assets/b9058cda-2947-4688-b136-9a7e9efaf49d)
 ---
 
 ## 🙏 Thanks & Support
