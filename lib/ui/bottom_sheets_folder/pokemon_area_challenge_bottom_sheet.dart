@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pokemonmap/models/pokemonFolder/pokeRegion.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart';
 import 'package:pokemonmap/ui/global_folder/globals.dart';
 
@@ -6,18 +8,37 @@ import '../../models/pokeAwards.dart';
 import '../global_folder/challenge_masters_folder/pokemon_master_data_class.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class BattleChallengeBottomSheetScreen extends StatefulWidget{
+import 'batlle_challenge_bottom_sheet_screen.dart';
+
+class BattleChallengePreviewBottomSheetScreen extends StatefulWidget{
   final PokemonMasterDataClass pokemonListMasters;
   final PokeAwards pokeAwards;
-  const BattleChallengeBottomSheetScreen({super.key, required this.pokemonListMasters, required this.pokeAwards});
+  final bool isEliteFour;
+  final bool isMaster;
+  final Region region;
+  const BattleChallengePreviewBottomSheetScreen({super.key, required this.pokemonListMasters,
+    required this.pokeAwards, required this.isEliteFour, required this.isMaster, required this.region});
 
   @override
-  BattleChallengeBottomSheetScreenState createState() => BattleChallengeBottomSheetScreenState();
+  BattleChallengePreviewBottomSheetScreenState createState() => BattleChallengePreviewBottomSheetScreenState();
 }
 
-class BattleChallengeBottomSheetScreenState extends State<BattleChallengeBottomSheetScreen> {
+class BattleChallengePreviewBottomSheetScreenState extends State<BattleChallengePreviewBottomSheetScreen> {
 
   int avgLvl = 0;
+
+  void startBattleVoid(){
+    showCupertinoModalBottomSheet(
+      topRadius: const Radius.circular(40),
+      backgroundColor: scaffoldColor,
+      context: context,
+      expand: false,
+      builder: (BuildContext context) {
+        return BattleChallengeBottomSheetScreen(pokemonListMasters: widget.pokemonListMasters,
+          pokeAwards: widget.pokeAwards, isEliteFour: widget.isEliteFour, isMaster: widget.isMaster, region: widget.region,);
+      },
+    );
+  }
 
   Future<void> getAverageLvlMasterPokemons() async{
     double lvlSum = 0;
@@ -32,7 +53,7 @@ class BattleChallengeBottomSheetScreenState extends State<BattleChallengeBottomS
   Widget startBattle(){
     return GestureDetector(
       onTap: (){
-
+        startBattleVoid();
       },
       child: Container(
         width: double.infinity,
@@ -144,7 +165,7 @@ class BattleChallengeBottomSheetScreenState extends State<BattleChallengeBottomS
                     Text("${AppLocalizations.of(context)!.average_lvl_string} $avgLvl", style: TextStyle(fontSize: 18, color: darkBlack, decoration: TextDecoration.none),),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 20,),
                 startBattle(),
                 SizedBox(height: 20,),
               ],

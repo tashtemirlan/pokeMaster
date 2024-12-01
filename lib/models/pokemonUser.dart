@@ -13,9 +13,13 @@ class PokemonUser{
   @HiveField(2)
   final String hashId;
 
+  @HiveField(3)
+  final int pokemonExp;
+
   const PokemonUser({
     required this.pokemon,
     required this.lvl,
-    required this.hashId
+    required this.hashId,
+    required this.pokemonExp
   });
 }

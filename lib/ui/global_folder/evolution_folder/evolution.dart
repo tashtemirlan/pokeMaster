@@ -824,6 +824,7 @@ PokemonUser evolvePokemonUser(PokemonUser pokemonUser, Pokemon desiredEvolution)
     pokemon: desiredEvolution,
     lvl: pokemonUser.lvl,
     hashId: pokemonUser.hashId,
+    pokemonExp: pokemonUser.pokemonExp
   );
 }
 

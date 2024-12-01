@@ -20,19 +20,22 @@ class PokemonUserAdapter extends TypeAdapter<PokemonUser> {
       pokemon: fields[0] as Pokemon,
       lvl: fields[1] as int,
       hashId: fields[2] as String,
+      pokemonExp: fields[3] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, PokemonUser obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.pokemon)
       ..writeByte(1)
       ..write(obj.lvl)
       ..writeByte(2)
-      ..write(obj.hashId);
+      ..write(obj.hashId)
+      ..writeByte(3)
+      ..write(obj.pokemonExp);
   }
 
   @override

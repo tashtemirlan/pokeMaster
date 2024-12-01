@@ -246,6 +246,10 @@
 
   "defeat_string" : "Поражение",
   "no_more_pokemons_string" : "Тренер все твои покемоны побеждены. Пожалуйста восстанови силы и попробуй еще раз",
-  "no_more_pokeballs" : "Пожалуйста выберите другой покеболл или купите еще в магазине"
-
+  "no_more_pokeballs" : "Пожалуйста выберите другой покеболл или купите еще в магазине",
+  "view_creator_github" : "Открыть Github создателя",
+  "view_creator_linkedin" : "Открыть Linkedin создателя",
+  "win_string" : "Победа",
+  "challenge_overcome_string" : "Вы успешно победили в данном состязании",
+  "you_got_string" : "Вы получили"
 }
