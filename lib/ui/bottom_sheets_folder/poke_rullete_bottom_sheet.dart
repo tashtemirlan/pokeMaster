@@ -175,7 +175,8 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
     PokemonUser firstPokemon = PokemonUser(
         pokemon: pokemon,
         lvl: 1,
-        hashId: "${year}_${month}_${day}_${minute}_${second}_${pokemon.name}"
+        hashId: "${year}_${month}_${day}_${minute}_${second}_${pokemon.name}",
+        pokemonExp: 0
     );
     pokeListFromHive.add(firstPokemon);
     await box.put("PokeUserInventory", pokeListFromHive);

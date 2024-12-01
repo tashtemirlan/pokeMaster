@@ -3,46 +3,46 @@ import 'package:pokemonmap/ui/global_folder/challenge_masters_folder/pokemon_mas
 import '../../globals.dart';
 
 List<PokemonTrainer> sinnoh_gym_master_pokemons_1 = [
-  PokemonTrainer(pokemon: pokemonsAllList[73], lvl: 12),
-  PokemonTrainer(pokemon: pokemonsAllList[94], lvl: 12),
-  PokemonTrainer(pokemon: pokemonsAllList[407], lvl: 14),
+  PokemonTrainer(pokemon: pokemonsAllList[73], lvl: 12  , hashPokemonTrainer: "s_Roark_p1"),
+  PokemonTrainer(pokemon: pokemonsAllList[94], lvl: 12  , hashPokemonTrainer: "s_Roark_p2"),
+  PokemonTrainer(pokemon: pokemonsAllList[407], lvl: 14 , hashPokemonTrainer: "s_Roark_p3"),
 ];
 List<PokemonTrainer> sinnoh_gym_master_pokemons_2 = [
-  PokemonTrainer(pokemon: pokemonsAllList[386], lvl: 20),
-  PokemonTrainer(pokemon: pokemonsAllList[420], lvl: 20),
-  PokemonTrainer(pokemon: pokemonsAllList[406], lvl: 22),
+  PokemonTrainer(pokemon: pokemonsAllList[386], lvl: 20, hashPokemonTrainer: "s_Gardenia_p1"),
+  PokemonTrainer(pokemon: pokemonsAllList[420], lvl: 20, hashPokemonTrainer: "s_Gardenia_p2"),
+  PokemonTrainer(pokemon: pokemonsAllList[406], lvl: 22, hashPokemonTrainer: "s_Gardenia_p3"),
 ];
 List<PokemonTrainer> sinnoh_gym_master_pokemons_3 = [
-  PokemonTrainer(pokemon:  pokemonsAllList[306], lvl: 28),
-  PokemonTrainer(pokemon:  pokemonsAllList[66], lvl: 29),
-  PokemonTrainer(pokemon:  pokemonsAllList[447], lvl: 32),
+  PokemonTrainer(pokemon:  pokemonsAllList[306], lvl: 28, hashPokemonTrainer: "s_Maylene_p1"),
+  PokemonTrainer(pokemon:  pokemonsAllList[66], lvl: 29 , hashPokemonTrainer: "s_Maylene_p2"),
+  PokemonTrainer(pokemon:  pokemonsAllList[447], lvl: 32, hashPokemonTrainer: "s_Maylene_p3"),
 ];
 List<PokemonTrainer> sinnoh_gym_master_pokemons_4 = [
-  PokemonTrainer(pokemon:  pokemonsAllList[129], lvl: 33),
-  PokemonTrainer(pokemon:  pokemonsAllList[194], lvl: 34),
-  PokemonTrainer(pokemon:  pokemonsAllList[418], lvl: 37),
+  PokemonTrainer(pokemon:  pokemonsAllList[129], lvl: 33, hashPokemonTrainer: "s_Crasher_Wake_p1"),
+  PokemonTrainer(pokemon:  pokemonsAllList[194], lvl: 34, hashPokemonTrainer: "s_Crasher_Wake_p2"),
+  PokemonTrainer(pokemon:  pokemonsAllList[418], lvl: 37, hashPokemonTrainer: "s_Crasher_Wake_p3"),
 ];
 List<PokemonTrainer> sinnoh_gym_master_pokemons_5 = [
-  PokemonTrainer(pokemon:  pokemonsAllList[354], lvl: 24),
-  PokemonTrainer(pokemon:  pokemonsAllList[92], lvl: 24),
-  PokemonTrainer(pokemon:  pokemonsAllList[428], lvl: 26),
+  PokemonTrainer(pokemon:  pokemonsAllList[354], lvl: 24, hashPokemonTrainer: "s_Fantina_p1"),
+  PokemonTrainer(pokemon:  pokemonsAllList[92], lvl: 24 , hashPokemonTrainer: "s_Fantina_p2"),
+  PokemonTrainer(pokemon:  pokemonsAllList[428], lvl: 26, hashPokemonTrainer: "s_Fantina_p3"),
 ];
 List<PokemonTrainer> sinnoh_gym_master_pokemons_6 = [
-  PokemonTrainer(pokemon:  pokemonsAllList[81], lvl: 37),
-  PokemonTrainer(pokemon:  pokemonsAllList[207], lvl: 38),
-  PokemonTrainer(pokemon:  pokemonsAllList[410], lvl: 41),
+  PokemonTrainer(pokemon:  pokemonsAllList[81], lvl: 37 , hashPokemonTrainer: "s_Byron_p1"),
+  PokemonTrainer(pokemon:  pokemonsAllList[207], lvl: 38, hashPokemonTrainer: "s_Byron_p2"),
+  PokemonTrainer(pokemon:  pokemonsAllList[410], lvl: 41, hashPokemonTrainer: "s_Byron_p3"),
 ];
 List<PokemonTrainer> sinnoh_gym_master_pokemons_7 = [
-  PokemonTrainer(pokemon:  pokemonsAllList[214], lvl: 40),
-  PokemonTrainer(pokemon:  pokemonsAllList[220], lvl: 40),
-  PokemonTrainer(pokemon:  pokemonsAllList[459], lvl: 42),
-  PokemonTrainer(pokemon:  pokemonsAllList[477], lvl: 44),
+  PokemonTrainer(pokemon:  pokemonsAllList[214], lvl: 40, hashPokemonTrainer: "s_Candice_p1"),
+  PokemonTrainer(pokemon:  pokemonsAllList[220], lvl: 40, hashPokemonTrainer: "s_Candice_p2"),
+  PokemonTrainer(pokemon:  pokemonsAllList[459], lvl: 42, hashPokemonTrainer: "s_Candice_p3"),
+  PokemonTrainer(pokemon:  pokemonsAllList[477], lvl: 44, hashPokemonTrainer: "s_Candice_p4"),
 ];
 List<PokemonTrainer> sinnoh_gym_master_pokemons_8 = [
-  PokemonTrainer(pokemon:  pokemonsAllList[134], lvl: 46),
-  PokemonTrainer(pokemon:  pokemonsAllList[25], lvl: 46),
-  PokemonTrainer(pokemon:  pokemonsAllList[404], lvl: 48),
-  PokemonTrainer(pokemon:  pokemonsAllList[465], lvl: 50),
+  PokemonTrainer(pokemon:  pokemonsAllList[134], lvl: 46, hashPokemonTrainer: "s_Volkner_p1"),
+  PokemonTrainer(pokemon:  pokemonsAllList[25], lvl: 46 , hashPokemonTrainer: "s_Volkner_p2"),
+  PokemonTrainer(pokemon:  pokemonsAllList[404], lvl: 48, hashPokemonTrainer: "s_Volkner_p3"),
+  PokemonTrainer(pokemon:  pokemonsAllList[465], lvl: 50, hashPokemonTrainer: "s_Volkner_p4"),
 ];
 
 PokemonMasterDataClass p1 = PokemonMasterDataClass(listPokemonTrainer: sinnoh_gym_master_pokemons_1, pokeTrainerName: "Roark");

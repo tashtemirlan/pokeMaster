@@ -10,6 +10,7 @@ import 'package:pokemonmap/models/pokemonWildModel.dart';
 import 'package:hive/hive.dart';
 import 'package:pokemonmap/models/pokemonUser.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart';
+import 'package:pokemonmap/ui/global_folder/evolution_folder/experience_data_list.dart';
 import 'package:pokemonmap/ui/global_folder/globals.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -55,6 +56,9 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
   List<int> userPokeBalls = [];
   int selectedIndex = 0;
 
+  int expNeedToNextLvl = 0;
+  int currentExpPokemonUser = 0;
+
   double userSelectedPokemonMaxHp = 0;
   double wildSelectedPokemonMaxHp = 0;
   double currentHpPokemonUser = 0;
@@ -92,18 +96,91 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
     List<dynamic> pokeListFromHiveDynamic = box.get("UserTeam", defaultValue: []);
     List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<PokemonUser>();
 
+    userTeam = List.filled(6, null);
+    for (int i = 0; i < pokeListFromHive.length && i < userTeam.length; i++) {
+      userTeam[i] = pokeListFromHive[i];
+    }
+    PokemonUser pkUser = userTeam.first!;
+    await getNewUserPokemon(pkUser);
+  }
+
+  Future<void> getNewUserPokemon(PokemonUser pkUser) async{
+    Pokemon pkUserPokemon = pkUser.pokemon;
+    Pokemon buffedUserPokemon = Pokemon(
+        pokeDexIndex: pkUserPokemon.pokeDexIndex,
+        name: pkUserPokemon.name,
+        rarity: pkUserPokemon.rarity,
+        type: pkUserPokemon.type,
+        pokeStats: pokeStatsGenInitialization(pkUserPokemon.rarity, pkUserPokemon, pkUser.lvl),
+        region: pkUserPokemon.region,
+        weakness: pkUserPokemon.weakness,
+        gifFront: pkUserPokemon.gifFront,
+        gifBack: pkUserPokemon.gifBack);
+    PokemonUser buffedUserPokemonBattle = PokemonUser(pokemon: buffedUserPokemon, lvl: pkUser.lvl, hashId: pkUser.hashId, pokemonExp: pkUser.pokemonExp);
+    //we need to get exp which it's need to get =>
     setState(() {
-      userTeam = List.filled(6, null);
-      for (int i = 0; i < pokeListFromHive.length && i < userTeam.length; i++) {
-        userTeam[i] = pokeListFromHive[i];
-      }
-      currentUserPokemon = userTeam.first!;
-      currentHpPokemonUser = userTeam.first!.pokemon.pokeStats.hp;
-      userSelectedPokemonMaxHp = userTeam.first!.pokemon.pokeStats.hp;
+      currentUserPokemon = buffedUserPokemonBattle;
+      currentHpPokemonUser = buffedUserPokemonBattle.pokemon.pokeStats.hp;
+      userSelectedPokemonMaxHp = buffedUserPokemonBattle.pokemon.pokeStats.hp;
+      expNeedToNextLvl = (pkUser.lvl>=300)? 0 : experienceDataList[pkUser.lvl-1];
+      currentExpPokemonUser = pkUser.pokemonExp;
     });
   }
 
   PokeStats pokeStatsGen(Rarity rarity, Pokemon poke, int lvl){
+    if(rarity == Rarity.casual){
+      return PokeStats(
+          hp: poke.pokeStats.hp + 2,
+          attack: poke.pokeStats.attack + 1,
+          defence: poke.pokeStats.defence + 1,
+          specialAttack: poke.pokeStats.specialAttack + 1,
+          specialDefence: poke.pokeStats.specialDefence + 1,
+          speed: poke.pokeStats.speed + 1
+      );
+    }
+    else if(rarity == Rarity.rare){
+      return PokeStats(
+          hp: poke.pokeStats.hp + 3,
+          attack: poke.pokeStats.attack + 2,
+          defence: poke.pokeStats.defence + 2,
+          specialAttack: poke.pokeStats.specialAttack + 2,
+          specialDefence: poke.pokeStats.specialDefence + 2,
+          speed: poke.pokeStats.speed + 2
+      );
+    }
+    else if(rarity == Rarity.epic){
+      return PokeStats(
+          hp: poke.pokeStats.hp + 4,
+          attack: poke.pokeStats.attack + 3,
+          defence: poke.pokeStats.defence + 3,
+          specialAttack: poke.pokeStats.specialAttack + 3,
+          specialDefence: poke.pokeStats.specialDefence + 3,
+          speed: poke.pokeStats.speed + 3
+      );
+    }
+    else if(rarity == Rarity.mystic){
+      return PokeStats(
+          hp: poke.pokeStats.hp + 5,
+          attack: poke.pokeStats.attack + 4,
+          defence: poke.pokeStats.defence + 4,
+          specialAttack: poke.pokeStats.specialAttack + 4,
+          specialDefence: poke.pokeStats.specialDefence + 4,
+          speed: poke.pokeStats.speed + 4
+      );
+    }
+    else{
+      return PokeStats(
+          hp: poke.pokeStats.hp + 7,
+          attack: poke.pokeStats.attack + 5,
+          defence: poke.pokeStats.defence + 5,
+          specialAttack: poke.pokeStats.specialAttack + 5,
+          specialDefence: poke.pokeStats.specialDefence + 5,
+          speed: poke.pokeStats.speed + 5
+      );
+    }
+  }
+
+  PokeStats pokeStatsGenInitialization(Rarity rarity, Pokemon poke, int lvl){
     if(rarity == Rarity.casual){
       return PokeStats(
           hp: poke.pokeStats.hp + 2*lvl,
@@ -165,7 +242,7 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
         name: pokemonData.name,
         rarity: pokemonData.rarity,
         type: pokemonData.type,
-        pokeStats: pokeStatsGen(pokemonData.rarity, pokemonData, wildDataPokemon.lvl),
+        pokeStats: pokeStatsGenInitialization(pokemonData.rarity, pokemonData, wildDataPokemon.lvl),
         region: pokemonData.region,
         weakness: pokemonData.weakness,
         gifFront: pokemonData.gifFront,
@@ -187,11 +264,9 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
       final potentialPokemon = userTeam[i];
       if (potentialPokemon != null && !defeatedUserPokemons.contains(potentialPokemon.hashId)) {
         // If we find a valid Pokémon not in the defeated list, use it
+        await getNewUserPokemon(userTeam[i]!);
         setState(() {
-          currentUserPokemon = userTeam[i]!;
           userHaveAnotherPokemon = true;
-          userSelectedPokemonMaxHp = userTeam[i]!.pokemon.pokeStats.hp;
-          currentHpPokemonUser = userTeam[i]!.pokemon.pokeStats.hp;
         });
         break;
       }
@@ -375,7 +450,8 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
     PokemonUser firstPokemon = PokemonUser(
         pokemon: pokemon.pokemon,
         lvl: pokemon.lvl,
-        hashId: "${year}_${month}_${day}_${minute}_${second}_${pokemon.pokemon.name}"
+        hashId: "${year}_${month}_${day}_${minute}_${second}_${pokemon.pokemon.name}",
+        pokemonExp: 0
     );
     pokeListFromHive.add(firstPokemon);
     await box.put("PokeUserInventory", pokeListFromHive);
@@ -609,12 +685,20 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
         final minusHp = (currentWildPokemon.pokemon.pokeStats.defence/2 - currentUserPokemon.pokemon.pokeStats.attack);
         if(minusHp >= 0){
           // that means wild pokemon shield is higher then our attack
+          final result = currentHpPokemonWild - 5;
+          setState(() {
+            currentHpPokemonWild = result;
+          });
         }
         else{
           //If our attack is higher then wild pokemon defence then we should minus our rest of attack with shield power
           final shieldMinusHp = addedShieldCasualWildPokemon + minusHp;
           if(shieldMinusHp >=0){
             //If overall shield protect then do nothing
+            final result = currentHpPokemonWild - 10;
+            setState(() {
+              currentHpPokemonWild = result;
+            });
           }
           else{
             //If shield can't defence then we should minune that value :
@@ -638,12 +722,20 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
 
         if(minusHp >= 0){
           // that means wild pokemon shield is higher then our attack
+          final result = currentHpPokemonWild - 5;
+          setState(() {
+            currentHpPokemonWild = result;
+          });
         }
         else{
           //If our attack is higher then wild pokemon defence then we should minus our rest of attack with shield power
           final shieldMinusHp = addedShieldElementalWildPokemon + minusHp;
           if(shieldMinusHp >=0){
             //If overall shield protect then do nothing
+            final result = currentHpPokemonWild - 10;
+            setState(() {
+              currentHpPokemonWild = result;
+            });
           }
           else{
             //If shield can't defence then we should minune that value :
@@ -713,11 +805,19 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
 
         if(minusHp >= 0){
           // that means our pokemon shield is higher then wild pokemon attack
+          final result = currentHpPokemonUser - 5;
+          setState(() {
+            currentHpPokemonUser = result;
+          });
         }
         else{
           final shieldMinusHp = addedShieldCasualUserPokemon + minusHp;
           if(shieldMinusHp >=0){
             //If overall shield protect then do nothing
+            final result = currentHpPokemonUser - 10;
+            setState(() {
+              currentHpPokemonUser = result;
+            });
           }
           else{
             //If shield can't defence then we should minune that value :
@@ -743,12 +843,20 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
 
         if(minusHp >= 0){
           // that means wild pokemon shield is higher then our attack
+          final result = currentHpPokemonUser - 5;
+          setState(() {
+            currentHpPokemonUser = result;
+          });
         }
         else{
           //If our attack is higher then wild pokemon defence then we should minus our rest of attack with shield power
           final shieldMinusHp = addedShieldElementalUserPokemon + minusHp;
           if(shieldMinusHp >=0){
             //If overall shield protect then do nothing
+            final result = currentHpPokemonUser - 10;
+            setState(() {
+              currentHpPokemonUser = result;
+            });
           }
           else{
             //If shield can't defence then we should minune that value :
@@ -796,7 +904,109 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
   }
 
   Future<void> addUserPokemonExperience(int ammountExp) async{
+    if(currentUserPokemon.lvl>=300){
+      //We can't add more exp to pokemon
+    }
+    else{
+      //Firstly we should add experience to user pokemon =>
+      int totalExp = currentUserPokemon.pokemonExp + ammountExp;
+      //now we should check if total exp is enought to get new lvl =>
+      if(totalExp > expNeedToNextLvl){
+        //calc difference and update user pokemon
+        int diff = totalExp - expNeedToNextLvl;
+        late PokemonUser raisedPokemon;
+        if(currentUserPokemon.lvl == 299){
+          raisedPokemon = PokemonUser(pokemon: currentUserPokemon.pokemon,
+              lvl: currentUserPokemon.lvl +1, hashId: currentUserPokemon.hashId, pokemonExp: 0);
+        }
+        else{
+          raisedPokemon = PokemonUser(pokemon: currentUserPokemon.pokemon,
+              lvl: currentUserPokemon.lvl +1, hashId: currentUserPokemon.hashId, pokemonExp: diff);
+        }
+        await updateUserPokemonData(raisedPokemon);
+        PokeStats updatedPokeStats = pokeStatsGen(raisedPokemon.pokemon.rarity, raisedPokemon.pokemon, raisedPokemon.lvl);
+        setState(() {
+          currentUserPokemon = raisedPokemon;
+          currentExpPokemonUser = diff;
+          expNeedToNextLvl = experienceDataList[currentUserPokemon.lvl -1];
+          currentHpPokemonUser = updatedPokeStats.hp;
+          userSelectedPokemonMaxHp = updatedPokeStats.hp;
+        });
+      }
+      else if(totalExp == expNeedToNextLvl){
+        //we must update user pokemon data =>
+        PokemonUser raisedPokemon = PokemonUser(pokemon: currentUserPokemon.pokemon,
+            lvl: currentUserPokemon.lvl +1, hashId: currentUserPokemon.hashId, pokemonExp: 0);
+        await updateUserPokemonData(raisedPokemon);
+        PokeStats updatedPokeStats = pokeStatsGen(raisedPokemon.pokemon.rarity, raisedPokemon.pokemon, raisedPokemon.lvl);
+        setState(() {
+          currentUserPokemon = raisedPokemon;
+          currentExpPokemonUser = 0;
+          expNeedToNextLvl = experienceDataList[currentUserPokemon.lvl -1];
+          currentHpPokemonUser = updatedPokeStats.hp;
+          userSelectedPokemonMaxHp = updatedPokeStats.hp;
+        });
+      }
+      else{
+        //update user pokemon exp
+        PokemonUser raisedPokemon = PokemonUser(pokemon: currentUserPokemon.pokemon,
+            lvl: currentUserPokemon.lvl, hashId: currentUserPokemon.hashId, pokemonExp: totalExp);
+        await updateUserPokemonData(raisedPokemon);
+        setState(() {
+          currentUserPokemon = raisedPokemon;
+          currentExpPokemonUser = totalExp;
+        });
+      }
+    }
+  }
 
+  Future<void> updateUserPokemonData(PokemonUser pokemonUser) async {
+    var box = await Hive.openBox("PokemonUserInventory");
+
+    // Retrieve the current Pokémon inventory
+    List<dynamic> pokeListFromHiveDynamic = box.get(
+        "PokeUserInventory", defaultValue: []);
+    List<PokemonUser> pokeListFromHive = pokeListFromHiveDynamic.cast<
+        PokemonUser>();
+
+    // Find the Pokémon in the inventory by hashId
+    int pokemonIndex = pokeListFromHive.indexWhere((
+        inventoryPokemon) => inventoryPokemon.hashId == pokemonUser.hashId);
+    if (pokemonIndex != -1) {
+      // Replace the Pokémon with its evolved form
+      pokeListFromHive[pokemonIndex] = PokemonUser(
+          pokemon: pokemonUser.pokemon,
+          lvl: pokemonUser.lvl,
+          hashId: pokemonUser.hashId,
+          pokemonExp: pokemonUser.pokemonExp
+      );
+      // Update the inventory in the box
+      await box.put("PokeUserInventory", pokeListFromHive);
+      await updateTeamPokemon(pokemonUser);
+    }
+  }
+
+  Future<void> updateTeamPokemon(PokemonUser pokemonUser) async {
+    var teamBox = await Hive.openBox("PokemonUserTeam");
+
+    // Retrieve the current team
+    List<dynamic> teamListFromHiveDynamic = teamBox.get("UserTeam", defaultValue: []);
+    List<PokemonUser> teamListFromHive = teamListFromHiveDynamic.cast<PokemonUser>();
+
+    // Find and update the Pokémon in the team by hashId
+    int teamPokemonIndex = teamListFromHive.indexWhere((teamPokemon) => teamPokemon.hashId == pokemonUser.hashId);
+    if (teamPokemonIndex != -1) {
+      // Replace the Pokémon with its evolved form
+      teamListFromHive[teamPokemonIndex] = PokemonUser(
+          pokemon: pokemonUser.pokemon,
+          lvl: pokemonUser.lvl,
+          hashId: pokemonUser.hashId,
+          pokemonExp: pokemonUser.pokemonExp
+      );
+
+      // Update the team in the box
+      await teamBox.put("UserTeam", teamListFromHive);
+    }
   }
 
   Future<void> fightBattle(PokeAction pokeAction) async{
@@ -994,18 +1204,33 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
                             progressColor: Colors.red.shade500,
                           ),
                           const SizedBox(height: 10,),
+                          (currentUserPokemon.lvl >=300)?
                           LinearPercentIndicator(
                             width: 140.0,
                             lineHeight: 14.0,
-                            percent: 0.85,
+                            percent: 1.0,
                             center: Text(
-                              "Exp.",
+                              showPokemonNameCyrillic("Maximum"),
                               style: TextStyle(
                                   fontSize: 14, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
                               ),
                             ),
                             barRadius: Radius.circular(15),
-                            backgroundColor: Colors.grey.shade200,
+                            backgroundColor: Colors.grey.shade400,
+                            progressColor: Colors.green.shade500,
+                          ) :
+                          LinearPercentIndicator(
+                            width: 140.0,
+                            lineHeight: 14.0,
+                            percent: currentExpPokemonUser/expNeedToNextLvl,
+                            center: Text(
+                              "$currentExpPokemonUser/$expNeedToNextLvl",
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                              ),
+                            ),
+                            barRadius: Radius.circular(15),
+                            backgroundColor: Colors.grey.shade400,
                             progressColor: Colors.green.shade500,
                           ),
                         ],

@@ -246,6 +246,10 @@
 
   "defeat_string" : "Defeat",
   "no_more_pokemons_string" : "Coach, all your Pokémon are defeated. Please recover your strength and try again",
-  "no_more_pokeballs" : "Please choose another pokeball or buy another one from the shop"
-
+  "no_more_pokeballs" : "Please choose another pokeball or buy another one from the shop",
+  "view_creator_github" : "View Creator Github",
+  "view_creator_linkedin" : "View Creator Linkedin",
+  "win_string" : "Win",
+  "challenge_overcome_string" : "You have successfully won this competition",
+  "you_got_string" : "You got"
 }

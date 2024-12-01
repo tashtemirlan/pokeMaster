@@ -4,11 +4,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pokemonmap/models/pokemonUser.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:pokemonmap/ui/global_folder/evolution_folder/evolution.dart';
+import 'package:pokemonmap/ui/global_folder/evolution_folder/experience_data_list.dart';
 
+import '../../models/pokemonFolder/pokeRarity.dart';
 import '../../models/pokemonFolder/pokeStats.dart';
 import '../../models/pokemonFolder/pokemonModel.dart';
 import '../global_folder/globals.dart';
@@ -29,6 +32,8 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
   bool dataGet = false;
   bool frontView = false;
   bool evolutionIsPossible = false;
+
+  late PokeStats user_pokemon_stats;
 
   void changeImageView(){
     if(frontView==true){
@@ -93,13 +98,12 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
   }
 
   Widget pokemonStats(double height){
-    PokeStats pokemon_Stats = widget.pokemonUser.pokemon.pokeStats;
-    double pokemon_hp = pokemon_Stats.hp;
-    double pokemon_attack = pokemon_Stats.attack;
-    double pokemon_defence = pokemon_Stats.defence;
-    double pokemon_sp_attack = pokemon_Stats.specialAttack;
-    double pokemon_sp_defence = pokemon_Stats.specialDefence;
-    double pokemon_speed = pokemon_Stats.speed;
+    double pokemon_hp = user_pokemon_stats.hp;
+    double pokemon_attack = user_pokemon_stats.attack;
+    double pokemon_defence = user_pokemon_stats.defence;
+    double pokemon_sp_attack = user_pokemon_stats.specialAttack;
+    double pokemon_sp_defence = user_pokemon_stats.specialDefence;
+    double pokemon_speed = user_pokemon_stats.speed;
     List<double> pokeData = [pokemon_hp, pokemon_attack ,pokemon_defence, pokemon_sp_attack , pokemon_sp_defence, pokemon_speed];
     Color? colorPokeCharts = typeColors[widget.pokemonUser.pokemon.type.first];
     Color showColor = (colorPokeCharts!=null)? colorPokeCharts : Colors.blue.shade600;
@@ -120,7 +124,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${widget.pokemonUser.pokemon.pokeStats.hp}",
+                "${user_pokemon_stats.hp}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -139,7 +143,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${widget.pokemonUser.pokemon.pokeStats.attack}",
+                "${user_pokemon_stats.attack}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -158,7 +162,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${widget.pokemonUser.pokemon.pokeStats.defence}",
+                "${user_pokemon_stats.defence}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -177,7 +181,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${widget.pokemonUser.pokemon.pokeStats.specialAttack}",
+                "${user_pokemon_stats.specialAttack}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -196,7 +200,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${widget.pokemonUser.pokemon.pokeStats.specialDefence}",
+                "${user_pokemon_stats.specialDefence}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -215,7 +219,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${widget.pokemonUser.pokemon.pokeStats.speed}",
+                "${user_pokemon_stats.speed}",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -228,6 +232,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
 
   Future<void> setData() async{
     changeImageView();
+    user_pokemon_stats = pokeStatsGenInitialization(widget.pokemonUser.pokemon.rarity, widget.pokemonUser.pokemon, widget.pokemonUser.lvl);
     setState(() {
       evolutionIsPossible = pokemonCanEvolve(widget.pokemonUser);
       dataGet = true;
@@ -552,14 +557,14 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
         pokemon: evolvedPokemonUser.pokemon,
         lvl: pokemonUser.lvl,
         hashId: pokemonUser.hashId,
+        pokemonExp: pokemonUser.pokemonExp
       );
 
       // Update the inventory in the box
       await box.put("PokeUserInventory", pokeListFromHive);
+      // If the Pokémon is in the user's team, update it there as well
+      await updateTeamPokemon(pokemonUser, evolvedPokemonUser.pokemon);
     }
-
-    // If the Pokémon is in the user's team, update it there as well
-    await updateTeamPokemon(pokemonUser, evolvedPokemonUser.pokemon);
     Navigator.pop(context);
   }
 
@@ -579,10 +584,64 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
         pokemon: newPokemon,
         lvl: oldPokemon.lvl,
         hashId: oldPokemon.hashId,
+        pokemonExp: oldPokemon.pokemonExp
       );
 
       // Update the team in the box
       await teamBox.put("UserTeam", teamListFromHive);
+    }
+  }
+
+  PokeStats pokeStatsGenInitialization(Rarity rarity, Pokemon poke, int lvl){
+    if(rarity == Rarity.casual){
+      return PokeStats(
+          hp: poke.pokeStats.hp + 2*lvl,
+          attack: poke.pokeStats.attack + lvl,
+          defence: poke.pokeStats.defence + lvl,
+          specialAttack: poke.pokeStats.specialAttack + lvl,
+          specialDefence: poke.pokeStats.specialDefence + lvl,
+          speed: poke.pokeStats.speed + lvl
+      );
+    }
+    else if(rarity == Rarity.rare){
+      return PokeStats(
+          hp: poke.pokeStats.hp + 3*lvl,
+          attack: poke.pokeStats.attack + 2*lvl,
+          defence: poke.pokeStats.defence + 2*lvl,
+          specialAttack: poke.pokeStats.specialAttack + 2*lvl,
+          specialDefence: poke.pokeStats.specialDefence + 2*lvl,
+          speed: poke.pokeStats.speed + 2*lvl
+      );
+    }
+    else if(rarity == Rarity.epic){
+      return PokeStats(
+          hp: poke.pokeStats.hp + 4*lvl,
+          attack: poke.pokeStats.attack + 3*lvl,
+          defence: poke.pokeStats.defence + 3*lvl,
+          specialAttack: poke.pokeStats.specialAttack + 3*lvl,
+          specialDefence: poke.pokeStats.specialDefence + 3*lvl,
+          speed: poke.pokeStats.speed + 3*lvl
+      );
+    }
+    else if(rarity == Rarity.mystic){
+      return PokeStats(
+          hp: poke.pokeStats.hp + 5*lvl,
+          attack: poke.pokeStats.attack + 4*lvl,
+          defence: poke.pokeStats.defence + 4*lvl,
+          specialAttack: poke.pokeStats.specialAttack + 4*lvl,
+          specialDefence: poke.pokeStats.specialDefence + 4*lvl,
+          speed: poke.pokeStats.speed + 4*lvl
+      );
+    }
+    else{
+      return PokeStats(
+          hp: poke.pokeStats.hp + 7*lvl,
+          attack: poke.pokeStats.attack + 5*lvl,
+          defence: poke.pokeStats.defence + 5*lvl,
+          specialAttack: poke.pokeStats.specialAttack + 5*lvl,
+          specialDefence: poke.pokeStats.specialDefence + 5*lvl,
+          speed: poke.pokeStats.speed + 5*lvl
+      );
     }
   }
 
@@ -631,6 +690,48 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
                 Text(
                   showPokemonNameCyrillic(widget.pokemonUser.pokemon.name),
                   style: TextStyle(color: Colors.black, fontSize: 24, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  "${showPokemonNameCyrillic("Lvl")} ${widget.pokemonUser.lvl}",
+                  style: TextStyle(color: Colors.black, fontSize: 24, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      (widget.pokemonUser.lvl >=300)?
+                      LinearPercentIndicator(
+                        width: width*0.6,
+                        lineHeight: 20.0,
+                        percent: 1.0,
+                        center: Text(
+                          showPokemonNameCyrillic("Maximum"),
+                          style: TextStyle(
+                              fontSize: 14, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                          ),
+                        ),
+                        barRadius: Radius.circular(15),
+                        backgroundColor: Colors.grey.shade400,
+                        progressColor: Colors.green.shade500,
+                      ):
+                      LinearPercentIndicator(
+                        width: width*0.6,
+                        lineHeight: 20.0,
+                        percent: widget.pokemonUser.pokemonExp/experienceDataList[widget.pokemonUser.lvl-1],
+                        center: Text(
+                          "${widget.pokemonUser.pokemonExp}/${experienceDataList[widget.pokemonUser.lvl-1]}",
+                          style: TextStyle(
+                              fontSize: 14, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
+                          ),
+                        ),
+                        barRadius: Radius.circular(15),
+                        backgroundColor: Colors.grey.shade400,
+                        progressColor: Colors.green.shade500,
+                      )
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Wrap(

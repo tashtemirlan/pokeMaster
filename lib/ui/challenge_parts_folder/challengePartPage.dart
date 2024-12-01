@@ -14,6 +14,7 @@ import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/pokeAwards.dart';
+import '../../models/pokemonFolder/pokeRegion.dart';
 import '../bottom_sheets_folder/pokemon_area_challenge_bottom_sheet.dart';
 import '../global_folder/challenge_masters_folder/hoenn/hoenn_area_gym_challenges.dart';
 import '../global_folder/challenge_masters_folder/johto/johto_area_gym_challenges.dart';
@@ -52,54 +53,54 @@ class _ChallengeTabState extends State<ChallengeTab> {
     );
   }
 
-  void showAreaInformation(PokemonMasterDataClass pokemonMaster, PokeAwards pokeAward){
+  void showAreaInformation(PokemonMasterDataClass pokemonMaster, PokeAwards pokeAward, bool isEliteFour, bool isMaster, Region region){
     showCupertinoModalBottomSheet(
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
       context: context,
       expand: false,
       builder: (BuildContext context) {
-        return BattleChallengeBottomSheetScreen(
-          pokemonListMasters: pokemonMaster, pokeAwards: pokeAward,
+        return BattleChallengePreviewBottomSheetScreen(
+          pokemonListMasters: pokemonMaster, pokeAwards: pokeAward, isEliteFour: isEliteFour, isMaster: isMaster, region:  region,
         );
       },
     );
   }
 
-  Future<void> setDataFromHivePokedexInitialized() async {
-    var box = await Hive.openBox("PokemonUserDataBase");
-    List<dynamic> pokeListAwards = box.get("PokeChallenge", defaultValue: []);
-    // Create a new List<List<PokeAwards>> by safely casting each sublist
-    List<List<PokeAwards>> pokeListFromHive = pokeListAwards.map((dynamic sublist) {
-      return (sublist as List).map((dynamic item) {
-        return item as PokeAwards;  // Cast each item to PokeAwards
+    Future<void> setDataFromHivePokedexInitialized() async {
+      var box = await Hive.openBox("PokemonUserDataBase");
+      List<dynamic> pokeListAwards = box.get("PokeChallenge", defaultValue: []);
+      // Create a new List<List<PokeAwards>> by safely casting each sublist
+      List<List<PokeAwards>> pokeListFromHive = pokeListAwards.map((dynamic sublist) {
+        return (sublist as List).map((dynamic item) {
+          return item as PokeAwards;  // Cast each item to PokeAwards
+        }).toList();
       }).toList();
-    }).toList();
 
-    //Here we need to get our elite 4:
-    List<dynamic> pokeListEliteFourAwards = box.get("PokeChallengeElite", defaultValue: []);
-    // Create a new List<List<PokeAwards>> by safely casting each sublist
-    List<List<PokeAwards>> pokeListEliteFourFromHive = pokeListEliteFourAwards.map((dynamic sublist) {
-      return (sublist as List).map((dynamic item) {
-        return item as PokeAwards;  // Cast each item to PokeAwards
+      //Here we need to get our elite 4:
+      List<dynamic> pokeListEliteFourAwards = box.get("PokeChallengeElite", defaultValue: []);
+      // Create a new List<List<PokeAwards>> by safely casting each sublist
+      List<List<PokeAwards>> pokeListEliteFourFromHive = pokeListEliteFourAwards.map((dynamic sublist) {
+        return (sublist as List).map((dynamic item) {
+          return item as PokeAwards;  // Cast each item to PokeAwards
+        }).toList();
       }).toList();
-    }).toList();
 
-    //Here we got masters :
-    List<dynamic> pokeListMasterAwards = box.get("PokeChallengeMaster", defaultValue: []);
-    List<PokeAwards> pokeMasterList = pokeListMasterAwards.map((dynamic item) {
-      return item as PokeAwards; // Cast each item to PokeAwards
-    }).toList();
+      //Here we got masters :
+      List<dynamic> pokeListMasterAwards = box.get("PokeChallengeMaster", defaultValue: []);
+      List<PokeAwards> pokeMasterList = pokeListMasterAwards.map((dynamic item) {
+        return item as PokeAwards; // Cast each item to PokeAwards
+      }).toList();
 
-    setState(() {
-      hiveList = pokeListFromHive;
-      eliteFourChallenge = pokeListEliteFourFromHive;
-      mastersChallenge = pokeMasterList;
-      dataGet = true;
-    });
-  }
+      setState(() {
+        hiveList = pokeListFromHive;
+        eliteFourChallenge = pokeListEliteFourFromHive;
+        mastersChallenge = pokeMasterList;
+        dataGet = true;
+      });
+    }
 
-  Widget locationListGym(List<PokeAwards> pokeAwardsList, List<PokemonMasterDataClass> gymMasters) {
+  Widget locationListGym(List<PokeAwards> pokeAwardsList, List<PokemonMasterDataClass> gymMasters, Region region) {
     return Wrap(
       alignment: WrapAlignment.center,
       children: List.generate(8, (index) {
@@ -107,7 +108,7 @@ class _ChallengeTabState extends State<ChallengeTab> {
           alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
           child: GestureDetector(
             onTap: (){
-              showAreaInformation(gymMasters[index], pokeAwardsList[index]);
+              showAreaInformation(gymMasters[index], pokeAwardsList[index], false, false, region);
             },
             child: Padding(
               padding: EdgeInsets.only(top: (index==0)? 0 : 15),
@@ -141,7 +142,7 @@ class _ChallengeTabState extends State<ChallengeTab> {
     );
   }
 
-  Widget locationListEliteFour(List<PokemonMasterDataClass> eliteMasters, List<PokeAwards> pokeAwardsList) {
+  Widget locationListEliteFour(List<PokemonMasterDataClass> eliteMasters, List<PokeAwards> pokeAwardsList,  Region region) {
     return Wrap(
       alignment: WrapAlignment.center,
       children: List.generate(4, (index) {
@@ -149,7 +150,7 @@ class _ChallengeTabState extends State<ChallengeTab> {
           alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
           child: GestureDetector(
             onTap: (){
-              showAreaInformation(eliteMasters[index], pokeAwardsList[index]);
+              showAreaInformation(eliteMasters[index], pokeAwardsList[index], true, false, region);
             },
             child: Padding(
               padding: EdgeInsets.only(top: (index==0)? 0 : 15),
@@ -183,10 +184,10 @@ class _ChallengeTabState extends State<ChallengeTab> {
     );
   }
 
-  Widget locationChampion(String regionName, PokemonMasterDataClass master, PokeAwards pokeAward){
+  Widget locationChampion(String regionName, PokemonMasterDataClass master, PokeAwards pokeAward,  Region region){
     return GestureDetector(
       onTap: (){
-        showAreaInformation(master, pokeAward);
+        showAreaInformation(master, pokeAward, false, true, region);
       },
       child: Container(
         width: double.infinity,
@@ -224,7 +225,6 @@ class _ChallengeTabState extends State<ChallengeTab> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -263,13 +263,13 @@ class _ChallengeTabState extends State<ChallengeTab> {
               FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListGym(hiveList[0], kanto_gym_masters),
+              locationListGym(hiveList[0], kanto_gym_masters, Region.Kanto),
               const SizedBox(height: 10,),
               //we can't fight against elite 4 untill we got all region badges
-              locationListEliteFour(kanto_elite_masters, eliteFourChallenge[0]),
+              locationListEliteFour(kanto_elite_masters, eliteFourChallenge[0], Region.Kanto),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationChampion(AppLocalizations.of(context)!.region_kanto, masterKanto, mastersChallenge[0]),
+              locationChampion(AppLocalizations.of(context)!.region_kanto, masterKanto, mastersChallenge[0], Region.Kanto),
               const SizedBox(height: 10,),
 
               //Jhoto
@@ -277,13 +277,13 @@ class _ChallengeTabState extends State<ChallengeTab> {
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold,
                     color: colors.darkBlack, decoration: TextDecoration.underline), textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListGym(hiveList[1], jhoto_gym_masters),
+              locationListGym(hiveList[1], jhoto_gym_masters, Region.Johto),
               const SizedBox(height: 10,),
               //we can't fight against elite 4 untill we got all region badges
-              locationListEliteFour(jhoto_elite_masters, eliteFourChallenge[1]),
+              locationListEliteFour(jhoto_elite_masters, eliteFourChallenge[1], Region.Johto),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationChampion(AppLocalizations.of(context)!.region_johto, masterJhoto, mastersChallenge[1]),
+              locationChampion(AppLocalizations.of(context)!.region_johto, masterJhoto, mastersChallenge[1], Region.Johto),
               const SizedBox(height: 10,),
 
               //Hoenn
@@ -293,13 +293,13 @@ class _ChallengeTabState extends State<ChallengeTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListGym(hiveList[2], hoenn_gym_masters),
+              locationListGym(hiveList[2], hoenn_gym_masters, Region.Hoenn),
               const SizedBox(height: 10,),
               //we can't fight against elite 4 untill we got all region badges
-              locationListEliteFour(hoenn_elite_masters, eliteFourChallenge[2]),
+              locationListEliteFour(hoenn_elite_masters, eliteFourChallenge[2], Region.Hoenn),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationChampion(AppLocalizations.of(context)!.region_hoenn, masterHoenn, mastersChallenge[2]),
+              locationChampion(AppLocalizations.of(context)!.region_hoenn, masterHoenn, mastersChallenge[2], Region.Hoenn),
               const SizedBox(height: 10,),
 
               //Sinnoh
@@ -309,13 +309,13 @@ class _ChallengeTabState extends State<ChallengeTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListGym(hiveList[3], sinnoh_gym_masters),
+              locationListGym(hiveList[3], sinnoh_gym_masters, Region.Sinnoh),
               const SizedBox(height: 10,),
               //we can't fight against elite 4 untill we got all region badges
-              locationListEliteFour(sinnoh_elite_masters, eliteFourChallenge[3]),
+              locationListEliteFour(sinnoh_elite_masters, eliteFourChallenge[3], Region.Sinnoh),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationChampion(AppLocalizations.of(context)!.region_sinnoh, masterSinnoh, mastersChallenge[3]),
+              locationChampion(AppLocalizations.of(context)!.region_sinnoh, masterSinnoh, mastersChallenge[3], Region.Sinnoh),
               const SizedBox(height: 10,),
 
               //Unova
@@ -325,13 +325,13 @@ class _ChallengeTabState extends State<ChallengeTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListGym(hiveList[4], unova_gym_masters),
+              locationListGym(hiveList[4], unova_gym_masters, Region.Unova),
               const SizedBox(height: 10,),
               //we can't fight against elite 4 untill we got all region badges
-              locationListEliteFour(unova_elite_masters, eliteFourChallenge[4]),
+              locationListEliteFour(unova_elite_masters, eliteFourChallenge[4], Region.Unova),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationChampion(AppLocalizations.of(context)!.region_unova, masterUnova, mastersChallenge[4]),
+              locationChampion(AppLocalizations.of(context)!.region_unova, masterUnova, mastersChallenge[4], Region.Unova),
               const SizedBox(height: 10,),
 
               //Kalos
@@ -341,13 +341,13 @@ class _ChallengeTabState extends State<ChallengeTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListGym(hiveList[5], kalos_gym_masters),
+              locationListGym(hiveList[5], kalos_gym_masters, Region.Kalos),
               const SizedBox(height: 10,),
               //we can't fight against elite 4 untill we got all region badges
-              locationListEliteFour(kalos_elite_masters, eliteFourChallenge[5]),
+              locationListEliteFour(kalos_elite_masters, eliteFourChallenge[5], Region.Kalos),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationChampion(AppLocalizations.of(context)!.region_kalos, masterKalos, mastersChallenge[5]),
+              locationChampion(AppLocalizations.of(context)!.region_kalos, masterKalos, mastersChallenge[5], Region.Kalos),
               const SizedBox(height: 70,),
             ],
           ) :

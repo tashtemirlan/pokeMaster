@@ -50,7 +50,7 @@ class _ContestTabState extends State<ContestTab> {
     });
   }
 
-  Widget locationListContestKanto(List<PokeAwards> pokeAwardsList) {
+  Widget locationListContest(List<PokeAwards> pokeAwardsList) {
     return Wrap(
       alignment: WrapAlignment.center,
       children: List.generate(8, (index) {
@@ -91,212 +91,7 @@ class _ContestTabState extends State<ContestTab> {
     );
   }
 
-  Widget locationListContestJohto(List<PokeAwards> pokeAwardsList) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: List.generate(8, (index) {
-        return Align(
-          alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
-          child: GestureDetector(
-            onTap: (){
-            },
-            child: Padding(
-              padding: EdgeInsets.only(top: (index==0)? 0 : 15),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: colors.searchBoxColor
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13, vertical: 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                          pokeAwardsList[index].cityName,
-                          style: TextStyle(
-                              fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                          )
-                      ),
-                      const SizedBox(width: 8,),
-                      Icon(FontAwesomeIcons.ribbon, color: Colors.white, size: 36,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  Widget locationListContestHoenn(List<PokeAwards> pokeAwardsList) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: List.generate(8, (index) {
-        return Align(
-          alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
-          child: GestureDetector(
-            onTap: (){
-            },
-            child: Padding(
-              padding: EdgeInsets.only(top: (index==0)? 0 : 15),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: colors.searchBoxColor
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13, vertical: 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                          pokeAwardsList[index].cityName,
-                          style: TextStyle(
-                              fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                          )
-                      ),
-                      const SizedBox(width: 8,),
-                      Icon(FontAwesomeIcons.ribbon, color: Colors.white, size: 36,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  Widget locationListContestSinnoh(List<PokeAwards> pokeAwardsList) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: List.generate(8, (index) {
-        return Align(
-          alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
-          child: GestureDetector(
-            onTap: (){
-            },
-            child: Padding(
-              padding: EdgeInsets.only(top: (index==0)? 0 : 15),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: colors.searchBoxColor
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13, vertical: 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                          pokeAwardsList[index].cityName,
-                          style: TextStyle(
-                              fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                          )
-                      ),
-                      const SizedBox(width: 8,),
-                      Icon(FontAwesomeIcons.ribbon, color: Colors.white, size: 36,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  Widget locationListContestUnova(List<PokeAwards> pokeAwardsList) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: List.generate(8, (index) {
-        return Align(
-          alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
-          child: GestureDetector(
-            onTap: (){
-            },
-            child: Padding(
-              padding: EdgeInsets.only(top: (index==0)? 0 : 15),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: colors.searchBoxColor
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13, vertical: 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                          pokeAwardsList[index].cityName,
-                          style: TextStyle(
-                              fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                          )
-                      ),
-                      const SizedBox(width: 8,),
-                      Icon(FontAwesomeIcons.ribbon, color: Colors.white, size: 36,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  Widget locationListContestKalos(List<PokeAwards> pokeAwardsList) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      children: List.generate(8, (index) {
-        return Align(
-          alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
-          child: GestureDetector(
-            onTap: (){
-            },
-            child: Padding(
-              padding: EdgeInsets.only(top: (index==0)? 0 : 15),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: colors.searchBoxColor
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13, vertical: 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                          pokeAwardsList[index].cityName,
-                          style: TextStyle(
-                              fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                          )
-                      ),
-                      const SizedBox(width: 8,),
-                      Icon(FontAwesomeIcons.ribbon, color: Colors.white, size: 36,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  Widget locationBigFestivalKanto(){
+  Widget locationBigFestival(String regionString){
     return GestureDetector(
       onTap: (){
 
@@ -314,167 +109,7 @@ class _ContestTabState extends State<ContestTab> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                  "${AppLocalizations.of(context)!.big_festival_string} ${AppLocalizations.of(context)!.region_kanto}",
-                  style: TextStyle(
-                      fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                  )
-              ),
-              const SizedBox(width: 8,),
-              Icon(FontAwesomeIcons.crown, color: Colors.white, size: 36,)
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget locationBigFestivalJhoto(){
-    return GestureDetector(
-      onTap: (){
-
-      },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: colors.areaChampion,
-            borderRadius: BorderRadius.circular(10)
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                  "${AppLocalizations.of(context)!.big_festival_string} ${AppLocalizations.of(context)!.region_johto}",
-                  style: TextStyle(
-                      fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                  )
-              ),
-              const SizedBox(width: 8,),
-              Icon(FontAwesomeIcons.crown, color: Colors.white, size: 36,)
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget locationBigFestivalHoenn(){
-    return GestureDetector(
-      onTap: (){
-
-      },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: colors.areaChampion,
-            borderRadius: BorderRadius.circular(10)
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                  "${AppLocalizations.of(context)!.big_festival_string} ${AppLocalizations.of(context)!.region_hoenn}",
-                  style: TextStyle(
-                      fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                  )
-              ),
-              const SizedBox(width: 8,),
-              Icon(FontAwesomeIcons.crown, color: Colors.white, size: 36,)
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget locationBigFestivalSinnoh(){
-    return GestureDetector(
-      onTap: (){
-
-      },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: colors.areaChampion,
-            borderRadius: BorderRadius.circular(10)
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                  "${AppLocalizations.of(context)!.big_festival_string} ${AppLocalizations.of(context)!.region_sinnoh}",
-                  style: TextStyle(
-                      fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                  )
-              ),
-              const SizedBox(width: 8,),
-              Icon(FontAwesomeIcons.crown, color: Colors.white, size: 36,)
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget locationBigFestivalUnova(){
-    return GestureDetector(
-      onTap: (){
-
-      },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: colors.areaChampion,
-            borderRadius: BorderRadius.circular(10)
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                  "${AppLocalizations.of(context)!.big_festival_string} ${AppLocalizations.of(context)!.region_unova}",
-                  style: TextStyle(
-                      fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
-                  )
-              ),
-              const SizedBox(width: 8,),
-              Icon(FontAwesomeIcons.crown, color: Colors.white, size: 36,)
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget locationBigFestivalKalos(){
-    return GestureDetector(
-      onTap: (){
-
-      },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: colors.areaChampion,
-            borderRadius: BorderRadius.circular(10)
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                  "${AppLocalizations.of(context)!.big_festival_string} ${AppLocalizations.of(context)!.region_kalos}",
+                  "${AppLocalizations.of(context)!.big_festival_string} $regionString",
                   style: TextStyle(
                       fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500 , letterSpacing: 0.1
                   )
@@ -536,20 +171,20 @@ class _ContestTabState extends State<ContestTab> {
               FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContestKanto(hiveList[0]),
+              locationListContest(hiveList[0]),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestivalKanto(),
+              locationBigFestival(AppLocalizations.of(context)!.region_kanto),
               const SizedBox(height: 10,),
               //Jhoto
               Text(AppLocalizations.of(context)!.region_johto,
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold,
                     color: colors.darkBlack, decoration: TextDecoration.underline), textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContestJohto(hiveList[1]),
+              locationListContest(hiveList[1]),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestivalJhoto(),
+              locationBigFestival(AppLocalizations.of(context)!.region_johto),
               const SizedBox(height: 10,),
               //Hoenn
               Text(
@@ -558,10 +193,10 @@ class _ContestTabState extends State<ContestTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContestHoenn(hiveList[2]),
+              locationListContest(hiveList[2]),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestivalHoenn(),
+              locationBigFestival(AppLocalizations.of(context)!.region_hoenn),
               const SizedBox(height: 10,),
               //Sinnoh
               Text(
@@ -570,10 +205,10 @@ class _ContestTabState extends State<ContestTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContestSinnoh(hiveList[3]),
+              locationListContest(hiveList[3]),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestivalSinnoh(),
+              locationBigFestival(AppLocalizations.of(context)!.region_sinnoh),
               const SizedBox(height: 10,),
               //Unova
               Text(
@@ -582,10 +217,10 @@ class _ContestTabState extends State<ContestTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContestUnova(hiveList[4]),
+              locationListContest(hiveList[4]),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestivalUnova(),
+              locationBigFestival(AppLocalizations.of(context)!.region_unova),
               const SizedBox(height: 10,),
               //Kalos
               Text(
@@ -594,10 +229,10 @@ class _ContestTabState extends State<ContestTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContestKalos(hiveList[5]),
+              locationListContest(hiveList[5]),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestivalKalos(),
+              locationBigFestival(AppLocalizations.of(context)!.region_kalos),
               const SizedBox(height: 70,),
             ],
           ) :

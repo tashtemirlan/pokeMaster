@@ -9,6 +9,7 @@ import 'package:pokemonmap/models/pokemonFolder/pokemonModel.dart';
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:pokemonmap/ui/global_folder/pokemon_area_folder/pokemons_area_johto.dart';
 import 'package:pokemonmap/ui/global_folder/pokemon_area_folder/pokemons_area_kanto.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/pokemonFolder/pokeType.dart';
 import '../../models/pokemonUser.dart';
@@ -36,6 +37,10 @@ class MapPage extends StatefulWidget{
 class MapPageState extends State<MapPage>{
   List<Pokemon> firstPokemonList = [];
   late Region selectedRegion;
+
+  String githubString = "https://github.com/tashtemirlan";
+  String linkedinString = "https://www.linkedin.com/in/tashtanov/";
+
 
   void viewPokeRouletteBottomSheet(int typeId, int cost) async{
     showCupertinoModalBottomSheet(
@@ -244,6 +249,12 @@ class MapPageState extends State<MapPage>{
     );
   }
 
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   void showSettings(BuildContext context){
     showDialog(
       context: context,
@@ -271,7 +282,7 @@ class MapPageState extends State<MapPage>{
                     width: double.infinity,
                     child: ElevatedButton(
                         onPressed: () async{
-
+                          _launchUrl(Uri.parse(githubString));
                         },
                         style: ButtonStyle(
                             shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -284,7 +295,7 @@ class MapPageState extends State<MapPage>{
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: Text(
-                              AppLocalizations.of(context)!.settings_load_progress,
+                              AppLocalizations.of(context)!.view_creator_github,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
@@ -297,7 +308,7 @@ class MapPageState extends State<MapPage>{
                     width: double.infinity,
                     child: ElevatedButton(
                         onPressed: () async{
-
+                          _launchUrl(Uri.parse(linkedinString));
                         },
                         style: ButtonStyle(
                             shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -310,7 +321,7 @@ class MapPageState extends State<MapPage>{
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: Text(
-                              AppLocalizations.of(context)!.settings_save_progress,
+                              AppLocalizations.of(context)!.view_creator_linkedin,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600 , letterSpacing: 0.01
@@ -547,7 +558,8 @@ class MapPageState extends State<MapPage>{
     PokemonUser firstPokemon = PokemonUser(
         pokemon: pokemon,
         lvl: 1,
-        hashId: "${year}_${month}_${day}_${minute}_${second}_${pokemon.name}"
+        hashId: "${year}_${month}_${day}_${minute}_${second}_${pokemon.name}",
+        pokemonExp: 0
     );
     pokeListFromHive.add(firstPokemon);
     await box.put("PokeUserInventory", pokeListFromHive);
