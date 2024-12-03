@@ -77,7 +77,7 @@ Here links how project started and all way throw development :
 - [Project start](https://www.linkedin.com/posts/tashtanov_github-tashtemirlanpokemaster-pokemon-activity-7250876090334810112-bcAk?utm_source=combined_share_message&utm_medium=member_desktop_web)
 - [First steps](https://www.linkedin.com/pulse/pokedex-pokeroulette-temirlan-tashtanov-fo5de/?trackingId=4FtVEHjiKPw0RDq%2Bpj3wTg%3D%3D)
 - [Major update](https://www.linkedin.com/pulse/pokemaster-v20-temirlan-tashtanov-ttfce/?trackingId=Lb4smk61zxIAIHJ3A7O2VQ%3D%3D)
-
+- [Release](https://www.linkedin.com/pulse/pokemaster-release-temirlan-tashtanov-prpae)
 ---
 
 ## 📄 Dart Code Database Structure
