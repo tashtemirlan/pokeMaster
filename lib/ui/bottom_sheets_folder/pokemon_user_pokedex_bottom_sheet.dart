@@ -11,8 +11,8 @@ import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:pokemonmap/ui/global_folder/evolution_folder/evolution.dart';
 import 'package:pokemonmap/ui/global_folder/evolution_folder/experience_data_list.dart';
 
+import '../../models/pokedexModel.dart';
 import '../../models/pokemonFolder/pokeRarity.dart';
-import '../../models/pokemonFolder/pokeStats.dart';
 import '../../models/pokemonFolder/pokemonModel.dart';
 import '../global_folder/globals.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,7 +33,22 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
   bool frontView = false;
   bool evolutionIsPossible = false;
 
-  late PokeStats user_pokemon_stats;
+  List<PokedexPokemonModel> hivePokedexList = [];
+
+  double userBasicHp = 0;
+  double userBasicAttack = 0;
+  double userBasicDefence = 0;
+  double userBasicSpAttack = 0;
+  double userBasicSpDefence = 0;
+  double userBasicSpeed = 0;
+
+  double userUpgradedHp = 0;
+  double userUpgradedAttack = 0;
+  double userUpgradedDefence = 0;
+  double userUpgradedSpAttack = 0;
+  double userUpgradedSpDefence = 0;
+  double userUpgradedSpeed = 0;
+
 
   void changeImageView(){
     if(frontView==true){
@@ -98,13 +113,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
   }
 
   Widget pokemonStats(double height){
-    double pokemon_hp = user_pokemon_stats.hp;
-    double pokemon_attack = user_pokemon_stats.attack;
-    double pokemon_defence = user_pokemon_stats.defence;
-    double pokemon_sp_attack = user_pokemon_stats.specialAttack;
-    double pokemon_sp_defence = user_pokemon_stats.specialDefence;
-    double pokemon_speed = user_pokemon_stats.speed;
-    List<double> pokeData = [pokemon_hp, pokemon_attack ,pokemon_defence, pokemon_sp_attack , pokemon_sp_defence, pokemon_speed];
+    List<double> pokeData = [userUpgradedHp, userUpgradedAttack ,userUpgradedDefence, userUpgradedSpAttack , userUpgradedSpDefence, userUpgradedSpeed];
     Color? colorPokeCharts = typeColors[widget.pokemonUser.pokemon.type.first];
     Color showColor = (colorPokeCharts!=null)? colorPokeCharts : Colors.blue.shade600;
     return radarChartPokemon(pokeData, showColor, height);
@@ -124,7 +133,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${user_pokemon_stats.hp}",
+                "$userUpgradedHp",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -143,7 +152,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${user_pokemon_stats.attack}",
+                "$userUpgradedAttack",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -162,7 +171,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${user_pokemon_stats.defence}",
+                "$userUpgradedDefence",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -181,7 +190,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${user_pokemon_stats.specialAttack}",
+                "$userUpgradedSpAttack",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -200,7 +209,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${user_pokemon_stats.specialDefence}",
+                "$userUpgradedSpDefence",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -219,7 +228,7 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
             const SizedBox(width: 5,),
             Expanded(
               child: Text(
-                "${user_pokemon_stats.speed}",
+                "$userUpgradedSpeed",
                 style: TextStyle(color: Colors.black , fontSize: 18,
                     decoration: TextDecoration.none, fontWeight: FontWeight.bold ,fontStyle: FontStyle.italic),
               ),
@@ -232,7 +241,8 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
 
   Future<void> setData() async{
     changeImageView();
-    user_pokemon_stats = pokeStatsGenInitialization(widget.pokemonUser.pokemon.rarity, widget.pokemonUser.pokemon, widget.pokemonUser.lvl);
+    await setDataFromHivePokedexInitialized();
+    await setPokemonData();
     setState(() {
       evolutionIsPossible = pokemonCanEvolve(widget.pokemonUser);
       dataGet = true;
@@ -592,58 +602,81 @@ class PokemonUserPokedexBottomSheetState extends State<PokemonUserPokedexBottomS
     }
   }
 
-  PokeStats pokeStatsGenInitialization(Rarity rarity, Pokemon poke, int lvl){
-    if(rarity == Rarity.casual){
-      return PokeStats(
-          hp: poke.pokeStats.hp + 2*lvl,
-          attack: poke.pokeStats.attack + lvl,
-          defence: poke.pokeStats.defence + lvl,
-          specialAttack: poke.pokeStats.specialAttack + lvl,
-          specialDefence: poke.pokeStats.specialDefence + lvl,
-          speed: poke.pokeStats.speed + lvl
-      );
+  Future<void> setPokemonData() async{
+    final pokemonUser = widget.pokemonUser;
+    final pokemon_pokmonUser = pokemonUser.pokemon;
+    // we need to get data from pokedex =>
+    late Pokemon pokemonFromPokedex;
+    for(int i=0; i<hivePokedexList.length; i++){
+      if(hivePokedexList[i].pokemon.name == pokemon_pokmonUser.name){
+        pokemonFromPokedex = hivePokedexList[i].pokemon;
+        break;
+      }
     }
-    else if(rarity == Rarity.rare){
-      return PokeStats(
-          hp: poke.pokeStats.hp + 3*lvl,
-          attack: poke.pokeStats.attack + 2*lvl,
-          defence: poke.pokeStats.defence + 2*lvl,
-          specialAttack: poke.pokeStats.specialAttack + 2*lvl,
-          specialDefence: poke.pokeStats.specialDefence + 2*lvl,
-          speed: poke.pokeStats.speed + 2*lvl
-      );
+
+    userBasicHp = pokemonFromPokedex.pokeStats.hp;
+    userBasicAttack = pokemonFromPokedex.pokeStats.attack;
+    userBasicDefence = pokemonFromPokedex.pokeStats.defence;
+    userBasicSpAttack = pokemonFromPokedex.pokeStats.specialAttack;
+    userBasicSpDefence = pokemonFromPokedex.pokeStats.specialDefence;
+    userBasicSpeed = pokemonFromPokedex.pokeStats.speed;
+
+    //Set buffed data =>
+    if(pokemon_pokmonUser.rarity == Rarity.casual){
+      userUpgradedHp = pokemonFromPokedex.pokeStats.hp + 2*(pokemonUser.lvl-1);
+      userUpgradedAttack = pokemonFromPokedex.pokeStats.attack + (pokemonUser.lvl-1);
+      userUpgradedDefence = pokemonFromPokedex.pokeStats.defence + (pokemonUser.lvl-1);
+      userUpgradedSpAttack = pokemonFromPokedex.pokeStats.specialAttack + (pokemonUser.lvl-1);
+      userUpgradedSpDefence = pokemonFromPokedex.pokeStats.specialDefence + (pokemonUser.lvl-1);
+      userUpgradedSpeed = pokemonFromPokedex.pokeStats.speed + (pokemonUser.lvl-1);
     }
-    else if(rarity == Rarity.epic){
-      return PokeStats(
-          hp: poke.pokeStats.hp + 4*lvl,
-          attack: poke.pokeStats.attack + 3*lvl,
-          defence: poke.pokeStats.defence + 3*lvl,
-          specialAttack: poke.pokeStats.specialAttack + 3*lvl,
-          specialDefence: poke.pokeStats.specialDefence + 3*lvl,
-          speed: poke.pokeStats.speed + 3*lvl
-      );
+    else if(pokemon_pokmonUser.rarity == Rarity.rare){
+      userUpgradedHp = pokemonFromPokedex.pokeStats.hp + 3*(pokemonUser.lvl-1);
+      userUpgradedAttack = pokemonFromPokedex.pokeStats.attack + 2*(pokemonUser.lvl-1);
+      userUpgradedDefence = pokemonFromPokedex.pokeStats.defence + 2*(pokemonUser.lvl-1);
+      userUpgradedSpAttack = pokemonFromPokedex.pokeStats.specialAttack + 2*(pokemonUser.lvl-1);
+      userUpgradedSpDefence = pokemonFromPokedex.pokeStats.specialDefence + 2*(pokemonUser.lvl-1);
+      userUpgradedSpeed = pokemonFromPokedex.pokeStats.speed + 2*(pokemonUser.lvl-1);
     }
-    else if(rarity == Rarity.mystic){
-      return PokeStats(
-          hp: poke.pokeStats.hp + 5*lvl,
-          attack: poke.pokeStats.attack + 4*lvl,
-          defence: poke.pokeStats.defence + 4*lvl,
-          specialAttack: poke.pokeStats.specialAttack + 4*lvl,
-          specialDefence: poke.pokeStats.specialDefence + 4*lvl,
-          speed: poke.pokeStats.speed + 4*lvl
-      );
+    else if(pokemon_pokmonUser.rarity == Rarity.epic){
+      userUpgradedHp = pokemonFromPokedex.pokeStats.hp + 4*(pokemonUser.lvl-1);
+      userUpgradedAttack = pokemonFromPokedex.pokeStats.attack + 3*(pokemonUser.lvl-1);
+      userUpgradedDefence = pokemonFromPokedex.pokeStats.defence + 3*(pokemonUser.lvl-1);
+      userUpgradedSpAttack = pokemonFromPokedex.pokeStats.specialAttack + 3*(pokemonUser.lvl-1);
+      userUpgradedSpDefence = pokemonFromPokedex.pokeStats.specialDefence + 3*(pokemonUser.lvl-1);
+      userUpgradedSpeed = pokemonFromPokedex.pokeStats.speed + 3*(pokemonUser.lvl-1);
+    }
+    else if(pokemon_pokmonUser.rarity == Rarity.mystic){
+      userUpgradedHp = pokemonFromPokedex.pokeStats.hp + 5*(pokemonUser.lvl-1);
+      userUpgradedAttack = pokemonFromPokedex.pokeStats.attack + 4*(pokemonUser.lvl-1);
+      userUpgradedDefence = pokemonFromPokedex.pokeStats.defence + 4*(pokemonUser.lvl-1);
+      userUpgradedSpAttack = pokemonFromPokedex.pokeStats.specialAttack + 4*(pokemonUser.lvl-1);
+      userUpgradedSpDefence = pokemonFromPokedex.pokeStats.specialDefence + 4*(pokemonUser.lvl-1);
+      userUpgradedSpeed = pokemonFromPokedex.pokeStats.speed + 4*(pokemonUser.lvl-1);
     }
     else{
-      return PokeStats(
-          hp: poke.pokeStats.hp + 7*lvl,
-          attack: poke.pokeStats.attack + 5*lvl,
-          defence: poke.pokeStats.defence + 5*lvl,
-          specialAttack: poke.pokeStats.specialAttack + 5*lvl,
-          specialDefence: poke.pokeStats.specialDefence + 5*lvl,
-          speed: poke.pokeStats.speed + 5*lvl
-      );
+      userUpgradedHp = pokemonFromPokedex.pokeStats.hp + 7*(pokemonUser.lvl-1);
+      userUpgradedAttack = pokemonFromPokedex.pokeStats.attack + 5*(pokemonUser.lvl-1);
+      userUpgradedDefence = pokemonFromPokedex.pokeStats.defence + 5*(pokemonUser.lvl-1);
+      userUpgradedSpAttack = pokemonFromPokedex.pokeStats.specialAttack + 5*(pokemonUser.lvl-1);
+      userUpgradedSpDefence = pokemonFromPokedex.pokeStats.specialDefence + 5*(pokemonUser.lvl-1);
+      userUpgradedSpeed = pokemonFromPokedex.pokeStats.speed + 5*(pokemonUser.lvl-1);
     }
   }
+
+  Future<void> setDataFromHivePokedexInitialized() async{
+    var box = await Hive.openBox("PokemonUserPokedex");
+
+    // Read the list from Hive and cast it to List<PokedexPokemonModel>
+    List<dynamic> pokeListFromHiveDynamic = box.get("Pokedex", defaultValue: []);
+
+    // Cast the list to List<PokedexPokemonModel>
+    List<PokedexPokemonModel> pokeListFromHive = pokeListFromHiveDynamic.cast<PokedexPokemonModel>();
+    setState(() {
+      hivePokedexList = pokeListFromHive;
+    });
+  }
+
 
   @override
   void initState() {
