@@ -4,15 +4,18 @@ import 'package:pokemonmap/ui/global_folder/colors.dart';
 import 'package:pokemonmap/ui/global_folder/globals.dart';
 
 import '../../models/pokeAwards.dart';
+import '../../models/pokemonFolder/pokeRegion.dart';
 import '../global_folder/challenge_masters_folder/pokemon_master_data_class.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'battle_contest_bottom_sheet_screen.dart';
 
 class BattleContestPreviewBottomSheetScreen extends StatefulWidget{
-  final List<PokemonMasterDataClass> pokemonListMasters;
+  final PokemonMasterDataClass pokemonListMasters;
   final PokeAwards pokeAwards;
-  const BattleContestPreviewBottomSheetScreen({super.key, required this.pokemonListMasters, required this.pokeAwards});
+  final bool isMaster;
+  final Region region;
+  const BattleContestPreviewBottomSheetScreen({super.key, required this.pokemonListMasters, required this.pokeAwards, required this.isMaster, required this.region});
 
   @override
   BattleContestPreviewBottomSheetScreenState createState() => BattleContestPreviewBottomSheetScreenState();
@@ -29,7 +32,12 @@ class BattleContestPreviewBottomSheetScreenState extends State<BattleContestPrev
       context: context,
       expand: false,
       builder: (BuildContext context) {
-        return BattleContestBottomSheetScreen();
+        return BattleContestBottomSheetScreen(
+          pokemonListMasters: widget.pokemonListMasters,
+          pokeAwards: widget.pokeAwards,
+          isMaster: widget.isMaster,
+          region: widget.region,
+        );
       },
     );
   }
@@ -37,7 +45,7 @@ class BattleContestPreviewBottomSheetScreenState extends State<BattleContestPrev
   Widget startBattle(){
     return GestureDetector(
       onTap: (){
-
+          startBattleVoid();
       },
       child: Container(
         width: double.infinity,
@@ -120,7 +128,7 @@ class BattleContestPreviewBottomSheetScreenState extends State<BattleContestPrev
                   Text(widget.pokeAwards.cityName, style: TextStyle(fontSize: 16, color: darkBlack, decoration: TextDecoration.none),),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 30,),
               startBattle(),
               SizedBox(height: 20,),
             ],

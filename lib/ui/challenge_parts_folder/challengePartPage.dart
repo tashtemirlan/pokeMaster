@@ -67,7 +67,7 @@ class _ChallengeTabState extends State<ChallengeTab> {
     );
   }
 
-    Future<void> setDataFromHivePokedexInitialized() async {
+  Future<void> setDataFromHivePokedexInitialized() async {
       var box = await Hive.openBox("PokemonUserDataBase");
       List<dynamic> pokeListAwards = box.get("PokeChallenge", defaultValue: []);
       // Create a new List<List<PokeAwards>> by safely casting each sublist

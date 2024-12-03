@@ -6,9 +6,24 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pokemonmap/ui/global_folder/colors.dart' as colors;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/hoenn/hoenn_area_big_festival.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/johto/johto_area_big_festival.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/johto/johto_area_contest.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/kalos/kalos_area_big_festival.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/kanto/kanto_area_big_festival.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/kanto/kanto_area_contest.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/sinnoh/sinnoh_area_big_festival.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/sinnoh/sinnoh_area_contest.dart';
+import 'package:pokemonmap/ui/global_folder/contest_masters_folder/unova/unova_area_big_festival.dart';
 
 import '../../models/pokeAwards.dart';
+import '../../models/pokemonFolder/pokeRegion.dart';
 import '../bottom_sheets_folder/poke_badges_bottom_sheet.dart';
+import '../bottom_sheets_folder/pokemon_area_contest_challenge_bottom_sheet.dart';
+import '../global_folder/challenge_masters_folder/pokemon_master_data_class.dart';
+import '../global_folder/contest_masters_folder/hoenn/hoenn_area_contest.dart';
+import '../global_folder/contest_masters_folder/kalos/kalos_area_contest.dart';
+import '../global_folder/contest_masters_folder/unova/unova_area_contest.dart';
 
 class ContestTab extends StatefulWidget {
   @override
@@ -19,6 +34,9 @@ class _ContestTabState extends State<ContestTab> {
 
   bool dataGet = false;
   List<List<PokeAwards>> hiveList = [];
+
+  List<PokeAwards> mastersChallenge = [];
+
 
   void showAllContestAwards(){
     showCupertinoModalBottomSheet(
@@ -44,13 +62,34 @@ class _ContestTabState extends State<ContestTab> {
       }).toList();
     }).toList();
 
+    //Here we got masters :
+    List<dynamic> pokeListMasterAwards = box.get("PokeContestBigFestival", defaultValue: []);
+    List<PokeAwards> pokeMasterList = pokeListMasterAwards.map((dynamic item) {
+      return item as PokeAwards; // Cast each item to PokeAwards
+    }).toList();
+
     setState(() {
       hiveList = pokeListFromHive;
+      mastersChallenge = pokeMasterList;
       dataGet = true;
     });
   }
 
-  Widget locationListContest(List<PokeAwards> pokeAwardsList) {
+  void showAreaInformation(PokemonMasterDataClass pokemonMaster, PokeAwards pokeAward, bool isMaster, Region region){
+    showCupertinoModalBottomSheet(
+      topRadius: const Radius.circular(40),
+      backgroundColor: colors.scaffoldColor,
+      context: context,
+      expand: false,
+      builder: (BuildContext context) {
+        return BattleContestPreviewBottomSheetScreen(
+          pokemonListMasters: pokemonMaster, pokeAwards: pokeAward, isMaster: isMaster, region:  region,
+        );
+      },
+    );
+  }
+
+  Widget locationListContest(List<PokeAwards> pokeAwardsList, List<PokemonMasterDataClass> contestMasters, Region region) {
     return Wrap(
       alignment: WrapAlignment.center,
       children: List.generate(8, (index) {
@@ -58,6 +97,8 @@ class _ContestTabState extends State<ContestTab> {
           alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight,
           child: GestureDetector(
             onTap: (){
+              // We must work like it's one poke master but have many pokemons , so main idea is we should fight against 4 pokemons on contests and 6 on big festival
+              showAreaInformation(contestMasters[index], pokeAwardsList[index], false, region);
             },
             child: Padding(
               padding: EdgeInsets.only(top: (index==0)? 0 : 15),
@@ -91,10 +132,10 @@ class _ContestTabState extends State<ContestTab> {
     );
   }
 
-  Widget locationBigFestival(String regionString){
+  Widget locationBigFestival(String regionString, PokemonMasterDataClass master, PokeAwards pokeAward,  Region region){
     return GestureDetector(
       onTap: (){
-
+        showAreaInformation(master, pokeAward , true , region);
       },
       child: Container(
         width: double.infinity,
@@ -171,20 +212,20 @@ class _ContestTabState extends State<ContestTab> {
               FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContest(hiveList[0]),
+              locationListContest(hiveList[0], kanto_contest_masters, Region.Kanto),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestival(AppLocalizations.of(context)!.region_kanto),
+              locationBigFestival(AppLocalizations.of(context)!.region_kanto, masterBigFestivalKanto, mastersChallenge[0], Region.Kanto),
               const SizedBox(height: 10,),
               //Jhoto
               Text(AppLocalizations.of(context)!.region_johto,
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold,
                     color: colors.darkBlack, decoration: TextDecoration.underline), textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContest(hiveList[1]),
+              locationListContest(hiveList[1], jhoto_contest_masters, Region.Johto),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestival(AppLocalizations.of(context)!.region_johto),
+              locationBigFestival(AppLocalizations.of(context)!.region_johto, masterBigFestivalJhoto, mastersChallenge[1], Region.Johto),
               const SizedBox(height: 10,),
               //Hoenn
               Text(
@@ -193,10 +234,10 @@ class _ContestTabState extends State<ContestTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContest(hiveList[2]),
+              locationListContest(hiveList[2], hoenn_contest_masters, Region.Hoenn),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestival(AppLocalizations.of(context)!.region_hoenn),
+              locationBigFestival(AppLocalizations.of(context)!.region_hoenn, masterBigFestivalHoenn, mastersChallenge[2], Region.Hoenn),
               const SizedBox(height: 10,),
               //Sinnoh
               Text(
@@ -205,10 +246,10 @@ class _ContestTabState extends State<ContestTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContest(hiveList[3]),
+              locationListContest(hiveList[3], sinnoh_contest_masters, Region.Sinnoh),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestival(AppLocalizations.of(context)!.region_sinnoh),
+              locationBigFestival(AppLocalizations.of(context)!.region_sinnoh, masterBigFestivalSinnoh, mastersChallenge[3], Region.Sinnoh),
               const SizedBox(height: 10,),
               //Unova
               Text(
@@ -217,10 +258,10 @@ class _ContestTabState extends State<ContestTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContest(hiveList[4]),
+              locationListContest(hiveList[4], unova_contest_masters, Region.Unova),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestival(AppLocalizations.of(context)!.region_unova),
+              locationBigFestival(AppLocalizations.of(context)!.region_unova, masterBigFestivalUnova, mastersChallenge[4], Region.Unova),
               const SizedBox(height: 10,),
               //Kalos
               Text(
@@ -229,10 +270,10 @@ class _ContestTabState extends State<ContestTab> {
                 FontWeight.bold, color: colors.darkBlack, decoration: TextDecoration.underline),
                 textAlign: TextAlign.center,),
               const SizedBox(height: 10,),
-              locationListContest(hiveList[5]),
+              locationListContest(hiveList[5], kalos_contest_masters, Region.Kalos),
               const SizedBox(height: 20,),
               //we can't fight against master untill we beat all elite 4 members
-              locationBigFestival(AppLocalizations.of(context)!.region_kalos),
+              locationBigFestival(AppLocalizations.of(context)!.region_kalos, masterBigFestivalKalos, mastersChallenge[5], Region.Kalos),
               const SizedBox(height: 70,),
             ],
           ) :
