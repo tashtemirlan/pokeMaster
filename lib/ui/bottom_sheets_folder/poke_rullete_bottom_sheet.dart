@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -357,7 +358,22 @@ class PokemonRouletteBottomSheetState extends State<PokemonRouletteBottomSheet> 
             listRarity(width),
             SizedBox(height: 10,),
             ElevatedButton(
-              onPressed: ()=> _startRoulette(),
+              onPressed: (){
+                if(showUserMoney >= widget.cost){
+                  _startRoulette();
+                }
+                else{
+                  Fluttertoast.showToast(
+                    msg: AppLocalizations.of(context)!.low_money_string,
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.white,
+                    textColor: Colors.black,
+                    fontSize: 16.0,
+                  );
+                }
+              },
               style: ButtonStyle(
                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(

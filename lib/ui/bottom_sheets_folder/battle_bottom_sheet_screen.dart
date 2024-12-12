@@ -748,12 +748,12 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
       addRecordDescripton(pokeAction, currentUserPokemon.pokemon.name);
       if(pokeAction == PokeAction.Defence){
         setState(() {
-          addedShieldCasualUserPokemon = currentUserPokemon.pokemon.pokeStats.defence / 2;
+          addedShieldCasualUserPokemon = userUpgradedDefence / 2;
         });
       }
       else if(pokeAction == PokeAction.ElemtalDefence){
         setState(() {
-          addedShieldElementalUserPokemon = currentUserPokemon.pokemon.pokeStats.specialDefence / 2;
+          addedShieldElementalUserPokemon = userUpgradedSpDefence / 2;
         });
       }
       else{
@@ -769,7 +769,7 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
       //We should update opponent pokemon health.
       if(pokeAction == PokeAction.Attack){
         //If attack we minus constant value=>
-        final minusHp = (currentWildPokemon.pokemon.pokeStats.defence/2 - currentUserPokemon.pokemon.pokeStats.attack);
+        final minusHp = (wildUpgradedDefence/2 - userUpgradedAttack);
         if(minusHp >= 0){
           // that means wild pokemon shield is higher then our attack
           final result = currentHpPokemonWild - 5;
@@ -805,7 +805,7 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
       }
       else{
         // If elemental attack we should check if pokemon hve weakness against this type=>
-        final minusHp = currentWildPokemon.pokemon.pokeStats.specialDefence *0.75 - currentUserPokemon.pokemon.pokeStats.specialAttack;
+        final minusHp = wildUpgradedSpDefence *0.75 - userUpgradedSpAttack;
 
         if(minusHp >= 0){
           // that means wild pokemon shield is higher then our attack
@@ -867,12 +867,12 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
       addRecordDescripton(wildPokemonAction, currentWildPokemon.pokemon.name);
       if(wildPokemonAction == PokeAction.Defence){
         setState(() {
-          addedShieldCasualWildPokemon = currentWildPokemon.pokemon.pokeStats.defence / 2;
+          addedShieldCasualWildPokemon = wildUpgradedDefence / 2;
         });
       }
       else{
         setState(() {
-          addedShieldElementalWildPokemon = currentWildPokemon.pokemon.pokeStats.specialDefence / 2;
+          addedShieldElementalWildPokemon = wildUpgradedSpDefence / 2;
         });
       }
     }
@@ -888,7 +888,7 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
       //Update users pokemon health.
       if(wildPokemonAction == PokeAction.Attack){
         //If attack we minus constant value=>
-        final minusHp = currentUserPokemon.pokemon.pokeStats.defence/2 - currentWildPokemon.pokemon.pokeStats.attack;
+        final minusHp = userUpgradedDefence/2 - wildUpgradedAttack;
 
         if(minusHp >= 0){
           // that means our pokemon shield is higher then wild pokemon attack
@@ -925,7 +925,7 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
       }
       else{
         // If elemental attack we should check if pokemon hve weakness against this type=>
-        final minusHp = currentUserPokemon.pokemon.pokeStats.specialDefence *0.75 - currentWildPokemon.pokemon.pokeStats.specialAttack;
+        final minusHp = wildUpgradedSpDefence *0.75 - userUpgradedSpAttack;
 
 
         if(minusHp >= 0){
