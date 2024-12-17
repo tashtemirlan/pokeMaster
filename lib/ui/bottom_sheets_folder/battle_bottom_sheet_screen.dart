@@ -336,7 +336,8 @@ class BattleBottomSheetScreenState extends State<BattleBottomSheetScreen> with T
       final potentialPokemon = userTeam[i];
       if (potentialPokemon != null && !defeatedUserPokemons.contains(potentialPokemon.hashId)) {
         // If we find a valid Pokémon not in the defeated list, use it
-        await getNewUserPokemon(userTeam[i]!);
+        await setUserPokemonData(potentialPokemon);
+        await getNewUserPokemon(potentialPokemon);
         setState(() {
           userHaveAnotherPokemon = true;
         });
