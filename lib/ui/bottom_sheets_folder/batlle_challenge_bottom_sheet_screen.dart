@@ -331,7 +331,8 @@ class BattleChallengeBottomSheetScreenState extends State<BattleChallengeBottomS
       final potentialPokemon = userTeam[i];
       if (potentialPokemon != null && !defeatedUserPokemons.contains(potentialPokemon.hashId)) {
         // If we find a valid Pokémon not in the defeated list, use it
-        await getNewUserPokemon(userTeam[i]!);
+        await setUserPokemonData(potentialPokemon);
+        await getNewUserPokemon(potentialPokemon);
         setState(() {
           userHaveAnotherPokemon = true;
         });
@@ -400,7 +401,8 @@ class BattleChallengeBottomSheetScreenState extends State<BattleChallengeBottomS
       final potentialPokemon = opponentTeam[i];
       if (potentialPokemon != null && !defeatedOpponentPokemons.contains(potentialPokemon.hashPokemonTrainer)) {
         // If we find a valid Pokémon not in the defeated list, use it
-        await getNewOpponentPokemon(opponentTeam[i]!);
+        await setOpponentPokemonData(potentialPokemon);
+        await getNewOpponentPokemon(potentialPokemon);
         setState(() {
           opponentHaveAnotherPokemon = true;
         });
@@ -460,7 +462,7 @@ class BattleChallengeBottomSheetScreenState extends State<BattleChallengeBottomS
                         await registerBadgeChallenge();
                         Navigator.pop(context); // Close the dialog
                         Navigator.pop(context); // Exit the battle
-                        Navigator.pop(context); //Exit challenge
+                        Navigator.pop(context, "Update"); //Exit challenge
                       },
                       style: ButtonStyle(
                           shape: WidgetStateProperty.all<RoundedRectangleBorder>(

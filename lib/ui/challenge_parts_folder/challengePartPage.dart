@@ -53,8 +53,8 @@ class _ChallengeTabState extends State<ChallengeTab> {
     );
   }
 
-  void showAreaInformation(PokemonMasterDataClass pokemonMaster, PokeAwards pokeAward, bool isEliteFour, bool isMaster, Region region){
-    showCupertinoModalBottomSheet(
+  Future<void> showAreaInformation(PokemonMasterDataClass pokemonMaster, PokeAwards pokeAward, bool isEliteFour, bool isMaster, Region region) async{
+    final resultChallenge = await showCupertinoModalBottomSheet(
       topRadius: const Radius.circular(40),
       backgroundColor: colors.scaffoldColor,
       context: context,
@@ -65,6 +65,13 @@ class _ChallengeTabState extends State<ChallengeTab> {
         );
       },
     );
+    if(resultChallenge !=null){
+      //we must update screen :
+      setState(() {
+        dataGet = false;
+      });
+      await setDataFromHivePokedexInitialized();
+    }
   }
 
   Future<void> setDataFromHivePokedexInitialized() async {
