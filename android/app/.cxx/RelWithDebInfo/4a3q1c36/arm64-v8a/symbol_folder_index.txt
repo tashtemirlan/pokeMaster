@@ -1,0 +1,1 @@
+/Users/timaakatsuki/StudioProjects/pokeMaster/build/app/intermediates/cxx/RelWithDebInfo/4a3q1c36/obj/arm64-v8a
