@@ -1,0 +1,2 @@
+/Users/timaakatsuki/StudioProjects/pokeMaster/android/app/.cxx/RelWithDebInfo/4a3q1c36/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/timaakatsuki/StudioProjects/pokeMaster/android/app/.cxx/RelWithDebInfo/4a3q1c36/arm64-v8a/CMakeFiles/rebuild_cache.dir
